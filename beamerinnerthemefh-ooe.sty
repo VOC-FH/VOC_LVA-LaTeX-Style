@@ -1,0 +1,300 @@
+% Copyright 2007 by Till Tantau
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+
+\ProvidesPackageRCS $Header: beamerinnerthemefh-ooe.sty,v 1.5 2007/01/28 20:48:30 tantau Exp $
+
+\useinnertheme[shadow=true]{rounded}
+
+\defbeamertemplate*{title page}{fh-ooe}[1][]
+{
+  \vbox{}
+  \vfill
+  \begin{centering}
+    \begin{beamercolorbox}[sep=8pt,center,#1]{title}
+      \ifx\insertdegree\@empty%
+      \else%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertdegree\par}%
+        \vskip0.25em%
+      \fi%
+      \usebeamerfont{title}\inserttitle\par%
+    \end{beamercolorbox}%
+    \vskip1em\par
+    \begin{beamercolorbox}[sep=8pt,center,#1]{author}
+      \usebeamerfont{author}\insertauthor
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=8pt,center,#1]{institute}
+      \usebeamerfont{institute}\insertinstitute
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=8pt,center,#1]{date}
+      \usebeamerfont{date}\insertsemester
+    \end{beamercolorbox}\vskip0.5em
+    {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
+  \end{centering}
+  \vfill
+}
+
+\setbeamertemplate{title page}[fh-ooe][colsep=-4bp,rounded=true,shadow=\beamer@themerounded@shadow]
+
+\defbeamertemplate*{lecture page}{fh-ooe}[1][]
+{
+  \begin{centering}
+    \begin{beamercolorbox}[sep=8pt,center,#1]{part title}
+      {\usebeamerfont{part name}\inserttitle\vskip0.5em\par\insertlecturenumbername~\insertlecturenumber}
+      \vskip1em\par
+      \usebeamerfont{part title}\usebeamercolor[fg]{part name}\insertlecture\par
+    \end{beamercolorbox}\vskip3em
+  \end{centering}
+  \tableofcontents[justparts]
+}
+
+\setbeamertemplate{lecture page}[fh-ooe][colsep=-4bp,rounded=true,shadow=\beamer@themerounded@shadow]
+
+\defbeamertemplate*{part page}{fh-ooe}[1][]
+{
+  \frametitle{\begin{center}\vskip-1.5em\insertpart\end{center}\vskip-1.5em}
+  \framesubtitle{\begin{center}\vskip-1em\ \insertpartframetitle\end{center}\vskip-2em}
+  \tableofcontents[%
+    hideallsubsections, % causes all subsections to be hidden.
+    firstsection=\value{fh-ooe@firstsectioninchapter}
+  ]
+}
+
+\setbeamertemplate{part page}[fh-ooe][colsep=-4bp,rounded=true,shadow=\beamer@themerounded@shadow]
+
+\let\orig@maketitle=\maketitle
+\def\maketitle{
+  \setbeamertemplate{headline}[fh-ooe theme title page]
+  \setbeamertemplate{footline}[fh-ooe theme title page]
+  \pdfbookmark[0]{\inserttitle}{titlepage}
+  \orig@maketitle
+  \setbeamertemplate{headline}[fh-ooe theme slide page]
+  \setbeamertemplate{footline}[fh-ooe theme slide page]
+}
+
+\def\lecturepage{\usebeamertemplate*{lecture page}}
+\def\makelectureframe{
+  \setbeamertemplate{headline}[fh-ooe theme lecture page]
+  \setbeamertemplate{footline}[fh-ooe theme lecture page]
+  \begin{frame}
+    \lecturepage
+  \end{frame}
+  \setbeamertemplate{headline}[fh-ooe theme slide page]
+  \setbeamertemplate{footline}[fh-ooe theme slide page]
+}
+
+\def\insertpartframetitle{Inhalt}
+\def\makepartframe{
+  \setbeamertemplate{headline}[fh-ooe theme part page]
+  \setbeamertemplate{footline}[fh-ooe theme part page]
+  \begin{frame}[t]
+    \partpage
+  \end{frame}
+  \setbeamertemplate{headline}[fh-ooe theme slide page]
+  \setbeamertemplate{footline}[fh-ooe theme slide page]
+}
+
+\def\makesectionframe{
+  \setbeamertemplate{headline}[fh-ooe theme section page]
+  \setbeamertemplate{footline}[fh-ooe theme section page]
+  \begin{frame}[t]{\insertpart}
+    \tableofcontents[%
+      currentsection, % causes all sections but the current to be shown in a semi-transparent way.
+      hideallsubsections, % causes all subsections to be hidden.
+      firstsection=\value{fh-ooe@firstsectioninchapter}
+    ]
+  \end{frame}
+  \setbeamertemplate{headline}[fh-ooe theme slide page]
+  \setbeamertemplate{footline}[fh-ooe theme slide page]
+}
+
+\AtBeginLecture{
+  \pdfbookmark[1]{\insertlecturenumbername\ \insertlecturenumber\ifx\insertlecturehead\@empty\else: \insertlecture\fi}{Inhalt-\beamer@currentlecturelabel}
+  \makelectureframe
+}
+\newcounter{fh-ooe@firstsectioninchapter}
+\setcounter{fh-ooe@firstsectioninchapter}{1}
+\AtBeginPart{
+  \setcounter{fh-ooe@firstsectioninchapter}{\value{section}}\addtocounter{fh-ooe@firstsectioninchapter}{1}
+  \makepartframe
+}
+\AtBeginSection{\makesectionframe}
+
+
+\newif\ifbeamer@justparts
+\beamer@justpartsfalse
+
+\def\beamer@toc@justparts{
+  \beamer@justpartstrue
+  \beamer@showpartnumber=0\relax
+}
+
+\define@key{beamertoc}{justparts}[true]{\beamer@toc@justparts}
+
+\defbeamertemplate{part in toc}{ball unnumbered}
+{\leavevmode\leftskip=2.75ex%
+  \llap{%
+    \normalsize%
+    \begin{pgfpicture}{-1ex}{-0.7ex}{1ex}{1ex}
+      \pgftext{\beamer@usesphere{section number projected}{tocsphere}}
+    \end{pgfpicture}%
+    \kern1.25ex}%
+  \inserttocpart\par
+}
+
+\defbeamertemplate{part in toc}{ball}
+{\leavevmode\leftskip=2.75ex%
+  \llap{%
+    \normalsize%
+    \begin{pgfpicture}{-1ex}{-0.7ex}{1ex}{1ex}
+      \pgftext{\beamer@usesphere{section number projected}{tocsphere}}
+      \pgftext{%
+        \usebeamerfont*{section number projected}%
+        \usebeamercolor{section number projected}%
+        \color{fg!90!bg}%
+        \inserttocpartnumber}
+    \end{pgfpicture}%
+    \kern1.25ex}%
+  \inserttocpart\par
+}
+
+\setbeamertemplate{part in toc}[ball unnumbered]
+
+\def\beamer@partintoc#1#2#3#4#5{%
+  \ifbeamer@justparts{
+    \ifnum\c@lecture=#4{
+      \edef\inserttocpartnumber{#1}%
+      \def\inserttocpart{\hyperlink{Navigation#3}{#2}}%
+      \hbox{\vbox{%
+              \def\beamer@breakhere{\\}
+              \usebeamertemplate**{part in toc}}%
+      }
+      \vskip1.5em
+      \par
+    }\fi
+  }\fi
+}
+
+% Redefine some beamer-stuff to build correct pdf-bookmarks
+\long\def\beamer@part[#1]#2{%
+  \beamer@savemode%
+  \mode<all>%
+  \ifbeamer@inlecture%
+    \refstepcounter{part}%
+    \def\beamer@partname{#2}%
+    \def\beamer@partnameshort{#1}%
+    \addtocontents{toc}{\protect\beamer@partintoc{\the\c@part}{#2}{\the\c@page}{\the\c@lecture}{0}}
+    \addtocontents{nav}{\protect\headcommand{\protect\partentry{#2}{\the\c@part}}}%
+    \xdef\partlink{{Navigation\the\c@page}{\noexpand\beamer@partname}}%
+    \xdef\partlinkshort{{Navigation\the\c@page}{\noexpand\beamer@partnameshort}}%
+    \beamer@tempcount=\c@page\advance\beamer@tempcount by -1%
+    \addtocontents{nav}{\protect\headcommand{%
+        \protect\beamer@partpages{\the\beamer@partstartpage}{\the\beamer@tempcount}}}%
+    \addtocontents{nav}{\protect\headcommand{%
+        \protect\beamer@sectionpages{\the\beamer@sectionstartpage}{\the\beamer@tempcount}}}%
+    \addtocontents{nav}{\protect\headcommand{%
+        \protect\beamer@subsectionpages{\the\beamer@subsectionstartpage}{\the\beamer@tempcount}}}%
+    \beamer@partstartpage=\c@page%
+    \beamer@sectionstartpage=\c@page%
+    \beamer@subsectionstartpage=\c@page%
+    \setcounter{subsection}{0}%
+    \def\insertsection{}%
+    \def\insertsubsection{}%
+    \def\insertsubsubsection{}%
+    \def\insertsectionhead{}%
+    \def\insertsubsectionhead{}%
+    \def\insertsubsubsectionhead{}%
+    \def\lastsubsection{}%
+    \def\insertpart{\expandafter\hyperlink\partlink}%
+    \Hy@writebookmark{\the\c@section}{#1}{Outline\the\c@part}{2}{toc}%
+    \hyper@anchorstart{Outline\the\c@part}\hyper@anchorend%
+    \beamer@atbeginpart%
+  \fi%
+  \beamer@resumemode}%
+
+\long\def\beamer@section[#1]#2{%
+  \beamer@savemode%
+  \mode<all>%
+  \ifbeamer@inlecture
+    \refstepcounter{section}%
+    \beamer@ifempty{#2}%
+    {\long\def\secname{#1}}%
+    {\advance\beamer@tocsectionnumber by 1\relax%
+      \long\def\secname{#2}\addtocontents{toc}{\protect\beamer@sectionintoc{\the\c@section}{#2}{\the\c@page}{\the\c@part}%
+        {\the\beamer@tocsectionnumber}}}%
+    {\let\\=\relax\xdef\sectionlink{{Navigation\the\c@page}{\noexpand\secname}}}%
+    \beamer@tempcount=\c@page\advance\beamer@tempcount by -1%
+    \beamer@ifempty{#1}{}{%
+      \addtocontents{nav}{\protect\headcommand{\protect\sectionentry{\the\c@section}{#1}{\the\c@page}{\secname}{\the\c@part}}}%
+      \addtocontents{nav}{\protect\headcommand{\protect\beamer@sectionpages{\the\beamer@sectionstartpage}{\the\beamer@tempcount}}}%
+      \addtocontents{nav}{\protect\headcommand{\protect\beamer@subsectionpages{\the\beamer@subsectionstartpage}{\the\beamer@tempcount}}}%
+    }%
+    \beamer@sectionstartpage=\c@page%
+    \beamer@subsectionstartpage=\c@page%
+    \def\insertsection{\expandafter\hyperlink\sectionlink}%
+    \def\insertsubsection{}%
+    \def\insertsubsubsection{}%
+    \def\insertsectionhead{#1}%
+    \def\insertsubsectionhead{}%
+    \def\insertsubsubsectionhead{}%
+    \def\lastsubsection{}%
+    \Hy@writebookmark{\the\c@section}{\secname}{Outline\the\c@part.\the\c@section}{3}{toc}%
+    \hyper@anchorstart{Outline\the\c@part.\the\c@section}\hyper@anchorend%
+    \beamer@ifempty{#2}{\beamer@atbeginsections}{\beamer@atbeginsection}%
+  \fi%
+  \beamer@resumemode}%
+
+\def\beamer@subsection[#1]#2{%
+  \beamer@savemode%
+  \mode<all>%
+  \ifbeamer@inlecture%
+    \refstepcounter{subsection}%
+    \beamer@ifempty{#2}{\long\def\subsecname{#1}\long\def\lastsubsection{#1}}
+    {%
+      \long\def\subsecname{#2}%
+      \long\def\lastsubsection{#1}%
+      \addtocontents{toc}{\protect\beamer@subsectionintoc{\the\c@section}{\the\c@subsection}{#2}{\the\c@page}{\the\c@part}{\the\beamer@tocsectionnumber}}%
+    }%
+    \beamer@tempcount=\c@page\advance\beamer@tempcount by -1%
+    \addtocontents{nav}{%
+      \protect\headcommand{\protect\beamer@subsectionentry{\the\c@part}{\the\c@section}{\the\c@subsection}{\the\c@page}{\lastsubsection}}%
+      \protect\headcommand{\protect\beamer@subsectionpages{\the\beamer@subsectionstartpage}{\the\beamer@tempcount}}%
+    }%
+    \beamer@subsectionstartpage=\c@page%
+    \edef\subsectionlink{{Navigation\the\c@page}{\noexpand\subsecname}}%
+    \def\insertsubsection{\expandafter\hyperlink\subsectionlink}%
+    \def\insertsubsubsection{}%
+    \def\insertsubsectionhead{#1}%
+    \def\insertsubsubsectionhead{}%
+    \Hy@writebookmark{\the\c@subsection}{#2}{Outline\the\c@part.\the\c@section.\the\c@subsection.\the\c@page}{4}{toc}%
+    \hyper@anchorstart{Outline\the\c@part.\the\c@section.\the\c@subsection.\the\c@page}\hyper@anchorend%
+    \beamer@ifempty{#2}{\beamer@atbeginsubsections}{\beamer@atbeginsubsection}%
+  \fi%
+  \beamer@resumemode}
+
+\def\beamer@subsubsection[#1]#2{%
+  \beamer@savemode%
+  \mode<all>%
+  \ifbeamer@inlecture%
+    \refstepcounter{subsubsection}%
+    \beamer@ifempty{#2}{\long\def\subsubsecname{#1}}
+    {%
+      \long\def\subsubsecname{#2}%
+      \addtocontents{toc}{\protect\beamer@subsubsectionintoc%
+        {\the\c@part}{\the\c@section}{\the\c@subsection}{\the\c@subsubsection}{\the\c@page}{\the\beamer@tocsectionnumber}{#2}}%
+    }%
+    \addtocontents{nav}{\protect\headcommand{\protect\beamer@subsubsectionentry%
+        {\the\c@part}{\the\c@section}{\the\c@subsection}{\the\c@subsubsection}{\the\c@page}{\subsubsecname}}}%
+    \edef\subsubsectionlink{{Navigation\the\c@page}{\noexpand\subsubsecname}}%
+    \def\insertsubsubsection{\expandafter\hyperlink\subsubsectionlink}%
+    \def\insertsubsubsectionhead{#1}%
+    \Hy@writebookmark{\the\c@subsubsection}{#2}{Outline\the\c@part.\the\c@section.\the\c@subsection.\the\c@subsubsection.\the\c@page}{5}{toc}%
+    \hyper@anchorstart{Outline\the\c@part.\the\c@section.\the\c@subsection.\the\c@subsubsection.\the\c@page}\hyper@anchorend%
+    \beamer@ifempty{#2}{\beamer@atbeginsubsubsections}{\beamer@atbeginsubsubsection}%
+  \fi%
+  \beamer@resumemode}

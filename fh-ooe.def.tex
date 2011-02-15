@@ -1,0 +1,160 @@
+\titlegraphic{\includegraphics[height=1.5cm]{Fhooe-logo.eps}}
+
+%\def\insertlecturenumbername{Kapitel}
+
+%\def\fhooe@handoutlayout{6 on 1}
+%\def\fhooe@handoutlayoutoptions{[a4paper,border shrink=5mm]}
+
+%\def\fhooe@handoutlayout{4 on 1}
+%\def\fhooe@handoutlayoutoptions{[a4paper,border shrink=5mm,landscape]}
+
+%\def\fhooe@handoutlayout{2 on 1}
+%\def\fhooe@handoutlayoutoptions{[a4paper,border shrink=5mm]}
+
+%\def\fhooe@printlayout{resize to}
+%\def\fhooe@printlayoutoptions{[a4paper,border shrink=5mm,landscape]}
+
+%\def\insertpartframetitle{Inhalt}
+%\def\insertsectionframetitle{Übersicht}
+
+\setbeamercovered{transparent}
+\setbeamercovered{highly dynamic}
+%\usefonttheme{structurebold}
+
+%\definecolor{lstcommentcolor}{HTML}{3F7F5F}
+%\definecolor{lststringcolor}{HTML}{2A00FF}
+%\definecolor{lstkeywordcolor}{HTML}{7F0055}
+%\lstdefinestyle{Java}
+%{
+%  language=Java,
+%  basicstyle=\scriptsize\ttfamily,
+%  inputencoding=utf8x,
+%  extendedchars=\true,
+%  numbers=left,
+%  stepnumber=1,
+%  numberstyle=\tiny,
+%  numbersep=5pt,
+%  frame=tlbr,
+%  commentstyle=\ttfamily\color{lstcommentcolor},
+%  stringstyle=\ttfamily\color{lststringcolor},
+%  keywordstyle=\bfseries\ttfamily\color{lstkeywordcolor},
+%  ndkeywordstyle=\color{yellow}\ttfamily\bfseries,
+%  identifierstyle=\bfseries\ttfamily
+%}
+
+\newcommand{\lstfontfamily}{\ttfamily}
+\definecolor{darkviolet}{rgb}{0.5,0,0.4}
+\definecolor{darkgreen}{rgb}{0,0.4,0.2}
+\definecolor{darkblue}{rgb}{0.1,0.1,0.9}
+\definecolor{darkgrey}{rgb}{0.5,0.5,0.5}
+\definecolor{lightblue}{rgb}{0.4,0.4,1}
+
+\lstdefinestyle{eclipse}{
+  morecomment=[s][\color{lightblue}]{/**}{*/},
+  basicstyle=\scriptsize\lstfontfamily,
+  inputencoding=utf8x,
+  extendedchars=\true,
+  numbers=left,
+  stepnumber=1,
+  numberstyle=\tiny,
+  numbersep=5pt,
+  frame=l,
+  rulecolor=\color{fh-ooe-red},
+  abovecaptionskip=0px,
+  belowcaptionskip=0px,
+  commentstyle=\color{darkgreen},
+  stringstyle=\color{darkblue},
+  keywordstyle=\color{darkviolet}\bfseries,
+  ndkeywordstyle=\color{yellow}\bfseries,
+  identifierstyle=,
+  emphstyle=\color{red}\bfseries,
+  rangeprefix=/*\{\ ,
+  rangesuffix=\ \}*,
+  includerangemarker=false,
+  captionpos=b
+}
+\lstset{language=java, style=eclipse}
+
+
+\RequirePackage{pgfpages}
+\pgfpagesdeclarelayout{mytwoscreens}
+{
+  \beamer@twoscreenstexttrue
+  \nofiles
+}
+{
+  \pgfpagesphysicalpageoptions
+  {%
+    logical pages=2,
+    physical width=2960px,
+    physical height=1050px,
+    last logical shipout=1
+  }
+  \pgfpageslogicalpageoptions{1}
+  {%
+    resized width=1400px,
+    resized height=1050px,
+    center=\pgfpoint{839.5px}{524.5px}
+  }%
+  \pgfpageslogicalpageoptions{2}
+  {%
+    resized width=1280px,
+    resized height=960px,
+    center=\pgfpoint{2320.5px}{537.5px},
+    copy from=1
+  }
+}
+
+%\pgfpagesuselayout{mytwoscreens}
+
+\usepackage{fp}
+\FPset{hihi}{3}
+
+\newcommand\definedisplaylayout[3]{
+  \expandafter\newcount\csname fhooe@displaylayout@#1@width\endcsname
+
+  \csname fhooe@displaylayout@#1@width\endcsname \csname fhooe@display@#2@width\endcsname
+  \advance\csname fhooe@displaylayout@#1@width\endcsname by \the\csname fhooe@display@#3@width\endcsname
+  \expandafter\newcount\expandafter{\csname fhooe@displaylayout@#1@height\endcsname}
+  \ifnum\csname fhooe@display@#2@height\endcsname<\csname fhooe@display@#3@height\endcsname
+    \csname fhooe@displaylayout@#1@height\endcsname \csname fhooe@display@#3@height\endcsname
+  \else
+    \csname fhooe@displaylayout@#1@height\endcsname \csname fhooe@display@#2@height\endcsname
+  \fi
+
+  \expandafter\newcount\csname fhooe@displaylayout@#1@leftration\endcsname
+  \csname fhooe@displaylayout@#1@leftration\endcsname \the\csname fhooe@display@#2@width\endcsname
+  \divide\csname fhooe@displaylayout@#1@leftration\endcsname by \csname fhooe@display@#2@height\endcsname
+
+  \expandafter\newcount\csname fhooe@displaylayout@#1@rightration\endcsname
+  \csname fhooe@displaylayout@#1@rightration\endcsname \the\csname fhooe@display@#3@width\endcsname
+  \divide\csname fhooe@displaylayout@#1@rightration\endcsname by \csname fhooe@display@#3@height\endcsname
+
+  \expandafter\newcount\csname fhooe@displaylayout@#1@beamerration\endcsname
+  \csname fhooe@displaylayout@#1@beamerration\endcsname \paperwidth
+  \divide\csname fhooe@displaylayout@#1@beamerration\endcsname by \paperheight
+}
+
+\newcommand\definedisplay[4]{
+  \expandafter\def\csname fhooe@display@#1@placement\endcsname{#2}
+  \expandafter\newcount\csname fhooe@display@#1@width\endcsname
+  \csname fhooe@display@#1@width\endcsname #3
+  \expandafter\newcount\csname fhooe@display@#1@height\endcsname
+  \csname fhooe@display@#1@height\endcsname #4
+}
+
+\definedisplay{laptop}{t}{1680}{1050}
+\definedisplay{monitor}{t}{1280}{1024}
+
+\definedisplaylayout{desk}{laptop}{monitor}
+
+\message{----------------------}
+\message\expandafter{\the\fhooe@display@laptop@width}
+\message\expandafter{\the\fhooe@display@laptop@height}
+\message\expandafter{\the\fhooe@display@monitor@width}
+\message\expandafter{\the\fhooe@display@monitor@height}
+\message\expandafter{\the\fhooe@displaylayout@desk@width}
+\message\expandafter{\the\fhooe@displaylayout@desk@height}
+\message\expandafter{\the\fhooe@displaylayout@desk@beamerration}
+%\message\expandafter{\strip@pt\the\paperwidth}
+\message{----------------------}
