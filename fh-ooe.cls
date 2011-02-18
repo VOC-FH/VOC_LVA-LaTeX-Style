@@ -90,7 +90,7 @@
 {
   \write\srcf{\sourcepath/#2}
   \href{run:\sourcepath/#2}{
-    \lstinputlisting[#1]{\sourcepath/#2}
+    \lstinputlisting[basicstyle=\scriptsize\lstfontfamily,#1]{\sourcepath/#2}
   }
 }
 
