@@ -111,7 +111,7 @@
 
 \renewenvironment{document}[1][]
 {
-  \def\fhooe@ArgI{{#1}}%
+  \gdef\fhooe@ArgI{{#1}}
   \documentRelay
 }{
   \orig@enddocument
@@ -119,8 +119,9 @@
 
 \newcommand{\documentRelay}[1][]
 {
-  \def\fhooe@ArgII{{#1}}
+  \gdef\fhooe@ArgII{{#1}}
   \gdef\fhooe@maketitle{\relax}
+  \gdef\fhooe@includeonlylecture{\relax}
 
   \ifthenelse{\expandafter\equal\fhooe@ArgI{with titlepage}}
   {
@@ -128,7 +129,7 @@
     \ifthenelse{\expandafter\equal\fhooe@ArgII{}}
     {}
     {
-      \expandafter\includeonlylecture\fhooe@ArgII
+      \gdef\fhooe@includeonlylecture{\expandafter\includeonlylecture\fhooe@ArgII}
     }
   }
   {
@@ -137,7 +138,7 @@
       \ifthenelse{\expandafter\equal\fhooe@ArgII{}}
       {}
       {
-        \expandafter\includeonlylecture\fhooe@ArgII
+        \gdef\fhooe@includeonlylecture{\expandafter\includeonlylecture\fhooe@ArgII}
       }
     }
     {
@@ -148,7 +149,7 @@
           \gdef\fhooe@maketitle{\maketitle}
         }
         {
-          \expandafter\includeonlylecture\fhooe@ArgI
+          \gdef\fhooe@includeonlylecture{\expandafter\includeonlylecture\fhooe@ArgI}
         }
       }
       {
@@ -158,5 +159,6 @@
   }
 
   \orig@document
+  \fhooe@includeonlylecture
   \fhooe@maketitle
 }
