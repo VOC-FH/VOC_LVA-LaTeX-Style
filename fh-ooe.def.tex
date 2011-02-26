@@ -42,7 +42,6 @@
 %  identifierstyle=\bfseries\ttfamily
 %}
 
-\newcommand{\lstfontfamily}{\ttfamily}
 \definecolor{darkviolet}{rgb}{0.5,0,0.4}
 \definecolor{darkgreen}{rgb}{0,0.4,0.2}
 \definecolor{darkblue}{rgb}{0.1,0.1,0.9}
@@ -52,12 +51,12 @@
 \lstdefinestyle{eclipse}{
   morecomment=[s][\color{lightblue}]{/**}{*/},
 %  basicstyle=\scriptsize\lstfontfamily,
-  basicstyle=\lstfontfamily,
+  basicstyle=\codefontfamily,
   inputencoding=utf8x,
   extendedchars=\true,
   numbers=left,
   stepnumber=1,
-  numberstyle=\tiny,
+  numberstyle=\tiny\normalfont,
   numbersep=5pt,
   frame=l,
   rulecolor=\color{fh-ooe-red},
@@ -72,6 +71,11 @@
   rangeprefix=/*\{\ ,
   rangesuffix=\ \}*,
   includerangemarker=false,
+  postbreak=\space\space,
+  breaklines=true,
+  breakautoindent=false,
+  prebreak=\mbox{{\color{black}\tiny$\hookleftarrow$}},
+%  backgroundcolor=\color{lstblack},
   captionpos=b
 }
 \lstset{language=java, style=eclipse}
@@ -108,54 +112,54 @@
 
 %\pgfpagesuselayout{mytwoscreens}
 
-\usepackage{fp}
-\FPset{hihi}{3}
-
-\newcommand\definedisplaylayout[3]{
-  \expandafter\newcount\csname fhooe@displaylayout@#1@width\endcsname
-
-  \csname fhooe@displaylayout@#1@width\endcsname \csname fhooe@display@#2@width\endcsname
-  \advance\csname fhooe@displaylayout@#1@width\endcsname by \the\csname fhooe@display@#3@width\endcsname
-  \expandafter\newcount\expandafter{\csname fhooe@displaylayout@#1@height\endcsname}
-  \ifnum\csname fhooe@display@#2@height\endcsname<\csname fhooe@display@#3@height\endcsname
-    \csname fhooe@displaylayout@#1@height\endcsname \csname fhooe@display@#3@height\endcsname
-  \else
-    \csname fhooe@displaylayout@#1@height\endcsname \csname fhooe@display@#2@height\endcsname
-  \fi
-
-  \expandafter\newcount\csname fhooe@displaylayout@#1@leftration\endcsname
-  \csname fhooe@displaylayout@#1@leftration\endcsname \the\csname fhooe@display@#2@width\endcsname
-  \divide\csname fhooe@displaylayout@#1@leftration\endcsname by \csname fhooe@display@#2@height\endcsname
-
-  \expandafter\newcount\csname fhooe@displaylayout@#1@rightration\endcsname
-  \csname fhooe@displaylayout@#1@rightration\endcsname \the\csname fhooe@display@#3@width\endcsname
-  \divide\csname fhooe@displaylayout@#1@rightration\endcsname by \csname fhooe@display@#3@height\endcsname
-
-  \expandafter\newcount\csname fhooe@displaylayout@#1@beamerration\endcsname
-  \csname fhooe@displaylayout@#1@beamerration\endcsname \paperwidth
-  \divide\csname fhooe@displaylayout@#1@beamerration\endcsname by \paperheight
-}
-
-\newcommand\definedisplay[4]{
-  \expandafter\def\csname fhooe@display@#1@placement\endcsname{#2}
-  \expandafter\newcount\csname fhooe@display@#1@width\endcsname
-  \csname fhooe@display@#1@width\endcsname #3
-  \expandafter\newcount\csname fhooe@display@#1@height\endcsname
-  \csname fhooe@display@#1@height\endcsname #4
-}
-
-\definedisplay{laptop}{t}{1680}{1050}
-\definedisplay{monitor}{t}{1280}{1024}
-
-\definedisplaylayout{desk}{laptop}{monitor}
-
-\message{----------------------}
-\message\expandafter{\the\fhooe@display@laptop@width}
-\message\expandafter{\the\fhooe@display@laptop@height}
-\message\expandafter{\the\fhooe@display@monitor@width}
-\message\expandafter{\the\fhooe@display@monitor@height}
-\message\expandafter{\the\fhooe@displaylayout@desk@width}
-\message\expandafter{\the\fhooe@displaylayout@desk@height}
-\message\expandafter{\the\fhooe@displaylayout@desk@beamerration}
-%\message\expandafter{\strip@pt\the\paperwidth}
-\message{----------------------}
+% \usepackage{fp}
+% \FPset{hihi}{3}
+%
+% \newcommand\definedisplaylayout[3]{
+%   \expandafter\newcount\csname fhooe@displaylayout@#1@width\endcsname
+%
+%   \csname fhooe@displaylayout@#1@width\endcsname \csname fhooe@display@#2@width\endcsname
+%   \advance\csname fhooe@displaylayout@#1@width\endcsname by \the\csname fhooe@display@#3@width\endcsname
+%   \expandafter\newcount\expandafter{\csname fhooe@displaylayout@#1@height\endcsname}
+%   \ifnum\csname fhooe@display@#2@height\endcsname<\csname fhooe@display@#3@height\endcsname
+%     \csname fhooe@displaylayout@#1@height\endcsname \csname fhooe@display@#3@height\endcsname
+%   \else
+%     \csname fhooe@displaylayout@#1@height\endcsname \csname fhooe@display@#2@height\endcsname
+%   \fi
+%
+%   \expandafter\newcount\csname fhooe@displaylayout@#1@leftration\endcsname
+%   \csname fhooe@displaylayout@#1@leftration\endcsname \the\csname fhooe@display@#2@width\endcsname
+%   \divide\csname fhooe@displaylayout@#1@leftration\endcsname by \csname fhooe@display@#2@height\endcsname
+%
+%   \expandafter\newcount\csname fhooe@displaylayout@#1@rightration\endcsname
+%   \csname fhooe@displaylayout@#1@rightration\endcsname \the\csname fhooe@display@#3@width\endcsname
+%   \divide\csname fhooe@displaylayout@#1@rightration\endcsname by \csname fhooe@display@#3@height\endcsname
+%
+%   \expandafter\newcount\csname fhooe@displaylayout@#1@beamerration\endcsname
+%   \csname fhooe@displaylayout@#1@beamerration\endcsname \paperwidth
+%   \divide\csname fhooe@displaylayout@#1@beamerration\endcsname by \paperheight
+% }
+%
+% \newcommand\definedisplay[4]{
+%   \expandafter\def\csname fhooe@display@#1@placement\endcsname{#2}
+%   \expandafter\newcount\csname fhooe@display@#1@width\endcsname
+%   \csname fhooe@display@#1@width\endcsname #3
+%   \expandafter\newcount\csname fhooe@display@#1@height\endcsname
+%   \csname fhooe@display@#1@height\endcsname #4
+% }
+%
+% \definedisplay{laptop}{t}{1680}{1050}
+% \definedisplay{monitor}{t}{1280}{1024}
+%
+% \definedisplaylayout{desk}{laptop}{monitor}
+%
+% \message{----------------------}
+% \message\expandafter{\the\fhooe@display@laptop@width}
+% \message\expandafter{\the\fhooe@display@laptop@height}
+% \message\expandafter{\the\fhooe@display@monitor@width}
+% \message\expandafter{\the\fhooe@display@monitor@height}
+% \message\expandafter{\the\fhooe@displaylayout@desk@width}
+% \message\expandafter{\the\fhooe@displaylayout@desk@height}
+% \message\expandafter{\the\fhooe@displaylayout@desk@beamerration}
+% %\message\expandafter{\strip@pt\the\paperwidth}
+% \message{----------------------}

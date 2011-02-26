@@ -81,17 +81,62 @@
 \renewcommand{\include}[2][.]
 {
   \graphicspath{{#1/material/}}
-  \def\sourcepath{sources/#1/src}
+  \def\javasourcepath{sources/#1/src}
+  \def\cppsourcepath{c++sources/#1}
   \orig@include{#1/#2}
 }
 
-\def\lstlistingname{\scriptsize Listing}
-\newcommand{\includecode}[2][]
-{
-  \write\srcf{\sourcepath/#2}
-  \href{run:\sourcepath/#2}{
-    \lstinputlisting[basicstyle=\scriptsize\lstfontfamily,#1]{\sourcepath/#2}
-  }
+\newcommand{\codefontfamily}{\ttfamily}
+\def\codefontsize{\scriptsize}
+\def\codelistingname{Listing}
+\def\lstlistingname{\codefontsize \codelistingname}
+
+\newcommand{\includejavacode}[2][]{%
+  \newlength{\lenaa}%
+  \settowidth{\lenaa}{\lst@numberstyle{88}}%
+  \addtolength{\lenaa}{\lst@numbersep}%
+  \write\srcf{\javasourcepath/#2}%
+  \href{run:\javasourcepath/#2}{%
+    \vbox{%
+      {\lst@numberstyle\vspace{-0.5\baselineskip}}%
+      \lstinputlisting[%
+        basicstyle=\codefontsize\codefontfamily,%
+        language=java,%
+        framerule=0.3pt,%
+        resetmargins=true,%
+        xleftmargin=\lenaa,%
+        caption=#2,%
+        #1%
+      ]{%
+        \javasourcepath/#2%
+      }%
+      {\lst@numberstyle\vspace{-\baselineskip}}%
+    }%
+  }\\%
+}
+
+\newcommand{\includecppcode}[2][]{%
+  \newlength{\lenaa}%
+  \settowidth{\lenaa}{\lst@numberstyle{88}}%
+  \addtolength{\lenaa}{\lst@numbersep}%
+  \write\srcf{\cppsourcepath/#2}%
+  \href{run:\cppsourcepath/#2}{%
+    \vbox{%
+      {\lst@numberstyle\vspace{-0.5\baselineskip}}%
+      \lstinputlisting[%
+        basicstyle=\codefontsize\codefontfamily,%
+        language=c++,%
+        framerule=0.3pt,%
+        resetmargins=true,%
+        xleftmargin=\lenaa,%
+        caption=#2,%
+        #1%
+      ]{%
+        \cppsourcepath/#2%
+      }%
+      {\lst@numberstyle\vspace{-\baselineskip}}%
+    }%
+  }\\%
 }
 
 \let\orig@lecture\lecture
