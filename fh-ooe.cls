@@ -90,11 +90,11 @@
 \def\codefontsize{\scriptsize}
 \def\codelistingname{Listing}
 \def\lstlistingname{\codefontsize \codelistingname}
+\newlength{\fhooe@lenaa}%
 
 \newcommand{\includejavacode}[2][]{%
-  \newlength{\lenaa}%
-  \settowidth{\lenaa}{\lst@numberstyle{88}}%
-  \addtolength{\lenaa}{\lst@numbersep}%
+  \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
+  \addtolength{\fhooe@lenaa}{\lst@numbersep}%
   \write\srcf{\javasourcepath/#2}%
   \href{run:\javasourcepath/#2}{%
     \vbox{%
@@ -104,7 +104,7 @@
         language=java,%
         framerule=0.3pt,%
         resetmargins=true,%
-        xleftmargin=\lenaa,%
+        xleftmargin=\fhooe@lenaa,%
         caption=#2,%
         #1%
       ]{%
@@ -116,9 +116,8 @@
 }
 
 \newcommand{\includecppcode}[2][]{%
-  \newlength{\lenaa}%
-  \settowidth{\lenaa}{\lst@numberstyle{88}}%
-  \addtolength{\lenaa}{\lst@numbersep}%
+  \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
+  \addtolength{\fhooe@lenaa}{\lst@numbersep}%
   \write\srcf{\cppsourcepath/#2}%
   \href{run:\cppsourcepath/#2}{%
     \vbox{%
@@ -128,7 +127,7 @@
         language=c++,%
         framerule=0.3pt,%
         resetmargins=true,%
-        xleftmargin=\lenaa,%
+        xleftmargin=\fhooe@lenaa,%
         caption=#2,%
         #1%
       ]{%
