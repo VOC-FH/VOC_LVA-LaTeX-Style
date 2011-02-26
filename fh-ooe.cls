@@ -92,13 +92,14 @@
 \def\lstlistingname{\codefontsize \codelistingname}
 \newlength{\fhooe@lenaa}%
 
+\newcommand\inlinejavacode[1][]{\lstinline[language=java,#1]}
+
 \newcommand{\includejavacode}[2][]{%
   \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
   \addtolength{\fhooe@lenaa}{\lst@numbersep}%
   \write\srcf{\javasourcepath/#2}%
   \href{run:\javasourcepath/#2}{%
     \vbox{%
-      {\lst@numberstyle\vspace{-0.5\baselineskip}}%
       \lstinputlisting[%
         basicstyle=\codefontsize\codefontfamily,%
         language=java,%
@@ -110,10 +111,11 @@
       ]{%
         \javasourcepath/#2%
       }%
-      {\lst@numberstyle\vspace{-\baselineskip}}%
     }%
   }\\%
 }
+
+\newcommand\inlinecppcode[1][]{\lstinline[language=c++,#1]}
 
 \newcommand{\includecppcode}[2][]{%
   \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
@@ -121,7 +123,6 @@
   \write\srcf{\cppsourcepath/#2}%
   \href{run:\cppsourcepath/#2}{%
     \vbox{%
-      {\lst@numberstyle\vspace{-0.5\baselineskip}}%
       \lstinputlisting[%
         basicstyle=\codefontsize\codefontfamily,%
         language=c++,%
@@ -133,7 +134,6 @@
       ]{%
         \cppsourcepath/#2%
       }%
-      {\lst@numberstyle\vspace{-\baselineskip}}%
     }%
   }\\%
 }
