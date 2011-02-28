@@ -20,7 +20,7 @@
 \ifthenelse{\boolean{fh-ooe@ispresentation}}
 {
   % Make beamer to not complain about pdfpagelabels
-  \PassOptionsToPackage{pdfpagelabels=false}{hyperref}
+%  \PassOptionsToPackage{pdfpagelabels=false}{hyperref}
   \LoadClass{beamer}
 }
 {
@@ -59,6 +59,7 @@
 % Read options from file
 \InputIfFileExists{fh-ooe.def.tex}{}{}
 \InputIfFileExists{private.def.tex}{}{}
+\InputIfFileExists{experimental.def.tex}{}{}
 
 \ifthenelse{\boolean{fh-ooe@isprint}}
 {
@@ -85,6 +86,9 @@
   \def\cppsourcepath{c++sources/#1}
   \orig@include{#1/#2}
 }
+
+%\newcommand{\fhooe@includedraftgraphics}[2][]{\includegraphics[draft,#1]{#2}}
+\def\includegraphicswrapper[{\includegraphics[}
 
 \newcommand{\codefontfamily}{\ttfamily}
 \def\codefontsize{\scriptsize}
@@ -155,10 +159,10 @@
 
 \renewenvironment{document}[1][]
 {
-  \gdef\fhooe@ArgI{{#1}}
-  \documentRelay
+ \gdef\fhooe@ArgI{{#1}}
+ \documentRelay
 }{
-  \orig@enddocument
+ \orig@enddocument
 }
 
 \newcommand{\documentRelay}[1][]

@@ -50,6 +50,7 @@
 
 \lstdefinestyle{eclipse}{
   morecomment=[s][\color{lightblue}]{/**}{*/},
+  escapeinside={/*@}{@*/},
   basicstyle=\codefontfamily,
   inputencoding=utf8x,
   extendedchars=\true,
@@ -77,7 +78,8 @@
   breakautoindent=false,
   prebreak=\mbox{{\color{black}\tiny$\hookleftarrow$}},
   captionpos=b,
-  mathescape=true
+  mathescape=true,
+  texcl=true
 }
 \lstset{language=java, style=eclipse}
 
