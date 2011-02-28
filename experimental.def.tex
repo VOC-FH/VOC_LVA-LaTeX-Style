@@ -1,0 +1,18 @@
+\newcounter{fhooe@framenumber}
+\setcounter{fhooe@framenumber}{0}
+
+\def\newframeone#1#2{
+  \expandafter\def\csname fhooe@frame#1\endcsname{#2}
+}
+
+
+\def\fhooe@theframenumber{{\arabic{fhooe@framenumber}}}
+
+\def\newframe#1{
+  \stepcounter{fhooe@framenumber}
+  \expandafter\newframeone\fhooe@theframenumber{#1}
+}
+
+\def\typeframe#1{
+  \csname fhooe@frame#1\endcsname
+}
