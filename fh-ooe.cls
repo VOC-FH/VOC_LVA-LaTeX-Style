@@ -7,24 +7,31 @@
 \setboolean{fh-ooe@ispresentation}{true}
 \newboolean{fh-ooe@ishandout}
 \setboolean{fh-ooe@ishandout}{false}
-\newboolean{fh-ooe@isprint}
-\setboolean{fh-ooe@isprint}{false}
+\newboolean{fh-ooe@istrans}
+\setboolean{fh-ooe@istrans}{false}
 
-\DeclareOption{handout}{\PassOptionsToClass{handout}{beamer}\setboolean{fh-ooe@ishandout}{true}}
-\DeclareOption{print}{\PassOptionsToClass{trans}{beamer}\setboolean{fh-ooe@isprint}{true}}
+\DeclareOption{handout}{\setboolean{fh-ooe@ishandout}{true}}
+\DeclareOption{trans}{\setboolean{fh-ooe@istrans}{true}}
 \DeclareOption{article}{\setboolean{fh-ooe@ispresentation}{false}}
-\DeclareOption{draft}{\PassOptionsToClass{draft}{beamer}\PassOptionsToClass{draft}{article}}
-\DeclareOption{beamer}{\PassOptionsToClass{beamer}{beamer}}
+%\DeclareOption{handout}{\PassOptionsToClass{handout}{beamer}\setboolean{fh-ooe@ishandout}{true}}
+%\DeclareOption{trans}{\PassOptionsToClass{trans}{beamer}\setboolean{fh-ooe@isprint}{true}}
+%\DeclareOption{article}{\setboolean{fh-ooe@ispresentation}{false}}
+%\DeclareOption{draft}{\PassOptionsToClass{draft}{beamer}\PassOptionsToClass{draft}{article}}
+%\DeclareOption{beamer}{\PassOptionsToClass{beamer}{beamer}}
+%\DeclareOption{utf8}{\PassOptionsToClass{utf8}{beamer}}
+%\DeclareOption{utf8x}{\PassOptionsToClass{utf8x}{beamer}}
+%\DeclareOption{ucs}{\PassOptionsToClass{ucs}{beamer}}
+
 \ProcessOptions
 
 \ifthenelse{\boolean{fh-ooe@ispresentation}}
 {
   % Make beamer to not complain about pdfpagelabels
 %  \PassOptionsToPackage{pdfpagelabels=false}{hyperref}
-  \LoadClass{beamer}
+  \LoadClassWithOptions{beamer}[2010/06/21]
 }
 {
-  \LoadClass{article}
+  \LoadClassWithOptions{article}
   \RequirePackage{beamerarticle}
 }
 
@@ -61,7 +68,7 @@
 \InputIfFileExists{private.def.tex}{}{}
 \InputIfFileExists{experimental.def.tex}{}{}
 
-\ifthenelse{\boolean{fh-ooe@isprint}}
+\ifthenelse{\boolean{fh-ooe@istrans}}
 {
   \RequirePackage{pgfpages}
   \expandafter\pgfpagesuselayout\expandafter\fhooe@printlayout\fhooe@printlayoutoptions
