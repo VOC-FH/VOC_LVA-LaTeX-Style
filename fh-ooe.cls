@@ -59,10 +59,32 @@
 \def\fhooe@presentationoptions{\beamertemplatenavigationsymbolsempty}
 
 \def\fhooe@handoutlayout{4 on 1}
-\def\fhooe@handoutlayoutoptions{[a4paper,border shrink=5mm,landscape]}
+\def\fhooe@handoutlayoutoptions{[a4paper,landscape,border shrink=5mm]}
 
-\def\fhooe@printlayout{resize to}
-\def\fhooe@printlayoutoptions{[a4paper,border shrink=5mm,landscape]}
+\def\fhooe@printlayout{fhooe resize to}
+\def\fhooe@printlayoutoptions{[a4paper,border shrink=5mm]}
+
+\RequirePackage{pgfpages}
+
+\pgfpagesdeclarelayout{fhooe resize to}
+{
+  \def\pgfpageoptionborder{0pt}
+}
+{
+  \pgfpagesphysicalpageoptions
+  {%
+    logical pages=1,%
+    physical height=\pgfpageoptionheight,%
+    physical width=\pgfpageoptionwidth%
+  }
+  \pgfpageslogicalpageoptions{1}
+  {%
+    resized width=\pgfphysicalwidth,%
+    resized height=\pgfphysicalheight,%
+    border shrink=\pgfpageoptionborder,%
+    center=\pgfpoint{.5\pgfphysicalwidth}{.73\pgfphysicalheight}%
+  }%
+}
 
 \ifthenelse{\boolean{fh-ooe@istrans}}{
   \RequirePackage{pgfpages}
