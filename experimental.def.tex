@@ -69,11 +69,12 @@
 % %\message\expandafter{\strip@pt\the\paperwidth}
 % \message{----------------------}
 
-\define@key{pgfpages@main}{backgroundcolor}{\gdef\pgfphysicalbackgroundcolor{#1}}
 
 \ifthenelse{\boolean{fh-ooe@twoscreens}}{
-  \RequirePackage{pgfpages}
   \RequirePackage{everyshi}
+
+  \define@key{pgfpages@main}{backgroundcolor}{\gdef\pgfphysicalbackgroundcolor{#1}}
+
   \def\inittwoscreens{
     \beamer@twoscreenstexttrue
     \nofiles

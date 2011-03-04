@@ -17,7 +17,6 @@
 \DeclareOption{article}{\setboolean{fh-ooe@ispresentation}{false}}
 \DeclareOption{twoscreens}{\setboolean{fh-ooe@twoscreens}{true}}
 %\DeclareOption{handout}{\PassOptionsToClass{handout}{beamer}\setboolean{fh-ooe@ishandout}{true}}
-%\DeclareOption{trans}{\PassOptionsToClass{trans}{beamer}\setboolean{fh-ooe@isprint}{true}}
 %\DeclareOption{article}{\setboolean{fh-ooe@ispresentation}{false}}
 %\DeclareOption{draft}{\PassOptionsToClass{draft}{beamer}\PassOptionsToClass{draft}{article}}
 %\DeclareOption{beamer}{\PassOptionsToClass{beamer}{beamer}}
@@ -27,9 +26,8 @@
 
 \ProcessOptions
 
+\RequirePackage{pgfpages}
 \ifthenelse{\boolean{fh-ooe@ispresentation}}{
-  % Make beamer to not complain about pdfpagelabels
-%  \PassOptionsToPackage{pdfpagelabels=false}{hyperref}
   \LoadClassWithOptions{beamer}[2010/06/21]
 }{
   \LoadClassWithOptions{article}
@@ -55,75 +53,47 @@
 }
 \semester{}
 
-\def\fhooe@handoutoptions{\setbeamercolor{background canvas}{bg=black!2}}
-\def\fhooe@presentationoptions{\beamertemplatenavigationsymbolsempty}
-
-\def\fhooe@handoutlayout{4 on 1}
-\def\fhooe@handoutlayoutoptions{[a4paper,landscape,border shrink=5mm]}
-
-\def\fhooe@printlayout{fhooe resize to}
-\def\fhooe@printlayoutoptions{[a4paper,border shrink=5mm]}
-
-\RequirePackage{pgfpages}
-
-\pgfpagesdeclarelayout{fhooe resize to}
-{
-  \def\pgfpageoptionborder{0pt}
-}
-{
-  \pgfpagesphysicalpageoptions
-  {%
-    logical pages=1,%
-    physical height=\pgfpageoptionheight,%
-    physical width=\pgfpageoptionwidth%
-  }
-  \pgfpageslogicalpageoptions{1}
-  {%
-    resized width=\pgfphysicalwidth,%
-    resized height=\pgfphysicalheight,%
-    border shrink=\pgfpageoptionborder,%
-    center=\pgfpoint{.5\pgfphysicalwidth}{.73\pgfphysicalheight}%
-  }%
-}
 
 \ifthenelse{\boolean{fh-ooe@istrans}}{
-  \RequirePackage{pgfpages}
+  \def\fhooe@printlayout{fhooe resize to}
+  \def\fhooe@printlayoutoptions{[a4paper,border shrink=5mm]}
+
+  \pgfpagesdeclarelayout{fhooe resize to}
+  {
+    \def\pgfpageoptionborder{0pt}
+  }
+  {
+    \pgfpagesphysicalpageoptions
+    {%
+      logical pages=1,%
+      physical height=\pgfpageoptionheight,%
+      physical width=\pgfpageoptionwidth%
+    }
+    \pgfpageslogicalpageoptions{1}
+    {%
+      resized width=\pgfphysicalwidth,%
+      resized height=\pgfphysicalheight,%
+      border shrink=\pgfpageoptionborder,%
+      center=\pgfpoint{.5\pgfphysicalwidth}{.73\pgfphysicalheight}%
+    }%
+  }
+
   \expandafter\pgfpagesuselayout\expandafter\fhooe@printlayout\fhooe@printlayoutoptions
 }{}
 
 \ifthenelse{\boolean{fh-ooe@ishandout}}{
-  \RequirePackage{pgfpages}
+  \def\fhooe@handoutoptions{\setbeamercolor{background canvas}{bg=black!2}}
+  \def\fhooe@presentationoptions{\beamertemplatenavigationsymbolsempty}
+
+  \def\fhooe@handoutlayout{4 on 1}
+  \def\fhooe@handoutlayoutoptions{[a4paper,landscape,border shrink=5mm]}
+
   \expandafter\pgfpagesuselayout\expandafter\fhooe@handoutlayout\fhooe@handoutlayoutoptions
 }{}
 
-% \ifthenelse{\boolean{fh-ooe@twoscreens}}{
-%   \RequirePackage{pgfpages}
-%   \pgfpagesdeclarelayout{twoscreens}{
-%     \beamer@twoscreenstexttrue
-%     \nofiles
-%   }{
-%     \pgfpagesphysicalpageoptions{%
-%       logical pages=2,
-%       physical width=2960px,
-%       physical height=1050px,
-%       last logical shipout=1
-%     }
-%     \pgfpageslogicalpageoptions{1}{%
-%       resized width=1400px,
-%       resized height=1050px,
-%       center=\pgfpoint{839.5px}{524.5px}
-%     }%
-%     \pgfpageslogicalpageoptions{2}
-%     {%
-%       resized width=1280px,
-%       resized height=960px,
-%       center=\pgfpoint{2320.5px}{537.5px},
-%       copy from=1
-%     }
-%   }
-%   \pgfpagesuselayout{twoscreens}
-% %  \AtBeginDocument{\pgfpagescurrentpagewillbelogicalpage{2}}
-% }{}
+
+\def\fhooe@handoutoptions{\setbeamercolor{background canvas}{bg=black!2}}
+\def\fhooe@presentationoptions{\beamertemplatenavigationsymbolsempty}
 
 \mode<presentation>{\fhooe@presentationoptions}
 \mode<handout>{\fhooe@handoutoptions}
@@ -141,9 +111,17 @@
 \def\codelistingname{Listing}
 \def\lstlistingname{\codefontsize \codelistingname}
 
-\newcommand\inlinejavacode[1][]{\lstinline[style=eclipse-inline,language=java,#1]}
 
 \newlength{\fhooe@lenaa}%
+
+\newcommand\inlinejavacode[1][]{\lstinline[style=eclipse-inline,language=java,#1]}
+
+\lstnewenvironment{javacode}[1][]{
+  \lstset{style=eclipse,language=java,#1}%
+  \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
+  \addtolength{\fhooe@lenaa}{\lst@numbersep}%
+  \lstset{xleftmargin=\fhooe@lenaa,xrightmargin=\fhooe@lenaa,#1}%
+}{}
 
 \newcommand{\includejavacode}[2][]{%
   \lstset{style=eclipse}%
@@ -151,7 +129,7 @@
   \addtolength{\fhooe@lenaa}{\lst@numbersep}%
   \write\srcf{\javasourcepath/#2}%
   \href{run:\javasourcepath/#2}{%
-    \vbox{%
+    \vbox{%\hbox{%
       \lstinputlisting[%
         language=java,%
         xleftmargin=\fhooe@lenaa,%
@@ -160,11 +138,18 @@
       ]{%
         \javasourcepath/#2%
       }%
-    }%
-  }\\%
+    }%}%
+  }%\\%
 }
 
 \newcommand\inlinecppcode[1][]{\lstinline[style=eclipse-inline,language=c++,#1]}
+
+\lstnewenvironment{cppcode}[1][]{
+  \lstset{style=eclipse,language=c++,#1}%
+  \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
+  \addtolength{\fhooe@lenaa}{\lst@numbersep}%
+  \lstset{xleftmargin=\fhooe@lenaa,xrightmargin=\fhooe@lenaa,#1}%
+}{}
 
 \newcommand{\includecppcode}[2][]{%
   \lstset{style=eclipse,#1}%
@@ -172,7 +157,7 @@
   \addtolength{\fhooe@lenaa}{\lst@numbersep}%
   \write\srcf{\cppsourcepath/#2}%
   \href{run:\cppsourcepath/#2}{%
-    \vbox{%
+    \vbox{%\hbox{%
       \lstinputlisting[%
         language=c++,%
         xleftmargin=\fhooe@lenaa,%
@@ -181,8 +166,8 @@
       ]{%
         \cppsourcepath/#2%
       }%
-    }%
-  }\\%
+    }%}%
+  }%\\%
 }
 
 \let\orig@lecture\lecture
