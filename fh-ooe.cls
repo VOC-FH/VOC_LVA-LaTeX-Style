@@ -120,10 +120,11 @@
   \lstset{style=eclipse,language=java,#1}%
   \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
   \addtolength{\fhooe@lenaa}{\lst@numbersep}%
-  \lstset{xleftmargin=\fhooe@lenaa,xrightmargin=\fhooe@lenaa,#1}%
+  \lstset{xleftmargin=\fhooe@lenaa,#1}%
 }{}
 
 \newcommand{\includejavacode}[2][]{%
+  \codefontsize
   \lstset{style=eclipse}%
   \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
   \addtolength{\fhooe@lenaa}{\lst@numbersep}%
@@ -148,10 +149,11 @@
   \lstset{style=eclipse,language=c++,#1}%
   \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
   \addtolength{\fhooe@lenaa}{\lst@numbersep}%
-  \lstset{xleftmargin=\fhooe@lenaa,xrightmargin=\fhooe@lenaa,#1}%
+  \lstset{xleftmargin=\fhooe@lenaa,#1}%
 }{}
 
 \newcommand{\includecppcode}[2][]{%
+  \codefontsize
   \lstset{style=eclipse,#1}%
   \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
   \addtolength{\fhooe@lenaa}{\lst@numbersep}%

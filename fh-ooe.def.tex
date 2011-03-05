@@ -28,6 +28,7 @@
    morecomment=[s][\color{lightblue}]{/**}{*/},
    escapeinside={/*@}{@*/},
    basicstyle=\codefontfamily,
+   basewidth={0.5em,0.45em},
    inputencoding=utf8x,
    extendedchars=\true,
    commentstyle=\color{darkgreen},
@@ -50,7 +51,8 @@
 \lstdefinestyle{eclipse}{
   morecomment=[s][\color{lightblue}]{/**}{*/},
   escapeinside={/*@}{@*/},
-  basicstyle=\codefontsize\codefontfamily,
+  basicstyle=\codefontfamily,
+  basewidth={0.5em,0.45em},
   inputencoding=utf8x,
   extendedchars=\true,
   numbers=left,
@@ -80,7 +82,6 @@
   mathescape=true,
   texcl=true,
   framerule=0.3pt,%
-  resetmargins=true,%
 }
 
 \lstset{language=java, style=eclipse-inline}
