@@ -114,7 +114,9 @@
 }
 
 \AtBeginLecture{
-  \pdfbookmark[1]{\insertlecturenumbername\ \insertlecturenumber\ifx\insertlecturehead\@empty\else: \insertlecture\fi}{Inhalt-\beamer@currentlecturelabel}
+  \ifbeamer@inlecture
+    \pdfbookmark[1]{\insertlecturenumbername\ \insertlecturenumber\ifx\insertlecturehead\@empty\else: \insertlecture\fi}{Inhalt-\beamer@currentlecturelabel}
+  \fi
   \makelectureframe
 }
 \newcounter{fh-ooe@firstsectioninchapter}
