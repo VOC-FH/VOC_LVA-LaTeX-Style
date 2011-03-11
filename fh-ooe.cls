@@ -91,13 +91,6 @@
   \expandafter\pgfpagesuselayout\expandafter\fhooe@handoutlayout\fhooe@handoutlayoutoptions
 }{}
 
-
-\def\fhooe@handoutoptions{\setbeamercolor{background canvas}{bg=black!2}}
-\def\fhooe@presentationoptions{\beamertemplatenavigationsymbolsempty}
-
-\mode<presentation>{\fhooe@presentationoptions}
-\mode<handout>{\fhooe@handoutoptions}
-
 \let\orig@include\include
 \renewcommand{\include}[2][.]{
   \graphicspath{{#1/material/}}
@@ -111,6 +104,10 @@
 \def\codelistingname{Listing}
 \def\lstlistingname{\codefontsize \codelistingname}
 
+
+\newcommand{\addsourcefile}[1]{%
+  \write\srcf{#1}%
+}
 
 \newlength{\fhooe@lenaa}%
 
@@ -128,7 +125,7 @@
   \lstset{style=eclipse}%
   \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
   \addtolength{\fhooe@lenaa}{\lst@numbersep}%
-  \write\srcf{\javasourcepath/#2}%
+  \addsourcefile{\javasourcepath/#2}%
   \href{run:\javasourcepath/#2}{%
     \vbox{%\hbox{%
       \lstinputlisting[%
@@ -157,7 +154,7 @@
   \lstset{style=eclipse,#1}%
   \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
   \addtolength{\fhooe@lenaa}{\lst@numbersep}%
-  \write\srcf{\cppsourcepath/#2}%
+  \addsourcefile{\cppsourcepath/#2}%
   \href{run:\cppsourcepath/#2}{%
     \vbox{%\hbox{%
       \lstinputlisting[%
@@ -190,12 +187,12 @@
 \renewenvironment{document}[1][]
 {
  \gdef\fhooe@ArgI{{#1}}
- \documentRelay
+\fhooe@documentRelay
 }{
  \orig@enddocument
 }
 
-\newcommand{\documentRelay}[1][]
+\newcommand{\fhooe@documentRelay}[1][]
 {
   \gdef\fhooe@ArgII{{#1}}
   \gdef\fhooe@maketitle{\relax}
@@ -231,7 +228,13 @@
   \fhooe@maketitle
 }
 
+\def\fhooehandoutoptions{\setbeamercolor{background canvas}{bg=black!2}}
+\def\fhooepresentationoptions{\beamertemplatenavigationsymbolsempty}
+
 % Read options from file
 \InputIfFileExists{fh-ooe.def.tex}{}{}
 \InputIfFileExists{private.def.tex}{}{}
 \InputIfFileExists{experimental.def.tex}{}{}
+
+\mode<presentation>{\fhooepresentationoptions}
+\mode<handout>{\fhooehandoutoptions}
