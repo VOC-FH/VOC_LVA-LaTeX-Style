@@ -120,7 +120,7 @@
   \lstset{xleftmargin=\fhooe@lenaa,#1}%
 }{}
 
-\newcommand{\includejavacode}[2][]{%
+\newcommand{\includejavacode}[2][]{{%
   \codefontsize
   \lstset{style=eclipse}%
   \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
@@ -138,7 +138,7 @@
       }%
     }%}%
   }%\\%
-}
+}}
 
 \newcommand\inlinecppcode[1][]{\lstinline[style=eclipse-inline,language=c++,#1]}
 
@@ -149,7 +149,7 @@
   \lstset{xleftmargin=\fhooe@lenaa,#1}%
 }{}
 
-\newcommand{\includecppcode}[2][]{%
+\newcommand{\includecppcode}[2][]{{%
   \codefontsize
   \lstset{style=eclipse,#1}%
   \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
@@ -167,7 +167,7 @@
       }%
     }%}%
   }%\\%
-}
+}}
 
 \let\orig@lecture\lecture
 \newcounter{lastframeoflastlecture}
