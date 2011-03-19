@@ -92,20 +92,20 @@ order=-1
 
 [item:beamerinnerthemefh-ooe.sty]
 archive=true
-column=2
+column=13
 encoding=UTF-8
 highlight=LaTeX
-line=119
+line=83
 mode=LaTeX
 open=false
 order=3
 
 [item:beamerouterthemefh-ooe.sty]
 archive=true
-column=4
+column=58
 encoding=UTF-8
 highlight=LaTeX
-line=163
+line=23
 mode=LaTeX
 open=false
 order=1
@@ -175,12 +175,12 @@ CursorColumn=0
 CursorLine=13
 
 [view-settings,view=0,item:beamerinnerthemefh-ooe.sty]
-CursorColumn=2
-CursorLine=119
+CursorColumn=13
+CursorLine=83
 
 [view-settings,view=0,item:beamerouterthemefh-ooe.sty]
-CursorColumn=4
-CursorLine=163
+CursorColumn=58
+CursorLine=23
 
 [view-settings,view=0,item:beamerthemeFH-OOE.sty]
 CursorColumn=0

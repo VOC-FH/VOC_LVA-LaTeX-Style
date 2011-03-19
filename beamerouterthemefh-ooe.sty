@@ -16,7 +16,7 @@
 \useoutertheme{infolines}
 
 
-\defbeamertemplate*{headline}{fh-ooe theme slide page}
+\defbeamertemplate*{headline}{fh-ooe theme section slide page}
 {
   \leavevmode%
   \hbox{%
@@ -29,7 +29,37 @@
   \vskip0pt%
 }
 
-\defbeamertemplate*{footline}{fh-ooe theme slide page}
+\defbeamertemplate*{footline}{fh-ooe theme section slide page}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshortinstitute{} -- \insertshortdegree{} -- \insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertlecturenumber-\insertframenumberinlecture{} $\vert$ \insertframenumber{}/\inserttotalframenumber\hspace*{2ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+\defbeamertemplate*{headline}{fh-ooe theme part slide page}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{section in head/foot}%
+    \usebeamerfont{section in head/foot}\inserttitlehead{} -- \insertlonglecturenumberhead\hspace*{2ex}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,left]{subsection in head/foot}%
+    \usebeamerfont{subsection in head/foot}\hspace*{2ex}\insertpart
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+\defbeamertemplate*{footline}{fh-ooe theme part slide page}
 {
   \leavevmode%
   \hbox{%

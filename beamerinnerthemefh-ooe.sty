@@ -73,8 +73,6 @@
   \setbeamertemplate{footline}[fh-ooe theme title page]
   \pdfbookmark[0]{\inserttitle}{titlepage}
   \orig@maketitle
-  \setbeamertemplate{headline}[fh-ooe theme slide page]
-  \setbeamertemplate{footline}[fh-ooe theme slide page]
 }
 
 \def\lecturepage{\usebeamertemplate*{lecture page}}
@@ -84,8 +82,6 @@
   \begin{frame}
     \lecturepage
   \end{frame}
-  \setbeamertemplate{headline}[fh-ooe theme slide page]
-  \setbeamertemplate{footline}[fh-ooe theme slide page]
 }
 
 \def\insertpartframetitle{Inhalt}
@@ -95,8 +91,8 @@
   \begin{frame}[t]
     \partpage
   \end{frame}
-  \setbeamertemplate{headline}[fh-ooe theme slide page]
-  \setbeamertemplate{footline}[fh-ooe theme slide page]
+  \setbeamertemplate{headline}[fh-ooe theme part slide page]
+  \setbeamertemplate{footline}[fh-ooe theme part slide page]
 }
 
 \def\makesectionframe{
@@ -109,8 +105,8 @@
       firstsection=\value{fh-ooe@firstsectioninchapter}
     ]
   \end{frame}
-  \setbeamertemplate{headline}[fh-ooe theme slide page]
-  \setbeamertemplate{footline}[fh-ooe theme slide page]
+  \setbeamertemplate{headline}[fh-ooe theme section slide page]
+  \setbeamertemplate{footline}[fh-ooe theme section slide page]
 }
 
 \AtBeginLecture{

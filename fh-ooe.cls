@@ -33,6 +33,7 @@
   \LoadClassWithOptions{article}
   \RequirePackage{beamerarticle}
 }
+\hypersetup{bookmarksdepth=paragraph}
 
 \RequirePackage[lighttt]{lmodern}
 \RequirePackage{listings}
