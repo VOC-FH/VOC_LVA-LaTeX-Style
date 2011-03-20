@@ -115,13 +115,31 @@
   \fi
   \makelectureframe
 }
+
+\newboolean{fh-ooe@withpartpage}
+\setboolean{fh-ooe@withpartpage}{true}
 \newcounter{fh-ooe@firstsectioninchapter}
 \setcounter{fh-ooe@firstsectioninchapter}{1}
 \AtBeginPart{
   \setcounter{fh-ooe@firstsectioninchapter}{\value{section}}\addtocounter{fh-ooe@firstsectioninchapter}{1}
-  \makepartframe
+  \ifthenelse{\boolean{fh-ooe@withpartpage}} {
+    \makepartframe
+  } {
+    \setbeamertemplate{headline}[fh-ooe theme part slide page]
+    \setbeamertemplate{footline}[fh-ooe theme part slide page]
+  }
 }
 \AtBeginSection{\makesectionframe}
+
+\let\orig@part=\part
+\renewcommand{\part}[1][]{%
+  \ifthenelse{\equal{#1}{nopartpage}}{%
+    \setboolean{fh-ooe@withpartpage}{false}%
+  }{%
+    \setboolean{fh-ooe@withpartpage}{true}%
+  }%
+  \orig@part%
+}
 
 
 \newif\ifbeamer@justparts

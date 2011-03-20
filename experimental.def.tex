@@ -261,6 +261,39 @@
     }
   }
 
-  \pgfpagesuselayout{1680x1050|1024x768}
+    \pgfpagesdeclarelayout{1920x1080|1024x768}{
+    \inittwoscreens
+  }{
+    \pgfpagesphysicalpageoptions{%
+      logical pages=3,
+      physical width=2944px,
+      physical height=1080px,
+      last logical shipout=1,
+      backgroundcolor=black
+    }
+    \pgfpageslogicalpageoptions{1}{%
+      resized width=780px,
+      resized height=585px,
+      center=\pgfpoint{1530.5px}{787px},
+      border shrink=10pt,
+    }%
+    \pgfpageslogicalpageoptions{2}{%
+      resized width=1140px,
+      resized height=855px,
+      center=\pgfpoint{570.5px}{652px},
+      border shrink=10pt,
+      copy from=1,
+    }%
+    \pgfpageslogicalpageoptions{3}
+    {%
+      resized width=1024px,
+      resized height=768px,
+      center=\pgfpoint{2433px}{695.5px},
+      copy from=2
+    }
+  }
+
+%  \pgfpagesuselayout{1680x1050|1024x768}
+  \pgfpagesuselayout{1920x1080|1024x768}
 %  \pgfpagesuselayout{1680x1050|1280x1024}
 }{}
