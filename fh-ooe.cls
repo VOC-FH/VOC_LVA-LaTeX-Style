@@ -92,6 +92,7 @@
   \expandafter\pgfpagesuselayout\expandafter\fhooe@handoutlayout\fhooe@handoutlayoutoptions
 }{}
 
+\graphicspath{{./material/}}
 \let\orig@include\include
 \renewcommand{\include}[2][.]{
   \graphicspath{{#1/material/}}
