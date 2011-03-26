@@ -1,20 +1,8 @@
 %\documentclass[handout,utf8x]{fh-ooe}
 %\documentclass[aspectratio=1610]{beamer}
 
-%\begin{document}[without titlepage][kapitel-2]
-% \begin{document}
-%   \lecture[7. M\"arz 2011]{Einf\"uhrung}{kapitel-1}
-%   \part{Just first part}
-%   \begin{frame}{Testframe 1}
-%     Das ist Test 1
-%   \end{frame}
-%   \lecture[8. M\"arz 2011]{Einf\"uhrung}{kapitel-2}
-%   \part{Just second part}
-%   \begin{frame}[plain]
-%     Das ist Test 2
-%   \end{frame}
-% \end{document}
-\documentclass[trans]{fh-ooe}
+\documentclass[beamer]{fh-ooe}
+
 
 \author[Volker Christian]{Mag. Volker Christian}
 \degree[MTD]{Medientechnik und Design}
@@ -27,29 +15,192 @@
 \begin{document}
 \lecture[4. Oktober 2010]{Einf\"uhrung}{kapitel-1}
 \part{Hallo}
-\begin{frame}{1}
-Du
-\vbox{\colorbox{black}{\vbox{\hbox{hihi}}}}
+
+\begin{frame}{LinkedList}
+\begin{center}
+  \begin{tikzpicture}
+    [
+      line/.style={
+        color=blue
+      },
+      class/.style={
+        % The shape:
+        rectangle,minimum width=2cm,
+        % The rest
+        draw=black!50,
+        top color=white,bottom color=black!20,
+        font=\codefontsize}
+    ]
+
+%    \node (list) [class] {List};
+    \node (list) [class,bottom color=red!20] {\underbar{\inlinejavacode{:List}}};
+    \node (head) [node distance=0mm,class,below=of list] {\inlinejavacode{Node head}};
+    \node (tail) [node distance=0mm,class,below=of head] {\inlinejavacode{Node tail}};
+
+    \node (node1) [class,right=of list] {\inlinejavacode{Node}};
+    \node (next1) [node distance=0mm,class,below=of node1] {\inlinejavacode{Node next}};
+    \node (prev1) [node distance=0mm,class,below=of next1] {\inlinejavacode{Node prev}};
+    \node (value1) [node distance=0mm,class,below=of prev1] {\inlinejavacode{Object value}};
+    \node (object1) [class, below=of value1] {\inlinejavacode{Data}};
+
+    \node (node2) [class,right=of node1] {\inlinejavacode{Node}};
+    \node (next2) [node distance=0mm,class,below=of node2] {\inlinejavacode{Node next}};
+    \node (prev2) [node distance=0mm,class,below=of next2] {\inlinejavacode{Node prev}};
+    \node (value2) [node distance=0mm,class,below=of prev2] {\inlinejavacode{Object value}};
+    \node (object2) [class, below=of value2] {\inlinejavacode{Data}};
+
+    \node (node3) [class,right=of node2] {\inlinejavacode{Node}};
+    \node (next3) [node distance=0mm,class,below=of node3] {\inlinejavacode{Node next}};
+    \node (prev3) [node distance=0mm,class,below=of next3] {\inlinejavacode{Node prev}};
+    \node (value3) [node distance=0mm,class,below=of prev3] {\inlinejavacode{Object value}};
+    \node (object3) [class, below=of value3] {\inlinejavacode{Data}};
+
+    \draw [line,*->] ($(head.east) + (-2mm,0)$) -- (head.east) -- ++(6mm,0) |- ($(node1.north) + (-3mm,3mm)$) -| ($(node1.north) - (3mm,0)$);
+    \draw [line,*->] ($(tail.east) + (-2mm,0)$) -- (tail.east) -- ++(3mm,0) |- ($(node1.north) + (0,6mm)$) -| ($(node3.north) + (3mm,0)$);
+
+    \draw [line,*->] ($(next2.east) + (-2mm,0)$) -- (next2.east) -- ++(6mm,0) |- ($(node3.north) + (-3mm,3mm)$) -| ($(node3.north) - (3mm,0)$);
+    \draw [line,*->] ($(prev3.west) + (2mm,0)$) -- (prev3.west) -- ++(-6mm,0) |- ($(node2.north) + (3mm,3mm)$) -| ($(node2.north) + (3mm,0)$);
+
+    \draw [line,*->] ($(next1.east) + (-2mm,0)$) -- (next1.east) -- ++(6mm,0) |- ($(node2.north) + (-3mm,3mm)$) -| ($(node2.north) - (3mm,0)$);
+    \draw [line,*->] ($(prev2.west) + (2mm,0)$) -- (prev2.west) -- ++(-6mm,0) |- ($(node1.north) + (3mm,3mm)$) -| ($(node1.north) + (3mm,0)$);
+
+    \draw [line,*-|] ($(next3.east) + (-2mm,0)$) -- (next3.east) -- ++(2mm,0);
+    \draw [line,*-|] ($(prev1.west) + (2mm,0)$) -- (prev1.west) -- ++(-2mm,0);
+
+    \draw [line,*->] ($(value1.south) + (0,2mm)$) -- (value1.south) -- (object1.north);
+    \draw [line,*->] ($(value2.south) + (0,2mm)$) -- (value2.south) -- (object2.north);
+    \draw [line,*->] ($(value3.south) + (0,2mm)$) -- (value3.south) -- (object3.north);
+  \end{tikzpicture}
+\end{center}
 \end{frame}
-\part{Du}
-\begin{frame}{2}
-Du
+
+\begin{frame}{test}
+\newlength{\codebaselineskip}
+\codefontsize
+\setlength{\codebaselineskip}{\baselineskip}
+\normalsize
+
+\begin{tikzpicture}
+  [
+    line/.style={color=blue},
+    list/.style={rectangle split, rectangle split parts=3, draw, text width=2.2cm,
+        draw=black!50,
+        top color=white,bottom color=red!20,every text node part/.style={text centered},
+        font=\codefontsize},
+    node/.style={rectangle split, rectangle split parts=2, draw, text width=1.7cm,
+        draw=black!50,
+        top color=white,bottom color=green!20,every text node part/.style={text centered},
+        font=\codefontsize},
+    object/.style={rectangle split, rectangle split parts=1, draw, text width=1.7cm,
+        draw=black!50,
+        top color=white,bottom color=yellow!20,every text node part/.style={text centered},
+        font=\codefontsize}
+  ]
+  \node(list) [list] {
+      \underbar{\inlinejavacode{:List}}
+    \nodepart{second}
+      \inlinejavacode{head : Node}\\
+      \inlinejavacode{tail : Node}
+    \nodepart{third}
+      \inlinejavacode{append(Object o)}\\
+      \inlinejavacode{prepend(Object o)}
+  };
+  \node(node1) [node, right=of list] {
+      \underbar{\inlinejavacode{:Node}}
+    \nodepart{second}
+      \hspace{1mm}\inlinejavacode{next : Node}\\
+      \hspace{1mm}\inlinejavacode{prev : Node}\\
+      \hspace{1mm}\inlinejavacode{data : Object}
+    };
+  \node(node2) [node, right=of node1] {
+      \underbar{\inlinejavacode{:Node}}
+    \nodepart{second}
+      \hspace{1mm}\inlinejavacode{next : Node}\\
+      \hspace{1mm}\inlinejavacode{prev : Node}\\
+      \hspace{1mm}\inlinejavacode{data : Object}
+  };
+  \node(node3) [node, right=of node2] {
+      \underbar{\inlinejavacode{:Node}}
+    \nodepart{second}
+      \hspace{1mm}\inlinejavacode{next : Node}\\
+      \hspace{1mm}\inlinejavacode{prev : Node}\\
+      \hspace{1mm}\inlinejavacode{data : Object}
+  };
+
+  \node(object1) [object, below=of node1] {\underbar{\inlinejavacode{:Object}}};
+  \node(object2) [object, below=of node2] {\underbar{\inlinejavacode{:Object}}};
+  \node(object3) [object, below=of node3] {\underbar{\inlinejavacode{:Object}}};
+
+  \draw [line,*->] ($(list.second east) + (-2mm,0.5\codebaselineskip)$) -- ($(list.second east) + (0,0.5\codebaselineskip)$) -- ++(6mm,0) |- ($(node1.north) + (-3mm,3mm)$) -| ($(node1.north) - (3mm,0)$);
+  \draw [line,*->] ($(list.second east) + (-2mm,-0.5\codebaselineskip)$) -- ($(list.second east) + (0,-0.5\codebaselineskip)$) -- ++(3mm,0) |- ($(node3.north) + (-3mm,6mm)$) -| ($(node3.north) + (3mm,0)$);
+
+  \draw [line,*->] ($(node1.second east) + (-2mm,\codebaselineskip)$) -- ($(node1.second east) + (0,\codebaselineskip)$) -- ++(6mm,0) |- ($(node2.north) + (-3mm,3mm)$) -| ($(node2.north) - (3mm,0)$);
+  \draw [line,*-|] ($(node1.second west) + (2mm,0)$) -- (node1.second west) -- ++(-2mm,0);
+
+  \draw [line,*->] ($(node2.second east) + (-2mm,\codebaselineskip)$) -- ($(node2.second east) + (0,\codebaselineskip)$) -- ++(6mm,0) |- ($(node3.north) + (-3mm,3mm)$) -| ($(node3.north) - (3mm,0)$);
+  \draw [line,*->] ($(node2.second west) + (2mm,0)$) -- (node2.second west) -- ++(-6mm,0) |- ($(node1.north) + (3mm,3mm)$) -| ($(node1.north) + (3mm,0)$);
+
+  \draw [line,*->] ($(node3.second west) + (2mm,0)$) -- (node3.second west) -- ++(-6mm,0) |- ($(node2.north) + (3mm,3mm)$) -| ($(node2.north) + (3mm,0)$);
+  \draw [line,*-|] ($(node3.second east) + (-2mm,\codebaselineskip)$) -- ($(node3.second east) + (0,\codebaselineskip)$) -- ++(2mm,0);
+
+  \draw [line,*->] ($(node1.south) + (0,2mm)$) -- (node1.south) -- (object1.north);
+  \draw [line,*->] ($(node2.south) + (0,2mm)$) -- (node2.south) -- (object2.north);
+  \draw [line,*->] ($(node3.south) + (0,2mm)$) -- (node3.south) -- (object3.north);
+
+\end{tikzpicture}
 \end{frame}
-\part{Sie}
-\begin{frame}{3}
-Du
+
+\begin{frame}{sdfa}
+\begin{tikzpicture}[every text node part/.style={text centered}]
+\node[rectangle split, rectangle split parts=3, draw, text width=2.75cm]
+{Student
+\nodepart{second}
+age:int \\
+name:String
+\nodepart{third}
+getAge():int \\
+getName():String};
+\end{tikzpicture}
+
 \end{frame}
-\begin{frame}{4}
-Du
+
+\begin{frame}{test}
+\begin{tikzpicture}[node distance=5mm,
+terminal/.style={
+% The shape:
+rectangle,minimum size=6mm,rounded corners=3mm,
+% The rest
+very thick,draw=black!50,
+top color=white,bottom color=black!20,
+font=\ttfamily}]
+\node (dot)
+[terminal]
+{.};
+\node (digit) [terminal,right=of dot]
+{digit};
+\node (E)
+[terminal,right=of digit] {E};
+\end{tikzpicture}
+
 \end{frame}
-\begin{frame}{5}
-Du
-\end{frame}
-\begin{frame}{6}
-Du
-\end{frame}
-\begin{frame}{7}
-Du
+
+\begin{frame}{Image}
+\begin{tikzpicture}
+\draw[step=.5cm,gray,very thin] (-1.4,-1.4) grid (1.4,1.4);
+\draw (-1.5,0) -- (1.5,0);
+\draw (0,-1.5) -- (0,1.5);
+\draw (0,0) circle (1cm);
+draw (3mm,0mm) arc (0:30:3mm);
+
+
+\end{tikzpicture}.
+\begin{tikzpicture}[rounded corners,ultra thick]
+\shade[top color=yellow,bottom color=black] (0,0) rectangle +(2,1);
+\shade[left color=yellow,right color=black] (3,0) rectangle +(2,1);
+\shadedraw[inner color=yellow,outer color=black,draw=yellow] (6,0) rectangle +(2,1);
+\shade[ball color=green] (9,.5) circle (.5cm);
+\end{tikzpicture}
+
 \end{frame}
 
 \end{document}

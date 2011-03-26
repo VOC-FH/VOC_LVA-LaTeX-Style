@@ -2,6 +2,9 @@
 
 \RequirePackage{ifthen}
 \RequirePackage[T1]{fontenc}
+\RequirePackage{tikz}
+\usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,positioning,fit,calc,shapes.multipart}
+\RequirePackage{pgfpages}
 
 \newboolean{fh-ooe@ispresentation}
 \setboolean{fh-ooe@ispresentation}{true}
@@ -26,7 +29,6 @@
 
 \ProcessOptions
 
-\RequirePackage{pgfpages}
 \ifthenelse{\boolean{fh-ooe@ispresentation}}{
   \LoadClassWithOptions{beamer}[2010/06/21]
 }{
@@ -92,7 +94,7 @@
   \expandafter\pgfpagesuselayout\expandafter\fhooe@handoutlayout\fhooe@handoutlayoutoptions
 }{}
 
-\graphicspath{{./material/}}
+%\graphicspath{{./material/}}
 \let\orig@include\include
 \renewcommand{\include}[2][.]{
   \graphicspath{{#1/material/}}
