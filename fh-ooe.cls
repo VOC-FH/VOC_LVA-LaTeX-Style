@@ -3,7 +3,7 @@
 \RequirePackage{ifthen}
 \RequirePackage[T1]{fontenc}
 \RequirePackage{tikz}
-\usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,positioning,fit,calc,shapes.multipart}
+\usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,positioning,fit,calc,shapes.multipart,shapes.callouts}
 \RequirePackage{pgfpages}
 
 \newboolean{fh-ooe@ispresentation}
@@ -172,6 +172,13 @@
     }%}%
   }%\\%
 }}
+
+\lstnewenvironment{cppapi}[1][]{
+  \lstset{style=eclipse,language=c++,basicstyle=\normalsize\codefontfamily,xleftmargin=0pt,numbers=none}%
+  \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
+  \addtolength{\fhooe@lenaa}{\lst@numbersep}%
+  \lstset{xleftmargin=\fhooe@lenaa,#1}%
+}{}
 
 \let\orig@lecture\lecture
 \newcounter{lastframeoflastlecture}

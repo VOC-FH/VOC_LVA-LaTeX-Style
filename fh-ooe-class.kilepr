@@ -142,32 +142,32 @@ order=-1
 
 [item:fh-ooe.cls]
 archive=true
-column=80
+column=2
 encoding=UTF-8
 highlight=LaTeX
-line=5
+line=131
 mode=LaTeX
 open=true
-order=1
+order=0
 
 [item:fh-ooe.def.tex]
 archive=true
-column=23
+column=0
 encoding=UTF-8
 highlight=LaTeX
-line=65
+line=67
 mode=LaTeX
 open=false
 order=0
 
 [item:test.tex]
 archive=true
-column=6
+column=0
 encoding=UTF-8
 highlight=LaTeX
-line=25
+line=77
 mode=LaTeX
-open=true
+open=false
 order=0
 
 [view-settings,view=0,item:beamercolorthemefh-ooe.sty]
@@ -191,13 +191,13 @@ CursorColumn=21
 CursorLine=239
 
 [view-settings,view=0,item:fh-ooe.cls]
-CursorColumn=80
-CursorLine=5
+CursorColumn=2
+CursorLine=131
 
 [view-settings,view=0,item:fh-ooe.def.tex]
-CursorColumn=23
-CursorLine=65
+CursorColumn=0
+CursorLine=67
 
 [view-settings,view=0,item:test.tex]
-CursorColumn=6
-CursorLine=25
+CursorColumn=0
+CursorLine=77
