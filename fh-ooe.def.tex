@@ -91,6 +91,12 @@
 
 \lstset{language=java, style=eclipse-inline}
 
+{
+  \catcode`\%=12
+  \catcode`\"=12
+  \xdef\pgf@gnuplot@head#1{set table; set output "#1.table"; set format "%.5f"}
+}
+
 %\def\fhooe@handoutlayout{6 on 1}
 %\def\fhooe@handoutlayoutoptions{[a4paper,border shrink=5mm]}
 

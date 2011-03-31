@@ -4,8 +4,8 @@ img_extIsRegExp=false
 img_extensions=.eps .jpg .jpeg .png .pdf .ps .fig .gif
 kileprversion=2
 kileversion=2.0.85
-lastDocument=test.tex
-masterDocument=test.tex
+lastDocument=fh-ooe.cls
+masterDocument=
 name=FH-OOE-Class
 pkg_extIsRegExp=false
 pkg_extensions=.cls .sty .bbx .cbx .lbx
@@ -72,14 +72,6 @@ Indentation Mode=normal
 Mode=LaTeX
 ReadWrite=true
 
-[document-settings,item:test.tex]
-Bookmarks=
-Encoding=UTF-8
-Highlighting=LaTeX
-Indentation Mode=normal
-Mode=LaTeX
-ReadWrite=true
-
 [item:beamercolorthemefh-ooe.sty]
 archive=true
 column=0
@@ -92,23 +84,23 @@ order=-1
 
 [item:beamerinnerthemefh-ooe.sty]
 archive=true
-column=0
+column=135
 encoding=UTF-8
 highlight=LaTeX
-line=316
+line=315
 mode=LaTeX
-open=false
-order=3
+open=true
+order=1
 
 [item:beamerouterthemefh-ooe.sty]
 archive=true
-column=58
+column=29
 encoding=UTF-8
 highlight=LaTeX
-line=23
+line=193
 mode=LaTeX
-open=false
-order=1
+open=true
+order=2
 
 [item:beamerthemeFH-OOE.sty]
 archive=true
@@ -142,30 +134,20 @@ order=-1
 
 [item:fh-ooe.cls]
 archive=true
-column=2
+column=25
 encoding=UTF-8
 highlight=LaTeX
-line=131
+line=212
 mode=LaTeX
 open=true
 order=0
 
 [item:fh-ooe.def.tex]
 archive=true
-column=0
+column=31
 encoding=UTF-8
 highlight=LaTeX
-line=67
-mode=LaTeX
-open=false
-order=0
-
-[item:test.tex]
-archive=true
-column=0
-encoding=UTF-8
-highlight=LaTeX
-line=77
+line=96
 mode=LaTeX
 open=false
 order=0
@@ -175,12 +157,12 @@ CursorColumn=0
 CursorLine=13
 
 [view-settings,view=0,item:beamerinnerthemefh-ooe.sty]
-CursorColumn=0
-CursorLine=316
+CursorColumn=135
+CursorLine=315
 
 [view-settings,view=0,item:beamerouterthemefh-ooe.sty]
-CursorColumn=58
-CursorLine=23
+CursorColumn=29
+CursorLine=193
 
 [view-settings,view=0,item:beamerthemeFH-OOE.sty]
 CursorColumn=0
@@ -191,13 +173,9 @@ CursorColumn=21
 CursorLine=239
 
 [view-settings,view=0,item:fh-ooe.cls]
-CursorColumn=2
-CursorLine=131
+CursorColumn=25
+CursorLine=212
 
 [view-settings,view=0,item:fh-ooe.def.tex]
-CursorColumn=0
-CursorLine=67
-
-[view-settings,view=0,item:test.tex]
-CursorColumn=0
-CursorLine=77
+CursorColumn=31
+CursorLine=96

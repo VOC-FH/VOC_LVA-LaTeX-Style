@@ -71,8 +71,9 @@
 \def\maketitle{
   \setbeamertemplate{headline}[fh-ooe theme title page]
   \setbeamertemplate{footline}[fh-ooe theme title page]
-  \pdfbookmark[0]{\inserttitle}{titlepage}
+%  \pdfbookmark[0]{\inserttitle}{titlepage}
   \orig@maketitle
+  \global\advance\c@framenumber by-1\relax%
 }
 
 \def\lecturepage{\usebeamertemplate*{lecture page}}
@@ -111,7 +112,7 @@
 
 \AtBeginLecture{
   \ifbeamer@inlecture
-    \pdfbookmark[1]{\insertlecturenumbername\ \insertlecturenumber\ifx\insertlecturehead\@empty\else: \insertlecture\fi}{Inhalt-\beamer@currentlecturelabel}
+    \pdfbookmark[0]{\insertlecturenumbername\ \insertlecturenumber\ifx\insertlecturehead\@empty\else: \insertlecture\fi}{Inhalt-\beamer@currentlecturelabel}
   \fi
   \makelectureframe
 }
@@ -227,10 +228,11 @@
     \def\insertsubsubsectionhead{}%
     \def\lastsubsection{}%
     \def\insertpart{\expandafter\hyperlink\partlink}%
-    \Hy@writebookmark{\the\c@section}{#1}{Outline\the\c@part}{2}{toc}%
+    \Hy@writebookmark{\the\c@section}{#1}{Outline\the\c@part}{1}{toc}%
     \hyper@anchorstart{Outline\the\c@part}\hyper@anchorend%
-    \beamer@atbeginpart%
+%    \beamer@atbeginpart%
   \fi%
+  \beamer@atbeginpart%
   \beamer@resumemode}%
 
 \long\def\beamer@section[#1]#2{%
@@ -259,10 +261,11 @@
     \def\insertsubsectionhead{}%
     \def\insertsubsubsectionhead{}%
     \def\lastsubsection{}%
-    \Hy@writebookmark{\the\c@section}{\secname}{Outline\the\c@part.\the\c@section}{3}{toc}%
+    \Hy@writebookmark{\the\c@section}{\secname}{Outline\the\c@part.\the\c@section}{2}{toc}%
     \hyper@anchorstart{Outline\the\c@part.\the\c@section}\hyper@anchorend%
-    \beamer@ifempty{#2}{\beamer@atbeginsections}{\beamer@atbeginsection}%
+%    \beamer@ifempty{#2}{\beamer@atbeginsections}{\beamer@atbeginsection}%
   \fi%
+  \beamer@ifempty{#2}{\beamer@atbeginsections}{\beamer@atbeginsection}%
   \beamer@resumemode}%
 
 \def\beamer@subsection[#1]#2{%
@@ -287,10 +290,11 @@
     \def\insertsubsubsection{}%
     \def\insertsubsectionhead{#1}%
     \def\insertsubsubsectionhead{}%
-    \Hy@writebookmark{\the\c@subsection}{#2}{Outline\the\c@part.\the\c@section.\the\c@subsection.\the\c@page}{4}{toc}%
+    \Hy@writebookmark{\the\c@subsection}{#2}{Outline\the\c@part.\the\c@section.\the\c@subsection.\the\c@page}{3}{toc}%
     \hyper@anchorstart{Outline\the\c@part.\the\c@section.\the\c@subsection.\the\c@page}\hyper@anchorend%
-    \beamer@ifempty{#2}{\beamer@atbeginsubsections}{\beamer@atbeginsubsection}%
+%    \beamer@ifempty{#2}{\beamer@atbeginsubsections}{\beamer@atbeginsubsection}%
   \fi%
+  \beamer@ifempty{#2}{\beamer@atbeginsubsections}{\beamer@atbeginsubsection}%
   \beamer@resumemode}
 
 \def\beamer@subsubsection[#1]#2{%
@@ -309,9 +313,10 @@
     \edef\subsubsectionlink{{Navigation\the\c@page}{\noexpand\subsubsecname}}%
     \def\insertsubsubsection{\expandafter\hyperlink\subsubsectionlink}%
     \def\insertsubsubsectionhead{#1}%
-    \Hy@writebookmark{\the\c@subsubsection}{#2}{Outline\the\c@part.\the\c@section.\the\c@subsection.\the\c@subsubsection.\the\c@page}{5}{toc}%
+    \Hy@writebookmark{\the\c@subsubsection}{#2}{Outline\the\c@part.\the\c@section.\the\c@subsection.\the\c@subsubsection.\the\c@page}{4}{toc}%
     \hyper@anchorstart{Outline\the\c@part.\the\c@section.\the\c@subsection.\the\c@subsubsection.\the\c@page}\hyper@anchorend%
-    \beamer@ifempty{#2}{\beamer@atbeginsubsubsections}{\beamer@atbeginsubsubsection}%
+%    \beamer@ifempty{#2}{\beamer@atbeginsubsubsections}{\beamer@atbeginsubsubsection}%
   \fi%
+  \beamer@ifempty{#2}{\beamer@atbeginsubsubsections}{\beamer@atbeginsubsubsection}%
   \beamer@resumemode}
 
