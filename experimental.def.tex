@@ -78,23 +78,27 @@
   \def\inittwoscreens{
     \beamer@twoscreenstexttrue
     \nofiles
-    \newcommand{\@EveryShipout@AfterNextHook}{}
-    \newcommand*{\AfterNextShipout}[1]
-      {\g@addto@macro\@EveryShipout@AfterNextHook{##1}}
-    \renewcommand{\@EveryShipout@Output}{%
-    \@EveryShipout@Hook%
-    \@EveryShipout@AtNextHook%
-      \gdef\@EveryShipout@AtNextHook{}%
-    \@EveryShipout@Org@Shipout\box\@cclv%
-    \@EveryShipout@AfterNextHook%
-      \gdef\@EveryShipout@AfterNextHook{}%
-   }
-    \AtBeginDocument{
-      \pgfpagescurrentpagewillbelogicalpage{1}
-      \AfterNextShipout{
-        \pgfpages@performcopying
-      }
-    }
+%    \newcommand{\@EveryShipout@AfterNextHook}{}
+%    \newcommand*{\AfterNextShipout}[1]
+%      {\g@addto@macro\@EveryShipout@AfterNextHook{##1}}
+%    \renewcommand{\@EveryShipout@Output}{%
+%    \@EveryShipout@Hook%
+%    \@EveryShipout@AtNextHook%
+%      \gdef\@EveryShipout@AtNextHook{}%
+%    \@EveryShipout@Org@Shipout\box\@cclv%
+%    \@EveryShipout@AfterNextHook%
+%      \gdef\@EveryShipout@AfterNextHook{}%
+%   }
+
+%    \AtBeginDocument{
+%      \let\myship=\shipout
+%      \let\shipout=\myshipout
+%      \def\pgfpageoptionfirstshipout{1}
+%      \pgfpagescurrentpagewillbelogicalpage{1}
+%      \AfterNextShipout{
+%        \pgfpages@performcopying
+%      }
+%    }
     \AtEndDocument{
       \beamer@inlecturetrue
       \begin{frame}%[plain]
@@ -103,9 +107,7 @@
       \setbeamercolor{background canvas}{bg=black}
       \begin{frame}[plain]
       \end{frame}
-      \ifpgfphysicalpageempty\else
-        \pgfshipoutphysicalpage
-      \fi
+      \pgfshipoutphysicalpage
     }
 
     \def\pgfpages@buildshipoutbox{%
@@ -204,26 +206,27 @@
   }{
     \pgfpagesphysicalpageoptions{%
       logical pages=3,
-      physical width=2960px,
-      physical height=1050px,
+      physical width=2960pt,
+      physical height=1050pt,
       last logical shipout=1,
+      current logical shipout=2,
     }
     \pgfpageslogicalpageoptions{1}{%
-      resized width=700px,
-      resized height=500px,
-      center=\pgfpoint{350.5px}{524.5px}
+      resized width=700pt,
+      resized height=500pt,
+      center=\pgfpoint{350.5pt}{524.5pt}
     }%
     \pgfpageslogicalpageoptions{2}
     {%
-      resized width=700px,
-      resized height=500px,
-      center=\pgfpoint{1100.5px}{524.5px},
+      resized width=700pt,
+      resized height=500pt,
+      center=\pgfpoint{1100.5pt}{524.5pt},
       copy from=1
     }%
     \pgfpageslogicalpageoptions{3}{%
-      resized width=1280px,
-      resized height=960px,
-      center=\pgfpoint{2320.5px}{537.5px},
+      resized width=1280pt,
+      resized height=960pt,
+      center=\pgfpoint{2320.5pt}{537.5pt},
       copy from=2
     }%
   }
@@ -234,61 +237,61 @@
   }{
     \pgfpagesphysicalpageoptions{%
       logical pages=3,
-      physical width=2704px,
-      physical height=1050px,
+      physical width=2704pt,
+      physical height=1050pt,
       last logical shipout=1,
       backgroundcolor=black
     }
     \pgfpageslogicalpageoptions{1}{%
-      resized width=656px,
-      resized height=492px,
-      center=\pgfpoint{1352.5px}{803.5px},
+      resized width=656pt,
+      resized height=492pt,
+      center=\pgfpoint{1352.5pt}{803.5pt},
       border shrink=10pt,
     }%
     \pgfpageslogicalpageoptions{2}{%
-      resized width=1024px,
-      resized height=768px,
-      center=\pgfpoint{512.5px}{665.5px},
+      resized width=1024pt,
+      resized height=768pt,
+      center=\pgfpoint{512.5pt}{665.5pt},
       border shrink=10pt,
       copy from=1,
     }%
     \pgfpageslogicalpageoptions{3}
     {%
-      resized width=1024px,
-      resized height=768px,
-      center=\pgfpoint{2192.5px}{665.5px},
+      resized width=1024pt,
+      resized height=768pt,
+      center=\pgfpoint{2192.5pt}{665.5pt},
       copy from=2
     }
   }
 
-    \pgfpagesdeclarelayout{1920x1080|1024x768}{
+  \pgfpagesdeclarelayout{1920x1080|1024x768}{
     \inittwoscreens
   }{
     \pgfpagesphysicalpageoptions{%
       logical pages=3,
-      physical width=2944px,
-      physical height=1080px,
+      physical width=2944pt,
+      physical height=1080pt,
       last logical shipout=1,
       backgroundcolor=black
     }
     \pgfpageslogicalpageoptions{1}{%
-      resized width=780px,
-      resized height=585px,
-      center=\pgfpoint{1530.5px}{787px},
+      resized width=780pt,
+      resized height=585pt,
+      center=\pgfpoint{1530.5pt}{787pt},
       border shrink=10pt,
     }%
     \pgfpageslogicalpageoptions{2}{%
-      resized width=1140px,
-      resized height=855px,
-      center=\pgfpoint{570.5px}{652px},
+      resized width=1140pt,
+      resized height=855pt,
+      center=\pgfpoint{570.5pt}{652pt},
       border shrink=10pt,
       copy from=1,
     }%
     \pgfpageslogicalpageoptions{3}
     {%
-      resized width=1024px,
-      resized height=768px,
-      center=\pgfpoint{2433px}{695.5px},
+      resized width=1024pt,
+      resized height=768pt,
+      center=\pgfpoint{2433pt}{695.5pt},
       copy from=2
     }
   }
