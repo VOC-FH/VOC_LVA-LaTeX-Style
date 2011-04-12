@@ -3,7 +3,7 @@
 \RequirePackage{ifthen}
 \RequirePackage[T1]{fontenc}
 \RequirePackage{tikz}
-\usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,positioning,fit,calc,shapes.multipart,shapes.callouts}
+%\usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,positioning,fit,calc,shapes.multipart,shapes.callouts}
 \RequirePackage{pgfpages}
 
 \newboolean{fh-ooe@ispresentation}
