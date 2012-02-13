@@ -98,6 +98,7 @@
 \let\orig@include\include
 \renewcommand{\include}[2][.]{
   \graphicspath{{#1/material/}}
+  \def\pgfpath{#1/material/pgf/}
   \def\javasourcepath{sources/#1/src}
   \def\cppsourcepath{c++sources/#1}
   \orig@include{#1/#2}
@@ -180,6 +181,8 @@
   \lstset{xleftmargin=\fhooe@lenaa,#1}%
 }{}
 
+\def\pgfinput#1{\input{\pgfpath/#1.pgf}}
+
 \let\orig@lecture\lecture
 \newcounter{lastframeoflastlecture}
 \setcounter{lastframeoflastlecture}{0}
@@ -249,3 +252,5 @@
 
 \mode<presentation>{\fhooepresentationoptions}
 \mode<handout>{\fhooehandoutoptions}
+
+\RequirePackage{subfigure}
