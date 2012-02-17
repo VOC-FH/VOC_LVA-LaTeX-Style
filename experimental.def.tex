@@ -71,8 +71,6 @@
 
 
 \ifthenelse{\boolean{fh-ooe@twoscreens}}{
-%  \RequirePackage{everyshi}
-
   \define@key{pgfpages@main}{backgroundcolor}{\gdef\pgfphysicalbackgroundcolor{#1}}
 
   \def\inittwoscreens{
@@ -99,7 +97,7 @@
       physical width=2960pt,
       physical height=1050pt,
       last logical shipout=1,
-      backgroundcolor={0. 0. 0.}
+      backgroundcolor={rgb 0. 0. 0.}
     }
     \pgfpageslogicalpageoptions{1}{%
       resized width=700pt,
@@ -130,7 +128,7 @@
       physical width=2704pt,
       physical height=1050pt,
       last logical shipout=1,
-      backgroundcolor={0. 0. 0.}
+      backgroundcolor={rgb 0. 0. 0.}
     }
     \pgfpageslogicalpageoptions{1}{%
       resized width=656pt,
@@ -162,7 +160,7 @@
       physical width=2944pt,
       physical height=1080pt,
       last logical shipout=1,
-      backgroundcolor={0. 0. 0.}
+      backgroundcolor={rgb 0. 0. 0.}
     }
     \pgfpageslogicalpageoptions{1}{%
       resized width=780pt,
@@ -190,6 +188,6 @@
   \pgfpagesuselayout{1920x1080|1024x768}
 %  \pgfpagesuselayout{1680x1050|1280x1024}
   \ifdefined\pgfphysicalbackgroundcolor
-    \special{background rgb \pgfphysicalbackgroundcolor}
+    \special{background \pgfphysicalbackgroundcolor}
   \fi
 }{}
