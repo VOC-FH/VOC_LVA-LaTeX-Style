@@ -97,7 +97,7 @@
       physical width=2960pt,
       physical height=1050pt,
       last logical shipout=1,
-      backgroundcolor={rgb 0. 0. 0.}
+      backgroundcolor=black
     }
     \pgfpageslogicalpageoptions{1}{%
       resized width=700pt,
@@ -128,7 +128,7 @@
       physical width=2704pt,
       physical height=1050pt,
       last logical shipout=1,
-      backgroundcolor={rgb 0. 0. 0.}
+      backgroundcolor=black
     }
     \pgfpageslogicalpageoptions{1}{%
       resized width=656pt,
@@ -160,7 +160,7 @@
       physical width=2944pt,
       physical height=1080pt,
       last logical shipout=1,
-      backgroundcolor={rgb 0. 0. 0.}
+      backgroundcolor=black
     }
     \pgfpageslogicalpageoptions{1}{%
       resized width=780pt,
@@ -184,10 +184,48 @@
     }
   }
 
+  \pgfpagesdeclarelayout{1920x1080|1024x768|new}{
+    \inittwoscreens
+  }{
+    \pgfpagesphysicalpageoptions{%
+      logical pages=4,
+      physical width=2944pt,
+      physical height=1080pt,
+      last logical shipout=1,
+      backgroundcolor=black
+    }
+    \pgfpageslogicalpageoptions{1}{%
+      resized width=780pt,
+      resized height=585pt,
+      center=\pgfpoint{1530.5pt}{787pt},
+      border shrink=10pt,
+    }%
+    \pgfpageslogicalpageoptions{2}{%
+      resized width=1140pt,
+      resized height=855pt,
+      center=\pgfpoint{570.5pt}{652pt},
+      border shrink=10pt,
+      copy from=1,
+    }%
+    \pgfpageslogicalpageoptions{3}
+    {%
+      resized width=1024pt,
+      resized height=768pt,
+      center=\pgfpoint{2433pt}{695.5pt},
+      copy from=2
+    }
+    \pgfpageslogicalpageoptions{4}
+    {%
+      resized height=490pt,
+      center=\pgfpoint{1530.5pt}{250pt},
+      copy from=4
+    }
+  }
+
 %  \pgfpagesuselayout{1680x1050|1024x768}
   \pgfpagesuselayout{1920x1080|1024x768}
 %  \pgfpagesuselayout{1680x1050|1280x1024}
   \ifdefined\pgfphysicalbackgroundcolor
-    \special{background \pgfphysicalbackgroundcolor}
+    \pagecolor{\pgfphysicalbackgroundcolor}
   \fi
 }{}
