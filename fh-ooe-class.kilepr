@@ -4,7 +4,7 @@ img_extIsRegExp=false
 img_extensions=.eps .jpg .jpeg .png .pdf .ps .fig .gif
 kileprversion=2
 kileversion=2.1.0
-lastDocument=experimental.def.tex
+lastDocument=fh-ooe.cls
 masterDocument=
 name=FH-OOE-Class
 pkg_extIsRegExp=false
@@ -57,7 +57,7 @@ Mode=LaTeX
 ReadWrite=true
 
 [document-settings,item:fh-ooe.cls]
-Bookmarks=30
+Bookmarks=
 Encoding=UTF-8
 Highlighting=LaTeX
 Indentation Mode=normal
@@ -114,10 +114,10 @@ order=2
 
 [item:experimental.def.tex]
 archive=true
-column=0
+column=39
 encoding=UTF-8
 highlight=LaTeX
-line=298
+line=225
 mode=LaTeX
 open=false
 order=1
@@ -134,20 +134,20 @@ order=-1
 
 [item:fh-ooe.cls]
 archive=true
-column=1
+column=68
 encoding=UTF-8
 highlight=LaTeX
-line=5
+line=237
 mode=LaTeX
 open=false
-order=1
+order=0
 
 [item:fh-ooe.def.tex]
 archive=true
-column=2
+column=32
 encoding=UTF-8
 highlight=LaTeX
-line=59
+line=116
 mode=LaTeX
 open=false
 order=0
@@ -169,13 +169,13 @@ CursorColumn=0
 CursorLine=19
 
 [view-settings,view=0,item:experimental.def.tex]
-CursorColumn=0
-CursorLine=298
+CursorColumn=39
+CursorLine=225
 
 [view-settings,view=0,item:fh-ooe.cls]
-CursorColumn=1
-CursorLine=5
+CursorColumn=68
+CursorLine=237
 
 [view-settings,view=0,item:fh-ooe.def.tex]
-CursorColumn=2
-CursorLine=59
+CursorColumn=32
+CursorLine=116
