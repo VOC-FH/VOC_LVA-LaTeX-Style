@@ -3,7 +3,6 @@
 \RequirePackage{ifthen}
 \RequirePackage[T1]{fontenc}
 \RequirePackage{tikz}
-%\usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,positioning,fit,calc,shapes.multipart,shapes.callouts}
 \RequirePackage{pgfpages}
 
 \newboolean{fh-ooe@ispresentation}
@@ -19,13 +18,6 @@
 \DeclareOption{trans}{\setboolean{fh-ooe@istrans}{true}}
 \DeclareOption{article}{\setboolean{fh-ooe@ispresentation}{false}}
 \DeclareOption{twoscreens}{\setboolean{fh-ooe@twoscreens}{true}}
-%\DeclareOption{handout}{\PassOptionsToClass{handout}{beamer}\setboolean{fh-ooe@ishandout}{true}}
-%\DeclareOption{article}{\setboolean{fh-ooe@ispresentation}{false}}
-%\DeclareOption{draft}{\PassOptionsToClass{draft}{beamer}\PassOptionsToClass{draft}{article}}
-%\DeclareOption{beamer}{\PassOptionsToClass{beamer}{beamer}}
-%\DeclareOption{utf8}{\PassOptionsToClass{utf8}{beamer}}
-%\DeclareOption{utf8x}{\PassOptionsToClass{utf8x}{beamer}}
-%\DeclareOption{ucs}{\PassOptionsToClass{ucs}{beamer}}
 
 \ProcessOptions
 
