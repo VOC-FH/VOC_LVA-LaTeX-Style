@@ -1,0 +1,16 @@
+\documentclass{beamer}
+
+\RequirePackage[T1]{fontenc}
+
+\usepackage{tikz-uml}
+
+
+\RequirePackage[lighttt]{lmodern}
+
+\begin{document}
+
+\begin{frame}{}
+<>
+\end{frame}
+
+\end{document}

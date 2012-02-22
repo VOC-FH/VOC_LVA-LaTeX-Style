@@ -119,7 +119,7 @@ encoding=UTF-8
 highlight=LaTeX
 line=77
 mode=LaTeX
-open=true
+open=false
 order=1
 
 [item:fh-ooe-class.kilepr]
@@ -139,7 +139,7 @@ encoding=UTF-8
 highlight=LaTeX
 line=29
 mode=LaTeX
-open=true
+open=false
 order=0
 
 [item:fh-ooe.def.tex]
