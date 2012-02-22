@@ -48,7 +48,7 @@
       {\usebeamerfont{part name}\inserttitle\vskip0.5em\par\insertlecturenumbername~\insertlecturenumber}
       \vskip1em\par
       \usebeamerfont{part title}\usebeamercolor[fg]{part name}\insertlecture\par
-    \end{beamercolorbox}\vskip3em
+    \end{beamercolorbox}\vskip2em
   \end{centering}
   \tableofcontents[justparts]
 }
@@ -102,7 +102,8 @@
   \begin{frame}[t]{\insertpart}
     \tableofcontents[%
       currentsection, % causes all sections but the current to be shown in a semi-transparent way.
-      hideallsubsections, % causes all subsections to be hidden.
+%      hideallsubsections, % causes all subsections to be hidden.
+      hideothersubsections,
       firstsection=\value{fh-ooe@firstsectioninchapter}
     ]
   \end{frame}
