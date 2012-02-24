@@ -1,9 +1,6 @@
 \ProvidesClass{fh-ooe}
 
 \RequirePackage{ifthen}
-\RequirePackage[T1]{fontenc}
-\RequirePackage{tikz}
-\RequirePackage{pgfpages}
 
 \newboolean{fh-ooe@ispresentation}
 \setboolean{fh-ooe@ispresentation}{true}
@@ -27,12 +24,21 @@
   \LoadClassWithOptions{article}
   \RequirePackage{beamerarticle}
 }
+\usetheme{FH-OOE}
+
 \hypersetup{bookmarksdepth=paragraph}
 
+\RequirePackage[T1]{fontenc}
+\RequirePackage{tikz}
+\RequirePackage{pgfpages}
 \RequirePackage[lighttt]{lmodern}
 \RequirePackage{listings}
+\RequirePackage[scriptsize]{subfigure}
+\RequirePackage{caption}
+\RequirePackage{tikz-uml}
 
-\usetheme{FH-OOE}
+\DeclareCaptionFont{cap-fh-ooe-red}{\color{fh-ooe-red}}
+\captionsetup{format=default,justification=centering,labelformat=simple,labelfont={scriptsize,cap-fh-ooe-red},textfont=scriptsize}
 
 \newcommand{\degree}{\@dblarg\beamer@degree}
 \long\def\beamer@degree[#1]#2{%
@@ -86,7 +92,6 @@
   \expandafter\pgfpagesuselayout\expandafter\fhooe@handoutlayout\fhooe@handoutlayoutoptions
 }{}
 
-%\graphicspath{{./material/}}
 \let\orig@include\include
 \renewcommand{\include}[2][.]{
   \graphicspath{{#1/material/}}
@@ -99,7 +104,7 @@
 \def\includegraphicswrapper[{\includegraphics[}
 
 \def\codelistingname{Listing}
-\def\lstlistingname{\codefontsize \codelistingname}
+\def\lstlistingname{\codelistingname}
 
 
 \newcommand{\addsourcefile}[1]{%
@@ -244,5 +249,3 @@
 
 \mode<presentation>{\fhooepresentationoptions}
 \mode<handout>{\fhooehandoutoptions}
-
-\RequirePackage{subfigure}
