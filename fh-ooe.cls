@@ -4,10 +4,13 @@
 
 \newboolean{fh-ooe@ispresentation}
 \setboolean{fh-ooe@ispresentation}{true}
+
 \newboolean{fh-ooe@ishandout}
 \setboolean{fh-ooe@ishandout}{false}
+
 \newboolean{fh-ooe@istrans}
 \setboolean{fh-ooe@istrans}{false}
+
 \newboolean{fh-ooe@twoscreens}
 \setboolean{fh-ooe@twoscreens}{false}
 
@@ -36,6 +39,7 @@
 \RequirePackage[scriptsize]{subfigure}
 \RequirePackage{caption}
 \RequirePackage{tikz-uml}
+\RequirePackage{xstring}
 
 \DeclareCaptionFont{cap-fh-ooe-red}{\color{fh-ooe-red}}
 \captionsetup{format=default,justification=centering,labelformat=simple,labelfont={scriptsize,cap-fh-ooe-red},textfont=scriptsize}
@@ -83,8 +87,8 @@
 }{}
 
 \ifthenelse{\boolean{fh-ooe@ishandout}}{
-  \def\fhooe@handoutoptions{\setbeamercolor{background canvas}{bg=black!2}}
-  \def\fhooe@presentationoptions{\beamertemplatenavigationsymbolsempty}
+%  \def\fhooe@handoutoptions{\setbeamercolor{background canvas}{bg=black!2}}
+%  \def\fhooe@presentationoptions{\beamertemplatenavigationsymbolsempty}
 
   \def\fhooe@handoutlayout{4 on 1}
   \def\fhooe@handoutlayoutoptions{[a4paper,landscape,border shrink=5mm]}
@@ -99,6 +103,13 @@
   \def\javasourcepath{sources/#1/src}
   \def\cppsourcepath{c++sources/#1}
   \orig@include{#1/#2}
+}
+
+\newcommand{\setpath}[1]{
+  \graphicspath{{#1/material/}}
+  \def\pgfpath{#1/material/pgf/}
+  \def\javasourcepath{sources/#1/src}
+  \def\cppsourcepath{c++sources/#1}
 }
 
 \def\includegraphicswrapper[{\includegraphics[}
@@ -137,6 +148,27 @@
         #1
       ]{%
         \javasourcepath/#2%
+      }%
+    }%}%
+  }%\\%
+}}
+
+\newcommand{\includejavacodeinpackage}[3][]{{%
+  \StrSubstitute{#2}{.}{/}[\mydef]%
+  \codefontsize%
+  \lstset{style=eclipse}%
+  \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
+  \addtolength{\fhooe@lenaa}{\lst@numbersep}%
+  \expandafter\addsourcefile\expandafter{\expandafter\javasourcepath\expandafter/\mydef/#3}%
+  \href{run:\javasourcepath/\mydef/#3}{%
+    \vbox{%\hbox{%
+      \lstinputlisting[%
+        language=java,%
+        xleftmargin=\fhooe@lenaa,%
+        caption=\codefontfamily #3,%
+        #1
+      ]{%
+        \javasourcepath/\mydef/#3%
       }%
     }%}%
   }%\\%
@@ -242,10 +274,10 @@
 \def\fhooehandoutoptions{\setbeamercolor{background canvas}{bg=black!2}}
 \def\fhooepresentationoptions{\beamertemplatenavigationsymbolsempty}
 
+\mode<presentation>{\fhooepresentationoptions}
+\mode<handout>{\fhooehandoutoptions}
+
 % Read options from file
 \InputIfFileExists{fh-ooe.def.tex}{}{}
 \InputIfFileExists{private.def.tex}{}{}
 \InputIfFileExists{experimental.def.tex}{}{}
-
-\mode<presentation>{\fhooepresentationoptions}
-\mode<handout>{\fhooehandoutoptions}

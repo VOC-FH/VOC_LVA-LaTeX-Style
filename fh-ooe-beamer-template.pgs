@@ -9,7 +9,7 @@
 
 \begin{document}
 
-\usetikzlibrary{positioning,shapes.multipart,shadows,calc,arrows,fit}
+\usetikzlibrary{positioning,shapes.multipart,shadows,calc,arrows,fit,mindmap}
 \pgfdeclarelayer{background}
 \pgfdeclarelayer{foreground}
 \pgfsetlayers{background,main,foreground}
