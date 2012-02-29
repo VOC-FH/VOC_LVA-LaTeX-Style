@@ -1,18 +1,20 @@
-\documentclass{beamer}
+\documentclass[utf8x]{fh-ooe}
 
-\RequirePackage[T1]{fontenc}
+\usetikzlibrary{positioning,shapes.multipart,shadows,calc,arrows,fit,trees}
 
-\usepackage{tikz}
-
-
-\RequirePackage[lighttt]{lmodern}
-
-\begin{document}
-
-\usetikzlibrary{positioning,shapes.multipart,shadows,calc,arrows,fit,mindmap}
 \pgfdeclarelayer{background}
 \pgfdeclarelayer{foreground}
 \pgfsetlayers{background,main,foreground}
+
+
+\newlength{\codebaselineskip} 
+\tiny
+\setlength{\codebaselineskip}{\baselineskip}
+\normalsize
+
+
+\begin{document}[without titlepage]
+
 
 \begin{frame}{}
 <>
