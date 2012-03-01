@@ -1,5 +1,4 @@
 \documentclass[utf8x]{fh-ooe}
-
 \usetikzlibrary{positioning,shapes.multipart,shadows,calc,arrows,fit,trees}
 
 \pgfdeclarelayer{background}
@@ -12,12 +11,18 @@
 \setlength{\codebaselineskip}{\baselineskip}
 \normalsize
 
+\pgfpagesuselayout{8 on 1}[a4paper,portrait,border shrink=5mm]
 
-\begin{document}[without titlepage]
+\newdimen\height
+\newdimen\width
+\newsavebox{\mybox}
 
-
-\begin{frame}{}
-<>
-\end{frame}
-
+\begin{document}[without titlepage]%
+  \begin{frame}{Frametitle}%
+    \sbox{\mybox}{<>}%
+    \settototalheight\height{\usebox{\mybox}}%
+    \settowidth\width{\usebox{\mybox}}%
+    \centering\fbox{\usebox{\mybox}}\\%
+    \scriptsize width = \the\width, height = \the\height%
+  \end{frame}%
 \end{document}
