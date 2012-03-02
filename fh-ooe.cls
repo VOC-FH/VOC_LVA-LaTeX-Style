@@ -229,10 +229,10 @@
 
 \renewenvironment{document}[1][]
 {
- \gdef\fhooe@ArgI{{#1}}
-\fhooe@documentRelay
+  \gdef\fhooe@ArgI{{#1}}
+  \fhooe@documentRelay
 }{
- \orig@enddocument
+  \orig@enddocument
 }
 
 \newcommand{\fhooe@documentRelay}[1][]
