@@ -105,11 +105,11 @@
   \orig@include{#1/#2}
 }
 
-\newcommand{\setpath}[1]{
-  \graphicspath{{#1/material/}}
-  \def\pgfpath{#1/material/pgf/}
-  \def\javasourcepath{sources/#1/src}
-  \def\cppsourcepath{c++sources/#1}
+\newcommand{\setpath}[1]{%
+  \graphicspath{{#1/material/}}%
+  \def\pgfpath{#1/material/pgf/}%
+  \def\javasourcepath{sources/#1/src}%
+  \def\cppsourcepath{c++sources/#1}%
 }
 
 \def\includegraphicswrapper[{\includegraphics[}
@@ -133,7 +133,7 @@
   \lstset{xleftmargin=\fhooe@lenaa,#1}%
 }{}
 
-\newcommand{\includejavacode}[2][]{{%
+\newcommand{\includejavacodenostar}[2][]{{%
   \codefontsize
   \lstset{style=eclipse}%
   \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
@@ -153,7 +153,28 @@
   }%\\%
 }}
 
-\newcommand{\includejavacodeinpackage}[3][]{{%
+\newcommand{\includejavacodestar}[2][]{{%
+  \codefontsize
+  \lstset{style=eclipse}%
+  \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
+  \addtolength{\fhooe@lenaa}{\lst@numbersep}%
+  \vbox{%\hbox{%
+    \lstinputlisting[%
+      language=java,%
+      xleftmargin=\fhooe@lenaa,%
+      #1
+    ]{%
+      \javasourcepath/#2%
+    }%
+  }%}%
+}}
+
+\newcommand{\includejavacode}{\@ifstar
+  \includejavacodestar%
+  \includejavacodenostar%
+}
+
+\newcommand{\includejavacodeinpackagenostar}[3][]{{%
   \StrSubstitute{#2}{.}{/}[\mydef]%
   \codefontsize%
   \lstset{style=eclipse}%
@@ -173,6 +194,29 @@
     }%}%
   }%\\%
 }}
+
+\newcommand{\includejavacodeinpackagestar}[3][]{{%
+  \StrSubstitute{#2}{.}{/}[\mydef]%
+  \codefontsize%
+  \lstset{style=eclipse}%
+  \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
+  \addtolength{\fhooe@lenaa}{\lst@numbersep}%
+  \expandafter\addsourcefile\expandafter{\expandafter\javasourcepath\expandafter/\mydef/#3}%
+  \vbox{%\hbox{%
+    \lstinputlisting[%
+      language=java,%
+      xleftmargin=\fhooe@lenaa,%
+      #1
+    ]{%
+      \javasourcepath/\mydef/#3%
+    }%
+  }%}%
+}}
+
+\newcommand{\includejavacodeinpackage}{\@ifstar
+  \includejavacodeinpackagestar%
+  \includejavacodeinpackagenostar%
+}
 
 \newcommand\inlinecppcode[1][]{\lstinline[style=eclipse-inline,language=c++,#1]}
 
