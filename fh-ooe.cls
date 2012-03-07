@@ -1,44 +1,42 @@
 \ProvidesClass{fh-ooe}
 
 \RequirePackage{ifthen}
+\RequirePackage{kvoptions}
 
-\newboolean{fh-ooe@ispresentation}
-\setboolean{fh-ooe@ispresentation}{true}
-
-\newboolean{fh-ooe@ishandout}
-\setboolean{fh-ooe@ishandout}{false}
-
-\newboolean{fh-ooe@istrans}
-\setboolean{fh-ooe@istrans}{false}
-
-\newboolean{fh-ooe@twoscreens}
-\setboolean{fh-ooe@twoscreens}{false}
-
-\DeclareOption{handout}{\setboolean{fh-ooe@ishandout}{true}}
-\DeclareOption{trans}{\setboolean{fh-ooe@istrans}{true}}
-\DeclareOption{article}{\setboolean{fh-ooe@ispresentation}{false}}
-\DeclareOption{twoscreens}{\setboolean{fh-ooe@twoscreens}{true}}
-
-\ProcessOptions
-
-\ifthenelse{\boolean{fh-ooe@ispresentation}}{
-  \LoadClassWithOptions{beamer}[2010/06/21]
-}{
-  \LoadClassWithOptions{article}
-  \RequirePackage{beamerarticle}
+\SetupKeyvalOptions{
+  family=fhooe,
+  prefix=fhooe@
 }
+
+\DeclareStringOption{twoscreens}[1920x1080|1024x768]
+\DeclareStringOption{article}[article]
+
+\DeclareDefaultOption{
+  \expandafter\PassOptionsToPackage
+  \expandafter{\CurrentOption}{beamer}%
+}
+
+\ProcessKeyvalOptions*
+
+\ifx\fhooe@article\@empty%
+  \LoadClassWithOptions{beamer}[2010/06/21]
+  \hypersetup{bookmarksdepth=paragraph}
+  \RequirePackage{fh-ooe.multiscreen}
+\else
+  \LoadClassWithOptions{\fhooe@article}
+  \RequirePackage{beamerarticle}
+\fi
+
 \usetheme{FH-OOE}
 
-\hypersetup{bookmarksdepth=paragraph}
 
 \RequirePackage[T1]{fontenc}
 \RequirePackage{tikz}
-\RequirePackage{pgfpages}
+\RequirePackage{tikz-uml}
 \RequirePackage[lighttt]{lmodern}
 \RequirePackage{listings}
 \RequirePackage[scriptsize]{subfigure}
 \RequirePackage{caption}
-\RequirePackage{tikz-uml}
 \RequirePackage{xstring}
 
 \DeclareCaptionFont{cap-fh-ooe-red}{\color{fh-ooe-red}}
@@ -57,44 +55,6 @@
   \def\insertshortsemester{#1}
 }
 \semester{}
-
-
-\ifthenelse{\boolean{fh-ooe@istrans}}{
-  \def\fhooe@printlayout{fhooe resize to}
-  \def\fhooe@printlayoutoptions{[a4paper,border shrink=5mm]}
-
-  \pgfpagesdeclarelayout{fhooe resize to}
-  {
-    \def\pgfpageoptionborder{0pt}
-  }
-  {
-    \pgfpagesphysicalpageoptions
-    {%
-      logical pages=1,%
-      physical height=\pgfpageoptionheight,%
-      physical width=\pgfpageoptionwidth%
-    }
-    \pgfpageslogicalpageoptions{1}
-    {%
-      resized width=\pgfphysicalwidth,%
-      resized height=\pgfphysicalheight,%
-      border shrink=\pgfpageoptionborder,%
-      center=\pgfpoint{.5\pgfphysicalwidth}{.73\pgfphysicalheight}%
-    }%
-  }
-
-  \expandafter\pgfpagesuselayout\expandafter\fhooe@printlayout\fhooe@printlayoutoptions
-}{}
-
-\ifthenelse{\boolean{fh-ooe@ishandout}}{
-%  \def\fhooe@handoutoptions{\setbeamercolor{background canvas}{bg=black!2}}
-%  \def\fhooe@presentationoptions{\beamertemplatenavigationsymbolsempty}
-
-  \def\fhooe@handoutlayout{4 on 1}
-  \def\fhooe@handoutlayoutoptions{[a4paper,landscape,border shrink=5mm]}
-
-  \expandafter\pgfpagesuselayout\expandafter\fhooe@handoutlayout\fhooe@handoutlayoutoptions
-}{}
 
 \let\orig@include\include
 \renewcommand{\include}[2][.]{
@@ -315,11 +275,9 @@
   \fhooe@maketitle
 }
 
-\def\fhooehandoutoptions{\setbeamercolor{background canvas}{bg=black!2}}
 \def\fhooepresentationoptions{\beamertemplatenavigationsymbolsempty}
 
 \mode<presentation>{\fhooepresentationoptions}
-\mode<handout>{\fhooehandoutoptions}
 
 % Read options from file
 \InputIfFileExists{fh-ooe.def.tex}{}{}
