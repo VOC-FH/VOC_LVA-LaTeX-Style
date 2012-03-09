@@ -20,19 +20,21 @@
 
 \ifx\fhooe@article\@empty%
   \LoadClassWithOptions{beamer}[2010/06/21]
-  \hypersetup{bookmarksdepth=paragraph}
   \RequirePackage{fh-ooe.multiscreen}
 \else
   \LoadClassWithOptions{\fhooe@article}
   \RequirePackage{beamerarticle}
+  \RequirePackage{hyperref}
 \fi
 
-\usetheme{FH-OOE}
+\hypersetup{bookmarksdepth=paragraph}
 
+\usetheme{FH-OOE}
 
 \RequirePackage[T1]{fontenc}
 \RequirePackage{tikz}
 \RequirePackage{tikz-uml}
+\RequirePackage{tikz-uml-extension}
 \RequirePackage[lighttt]{lmodern}
 \RequirePackage{listings}
 \RequirePackage[scriptsize]{subfigure}

@@ -1,0 +1,37 @@
+\ProvidesPackage{tikz-uml-extension}
+\RequirePackage{tikz-uml}
+
+\tikzumlset{font=\tiny}
+
+\pgfarrowsdeclare{inner}{inner}{
+  \arrowsize=3pt
+  \advance\arrowsize by 2\pgflinewidth
+  \pgfarrowsrightextend{2\arrowsize+0.5\pgflinewidth}
+}{
+  \arrowsize=3pt
+  \advance\arrowsize by 2\pgflinewidth
+  \pgfsetdash{}{0pt}
+  \pgfsetroundjoin
+  \pgfsetroundcap
+  \pgfpathmoveto{\pgfpoint{2\arrowsize}{0pt}}
+  \pgfpatharc{0}{360}{\arrowsize}
+  \pgfpathmoveto{\pgfpoint{2\arrowsize}{0pt}}
+  \pgfpathlineto{\pgfpoint{-\arrowsize}{0pt}}
+  \pgfpathmoveto{\pgfpoint{\arrowsize}{\arrowsize-0.5\pgflinewidth}}
+  \pgfpathlineto{\pgfpoint{\arrowsize}{-\arrowsize+0.5\pgflinewidth}}
+  \pgfusepathqstroke
+}
+
+\tikzstyle{tikzuml innerclass style}=[color=\tikzumldrawcolor, inner-]%
+\tikzstyle{tikzuml unidirectional innerclass style}=[color=\tikzumldrawcolor, inner-angle 45]%
+
+\newcommand{\umlinner}[3][]{\umlrelation[style={tikzuml innerclass style}, #1]{#2}{#3}}%
+\newcommand{\umluniinner}[3][]{\umlrelation[style={tikzuml unidirectional innerclass style}, #1]{#2}{#3}}%
+\newcommand{\umlHVinner}[3][]{\umlHVrelation[style={tikzuml innerclass style}, #1]{#2}{#3}}%
+\newcommand{\umlHVuniinner}[3][]{\umlHVrelation[style={tikzuml unidirectional innerclass style}, #1]{#2}{#3}}%
+\newcommand{\umlVHinner}[3][]{\umlVHrelation[style={tikzuml innerclass style}, #1]{#2}{#3}}%
+\newcommand{\umlVHuniinner}[3][]{\umlVHrelation[style={tikzuml unidirectional innerclass style}, #1]{#2}{#3}}%
+\newcommand{\umlHVHinner}[3][]{\umlHVHrelation[style={tikzuml innerclass style}, #1]{#2}{#3}}%
+\newcommand{\umlHVHuniinner}[3][]{\umlHVHrelation[style={tikzuml unidirectional innerclass style}, #1]{#2}{#3}}%
+\newcommand{\umlVHVinner}[3][]{\umlVHVrelation[style={tikzuml innerclass style}, #1]{#2}{#3}}%
+\newcommand{\umlVHVuniinner}[3][]{\umlVHVrelation[style={tikzuml unidirectional innerclass style}, #1]{#2}{#3}}%
