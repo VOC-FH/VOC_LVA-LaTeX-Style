@@ -16,7 +16,7 @@
 \def\mymeasure{fdf}
 
 \begin{document}[without titlepage]%
-  \begin{frame}{Frametitle}%
+  \begin{frame}%
     \sbox{\mybox}{<>}%
     \settototalheight\height{\usebox{\mybox}}%
     \settowidth\width{\usebox{\mybox}}%
