@@ -102,7 +102,7 @@
   \addtolength{\fhooe@lenaa}{\lst@numbersep}%
   \addsourcefile{\javasourcepath/#2}%
   \href{run:\javasourcepath/#2}{%
-    \vbox{%\hbox{%
+    \vbox{%\frame{%\hbox{%
       \lstinputlisting[%
         language=java,%
         xleftmargin=\fhooe@lenaa,%
@@ -111,9 +111,9 @@
       ]{%
         \javasourcepath/#2%
       }%
-    }%}%
+    }%}%}
   }%\\%
-}}
+}}%
 
 \newcommand{\includejavacodestar}[2][]{{%
   \codefontsize
@@ -188,6 +188,25 @@
   \addtolength{\fhooe@lenaa}{\lst@numbersep}%
   \lstset{xleftmargin=\fhooe@lenaa,#1}%
 }{}
+
+\newcommand{\@cppcoderangerelay}[3][]{%
+  \edef\@eargs{[linerange=#2-#2,firstnumber=#2,\@begarg,#1]{#3}}
+  \def\@endcmd{\expandafter\includecppcode\@eargs}
+  \newcommand\range[3][]{%
+    \edef\@rargs{[linerange=##2-##3,firstnumber=##2,#1,caption=,\@begarg,##1]{#3}}
+    \expandafter\includecppcode\@rargs
+  }
+  \edef\@sargs{[linerange=1-1,caption=,\@begarg]{#3}}
+  \expandafter\includecppcode\@sargs%
+}
+
+\newenvironment{cppcoderange}[1][]{%
+  \def\@begarg{#1}%
+  \@cppcoderangerelay%
+}{
+  \@endcmd%
+  \ignorespacesafterend%
+}%
 
 \newcommand{\includecppcode}[2][]{{%
   \codefontsize
