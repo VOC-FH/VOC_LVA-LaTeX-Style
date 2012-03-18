@@ -68,3 +68,69 @@
 % \message\expandafter{\the\fhooe@displaylayout@desk@beamerration}
 % %\message\expandafter{\strip@pt\the\paperwidth}
 % \message{----------------------}
+
+
+\def\definejavacoderangeenvironment#1#2#3{%  #1 startlinenumber, #2 = linenumbercount #3 javafile
+  \expandafter\newcommand\expandafter{\csname java#3\endcsname}[1][#2]{%  ##1 = endoptions
+    \edef\@endoptions{[linerange=##1-#2,firstnumber=##1,\@globalargs]{#3}}%
+    \def\@endcmd{\expandafter\includejavacode\@endoptions}%
+    \edef\@startoptions{[\@startendlinenumber,caption=,\@globalargs]{#3}}%
+    \def\@startcmd{\expandafter\includejavacode\@startoptions}%
+    \@startcmd\newline%
+  }%
+
+  \expandafter\newcommand\expandafter{\csname javarel#3\endcsname}[1][#1]{% ##1 = startargs
+    \def\@startendlinenumber{linerange=#1-##1}
+    \expandafter\csname java#3\expandafter\endcsname
+  }%
+
+  \newcommand{\range}[3][]{% ##1 = rangeoptions, ##2 = startline, ##3 = endline
+    \edef\@rangecmd{[linerange=##2-##3,firstnumber=##2,caption=,\@globalargs,##1]{#3}}%
+    \expandafter\includejavacode\@rangecmd%
+  }%
+
+  \newenvironment{#3}[1][]{% #1 globaloptions
+    \begingroup%
+      \def\@globalargs{##1}%
+      \csname javarel#3\endcsname%
+  }{
+      \@endcmd%
+      \ignorespacesafterend%
+    \endgroup%
+    \ignorespacesafterend%
+  }%
+  \ignorespacesafterend
+}%
+
+
+\def\definecppcoderangeenvironment#1#2#3{%  #1 startlinenumber, #2 = linenumbercount #3 cppfile
+  \expandafter\newcommand\expandafter{\csname cpp#3\endcsname}[1][#2]{%  ##1 = endoptions
+    \edef\@endoptions{[linerange=##1-#2,firstnumber=##1,\@globalargs]{#3}}%
+    \def\@endcmd{\expandafter\includecppcode\@endoptions}%
+    \edef\@startoptions{[\@startendlinenumber,caption=,\@globalargs]{#3}}%
+    \def\@startcmd{\expandafter\includecppcode\@startoptions}%
+    \@startcmd\newline%
+  }%
+
+  \expandafter\newcommand\expandafter{\csname cpprel#3\endcsname}[1][#1]{% ##1 = startargs
+    \def\@startendlinenumber{linerange=#1-##1}
+    \expandafter\csname cpp#3\expandafter\endcsname
+  }%
+
+  \newcommand{\range}[3][]{% ##1 = rangeoptions, ##2 = startline, ##3 = endline
+    \edef\@rangecmd{[linerange=##2-##3,firstnumber=##2,caption=,\@globalargs,##1]{#3}}%
+    \expandafter\includecppcode\@rangecmd%
+  }%
+
+  \newenvironment{#3}[1][]{% #1 globaloptions
+    \begingroup%
+      \def\@globalargs{##1}%
+      \csname cpprel#3\endcsname%
+  }{
+      \@endcmd%
+      \ignorespacesafterend%
+    \endgroup%
+    \ignorespacesafterend%
+  }%
+  \ignorespacesafterend
+}%
