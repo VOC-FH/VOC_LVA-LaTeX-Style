@@ -20,7 +20,7 @@
     \sbox{\mybox}{<>}%
     \settototalheight\height{\usebox{\mybox}}%
     \settowidth\width{\usebox{\mybox}}%
-    \centering\fbox{\usebox{\mybox}}\\%
+    \framebox[\the\width]{\usebox{\mybox}}\\%
     \scriptsize width = \the\width, height = \the\height%
   \end{frame}%
 \end{document}
