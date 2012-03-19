@@ -200,7 +200,7 @@
 \def\insertshortdegreehead{\insertshortdegree}
 \def\insertlecturenumbername{Kapitel}
 \def\insertlonglecturenumberhead{\insertlecturenumbername{} \insertlecturenumber}
-\def\insertlecturehead{\insertlecture}
+\def\insertlecturehead{\ifx\insertlecture\@empty\else\insertlecture\fi}
 \newcounter{framenumberinlecture}
 \def\insertframenumberinlecture{%
   \setcounter{framenumberinlecture}{\value{framenumber}}%
