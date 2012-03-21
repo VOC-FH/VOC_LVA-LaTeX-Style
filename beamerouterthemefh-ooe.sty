@@ -40,7 +40,7 @@
   \end{beamercolorbox}%
   \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
     \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
-    \insertlecturenumber-\insertframenumberinlecture{} $\vert$ \insertframenumber{}/\inserttotalframenumber\hspace*{2ex}
+    \fhfootlineright
   \end{beamercolorbox}}%
   \vskip0pt%
 }
@@ -70,7 +70,7 @@
   \end{beamercolorbox}%
   \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
     \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
-    \insertlecturenumber-\insertframenumberinlecture{} $\vert$ \insertframenumber{}/\inserttotalframenumber\hspace*{2ex}
+    \fhfootlineright
   \end{beamercolorbox}}%
   \vskip0pt%
 }
@@ -100,7 +100,7 @@
   \end{beamercolorbox}%
   \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
     \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
-    \insertlecturenumber-\insertframenumberinlecture{} $\vert$ \insertframenumber{}/\inserttotalframenumber\hspace*{2ex}
+    \fhfootlineright
   \end{beamercolorbox}}%
   \vskip0pt%
 }
@@ -130,7 +130,7 @@
   \end{beamercolorbox}%
   \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
     \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
-    \insertlecturenumber-\insertframenumberinlecture{} $\vert$ \insertframenumber{}/\inserttotalframenumber\hspace*{2ex}
+    \fhfootlineright
   \end{beamercolorbox}}%
   \vskip0pt%
 }
@@ -160,7 +160,7 @@
   \end{beamercolorbox}%
   \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
     \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
-    \insertlecturenumber-\insertframenumberinlecture{} $\vert$ \insertframenumber{}/\inserttotalframenumber\hspace*{2ex}
+    \fhfootlineright
   \end{beamercolorbox}}%
   \vskip0pt%
 }
@@ -207,3 +207,6 @@
   \addtocounter{framenumberinlecture}{-\value{lastframeoflastlecture}}%
   \arabic{framenumberinlecture}
 }
+
+
+\def\fhfootlineright{\insertlecturenumber-\insertframenumberinlecture{} $\vert$ \insertframenumber{}/\inserttotalframenumber\hspace*{2ex}}
