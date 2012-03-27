@@ -2,6 +2,7 @@
 
 \RequirePackage{ifthen}
 \RequirePackage{kvoptions}
+\RequirePackage{etex}
 
 \SetupKeyvalOptions{
   family=fhooe,
