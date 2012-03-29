@@ -78,9 +78,7 @@
       \csname javarel#3\endcsname%
   }{
       \@endcmd%
-      \ignorespacesafterend%
     \endgroup%
-    \ignorespacesafterend%
   }%
 
   \expandafter\newcommand\expandafter{\csname java#3\endcsname}[1][#2]{%  ##1 = endoptions
@@ -98,7 +96,7 @@
 
   \expandafter\newcommand\expandafter{\csname javarange#3\endcsname}[3][]{% ##1 = rangeoptions, ##2 = startline, ##3 = endline
     \edef\@rangecmd{[linerange=##2-##3,firstnumber=##2,caption=,\@globalargs,##1]{#3}}%
-    \expandafter\includejavacode\@rangecmd%
+    \expandafter\includejavacode\@rangecmd\newline%
   }%
   \ignorespacesafterend
 }%
@@ -112,9 +110,7 @@
       \csname cpprel#3\endcsname%
   }{
       \@endcmd%
-      \ignorespacesafterend%
     \endgroup%
-    \ignorespacesafterend%
   }%
 
   \expandafter\newcommand\expandafter{\csname cpp#3\endcsname}[1][#2]{%  ##1 = endoptions
@@ -132,7 +128,7 @@
 
   \expandafter\newcommand\expandafter{\csname cpprange#3\endcsname}[3][]{% ##1 = rangeoptions, ##2 = startline, ##3 = endline
     \edef\@rangecmd{[linerange=##2-##3,firstnumber=##2,caption=,\@globalargs,##1]{#3}}%
-    \expandafter\includecppcode\@rangecmd%
+    \expandafter\includecppcode\@rangecmd\newline%
   }%
   \ignorespacesafterend
 }%

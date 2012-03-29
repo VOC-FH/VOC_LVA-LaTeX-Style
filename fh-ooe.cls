@@ -91,90 +91,116 @@
 
 \lstnewenvironment{javacode}[1][]{
   \lstset{style=eclipse,language=java,#1}%
-  \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
-  \addtolength{\fhooe@lenaa}{\lst@numbersep}%
-  \lstset{xleftmargin=\fhooe@lenaa,#1}%
+  \lstset{xleftmargin=\lst@numbersep}%
 }{}
 
-\newcommand{\includejavacodenostar}[2][]{{%
-  \codefontsize
-  \lstset{style=eclipse}%
-  \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
-  \addtolength{\fhooe@lenaa}{\lst@numbersep}%
+\newcommand{\includejavacodenostar}[2][]{%
   \addsourcefile{\javasourcepath/#2}%
   \href{run:\javasourcepath/#2}{%
-    \vbox{%\frame{%\hbox{%
+    \vbox{
       \lstinputlisting[%
+        belowskip=-1ex,
         language=java,%
-        xleftmargin=\fhooe@lenaa,%
+        style=eclipse,%
+        xleftmargin=\lst@numbersep,%
+        resetmargins=true,%
         caption=\codefontfamily #2,%
-        #1
+        #1%
       ]{%
         \javasourcepath/#2%
       }%
-    }%}%}
-  }%\\%
-}}%
+    }%
+  }%
+}%
 
-\newcommand{\includejavacodestar}[2][]{{%
-  \codefontsize
-  \lstset{style=eclipse}%
-  \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
-  \addtolength{\fhooe@lenaa}{\lst@numbersep}%
-  \vbox{%\hbox{%
+\newcommand{\includejavacodestar}[2][]{%
+  \vbox{%
     \lstinputlisting[%
+      belowskip=-1ex,
       language=java,%
-      xleftmargin=\fhooe@lenaa,%
+      style=eclipse,%
+      xleftmargin=\lst@numbersep,%
+      resetmargins=true,%
       #1
     ]{%
       \javasourcepath/#2%
     }%
-  }%}%
-}}
+  }%
+}%
+
 
 \newcommand{\includejavacode}{\@ifstar
   \includejavacodestar%
   \includejavacodenostar%
 }
 
-\newcommand{\includejavacodeinpackagenostar}[3][]{{%
+\newcommand{\includejavacodeinpackagenostar}[3][]{%
   \StrSubstitute{#2}{.}{/}[\mydef]%
-  \codefontsize%
-  \lstset{style=eclipse}%
-  \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
-  \addtolength{\fhooe@lenaa}{\lst@numbersep}%
   \expandafter\addsourcefile\expandafter{\expandafter\javasourcepath\expandafter/\mydef/#3}%
   \href{run:\javasourcepath/\mydef/#3}{%
-    \vbox{%\hbox{%
+    \vbox{%
       \lstinputlisting[%
+        belowskip=-1ex,
         language=java,%
-        xleftmargin=\fhooe@lenaa,%
+        style=eclipse,%
+        xleftmargin=\lst@numbersep,%
+        resetmargins=true,%
         caption=\codefontfamily #3,%
         #1
       ]{%
         \javasourcepath/\mydef/#3%
       }%
-    }%}%
-  }%\\%
-}}
+    }%
+  }%
+%  \StrSubstitute{#2}{.}{/}[\mydef]%
+%  \codefontsize%
+%  \lstset{style=eclipse}%
+%  \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
+%  \addtolength{\fhooe@lenaa}{\lst@numbersep}%
+%  \expandafter\addsourcefile\expandafter{\expandafter\javasourcepath\expandafter/\mydef/#3}%
+%  \href{run:\javasourcepath/\mydef/#3}{%
+%    \vbox{%\hbox{%
+%      \lstinputlisting[%
+%        language=java,%
+%        xleftmargin=\fhooe@lenaa,%
+%        caption=\codefontfamily #3,%
+%        #1
+%      ]{%
+%        \javasourcepath/\mydef/#3%
+%      }%
+%    }%}%
+%  }%\\%
+}%
 
-\newcommand{\includejavacodeinpackagestar}[3][]{{%
+\newcommand{\includejavacodeinpackagestar}[3][]{%
   \StrSubstitute{#2}{.}{/}[\mydef]%
-  \codefontsize%
-  \lstset{style=eclipse}%
-  \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
-  \addtolength{\fhooe@lenaa}{\lst@numbersep}%
-  \expandafter\addsourcefile\expandafter{\expandafter\javasourcepath\expandafter/\mydef/#3}%
-  \vbox{%\hbox{%
+  \vbox{%
     \lstinputlisting[%
+      belowskip=-1ex,
       language=java,%
-      xleftmargin=\fhooe@lenaa,%
+      style=eclipse,%
+      xleftmargin=\lst@numbersep,%
+      resetmargins=true,%
       #1
     ]{%
       \javasourcepath/\mydef/#3%
     }%
-  }%}%
-}}
+  }%
+%  \StrSubstitute{#2}{.}{/}[\mydef]%
+%  \codefontsize%
+%  \lstset{style=eclipse}%
+%  \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
+%  \addtolength{\fhooe@lenaa}{\lst@numbersep}%
+%  \vbox{%\hbox{%
+%    \lstinputlisting[%
+%      language=java,%
+%      xleftmargin=\fhooe@lenaa,%
+%      #1
+%    ]{%
+%      \javasourcepath/\mydef/#3%
+%    }%
+%  }%}%
+}
 
 \newcommand{\includejavacodeinpackage}{\@ifstar
   \includejavacodeinpackagestar%
@@ -185,9 +211,7 @@
 
 \lstnewenvironment{cppcode}[1][]{
   \lstset{style=eclipse,language=c++,#1}%
-  \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
-  \addtolength{\fhooe@lenaa}{\lst@numbersep}%
-  \lstset{xleftmargin=\fhooe@lenaa,#1}%
+  \lstset{xleftmargin=\lst@numbersep}%
 }{}
 
 \newcommand{\@cppcoderangerelay}[3][]{%
@@ -209,31 +233,52 @@
   \ignorespacesafterend%
 }%
 
-\newcommand{\includecppcode}[2][]{{%
-  \codefontsize
-  \lstset{style=eclipse,#1}%
-  \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
-  \addtolength{\fhooe@lenaa}{\lst@numbersep}%
+\newcommand{\includecppcode}[2][]{%
   \addsourcefile{\cppsourcepath/#2}%
   \href{run:\cppsourcepath/#2}{%
-    \vbox{%\hbox{%
+    \vbox{
       \lstinputlisting[%
+        belowskip=-1ex,
         language=c++,%
-        xleftmargin=\fhooe@lenaa,%
+        style=eclipse,%
+        xleftmargin=\lst@numbersep,%
+        resetmargins=true,%
         caption=\codefontfamily #2,%
-        #1
+        #1%
       ]{%
         \cppsourcepath/#2%
       }%
-    }%}%
-  }%\\%
-}}
+    }%
+  }%
+%  \codefontsize
+%  \lstset{style=eclipse,#1}%
+%  \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
+%  \addtolength{\fhooe@lenaa}{\lst@numbersep}%
+%  \addsourcefile{\cppsourcepath/#2}%
+%  \href{run:\cppsourcepath/#2}{%
+%    \makebox[\linewidth][l]{
+%      \lstinputlisting[%
+%        language=c++,%
+%        xleftmargin=\fhooe@lenaa,%
+%        caption=\codefontfamily #2,%
+%        #1
+%      ]{%
+%        \cppsourcepath/#2%
+%      }%
+%    }
+%  }
+}
 
 \lstnewenvironment{cppapi}[1][]{
-  \lstset{style=eclipse,language=c++,basicstyle=\normalsize\codefontfamily,xleftmargin=0pt,numbers=none}%
-  \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
-  \addtolength{\fhooe@lenaa}{\lst@numbersep}%
-  \lstset{xleftmargin=\fhooe@lenaa,#1}%
+  \lstset{%
+    style=eclipse,
+    language=c++,
+    basicstyle=\normalsize\codefontfamily,
+    resetmargins=true,
+    xleftmargin=\lst@numbersep,
+    numbers=none,
+    #1
+  }%
 }{}
 
 \def\pgfinput#1{\input{\pgfpath/#1.pgf}}
