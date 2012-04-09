@@ -4,7 +4,7 @@ img_extIsRegExp=false
 img_extensions=.eps .jpg .jpeg .png .pdf .ps .fig .gif
 kileprversion=2
 kileversion=2.9.60
-lastDocument=experimental.def.tex
+lastDocument=fh-ooe.cls
 masterDocument=
 name=FH-OOE-Class
 pkg_extIsRegExp=false
@@ -135,8 +135,8 @@ encoding=UTF-8
 highlight=LaTeX
 line=120
 mode=LaTeX
-open=true
-order=1
+open=false
+order=2
 
 [item:fh-ooe-class.kilepr]
 archive=true
@@ -150,12 +150,12 @@ order=-1
 
 [item:fh-ooe.cls]
 archive=true
-column=0
+column=2
 encoding=UTF-8
 highlight=LaTeX
-line=140
+line=281
 mode=LaTeX
-open=true
+open=false
 order=0
 
 [item:fh-ooe.def.tex]
@@ -165,8 +165,8 @@ encoding=UTF-8
 highlight=LaTeX
 line=65
 mode=LaTeX
-open=true
-order=2
+open=false
+order=1
 
 [item:fh-ooe.multiscreen.sty]
 archive=true
@@ -209,8 +209,8 @@ CursorColumn=14
 CursorLine=120
 
 [view-settings,view=0,item:fh-ooe.cls]
-CursorColumn=0
-CursorLine=140
+CursorColumn=2
+CursorLine=281
 
 [view-settings,view=0,item:fh-ooe.def.tex]
 CursorColumn=0
