@@ -90,6 +90,7 @@
 \newcommand\inlinejavacode[1][]{\lstinline[style=eclipse-inline,language=java,#1]}
 
 \lstnewenvironment{javacode}[1][]{
+  \codefontsize
   \lstset{style=eclipse,language=java,#1}%
   \lstset{xleftmargin=\lst@numbersep}%
 }{}
@@ -99,7 +100,6 @@
   \href{run:\javasourcepath/#2}{%
     \vbox{
       \lstinputlisting[%
-        belowskip=-0.5ex,
         language=java,%
         style=eclipse,%
         xleftmargin=\lst@numbersep,%
@@ -116,7 +116,6 @@
 \newcommand{\includejavacodestar}[2][]{%
   \vbox{%
     \lstinputlisting[%
-      belowskip=-0.5ex,
       language=java,%
       style=eclipse,%
       xleftmargin=\lst@numbersep,%
@@ -140,7 +139,6 @@
   \href{run:\javasourcepath/\mydef/#3}{%
     \vbox{%
       \lstinputlisting[%
-        belowskip=-0.5ex,
         language=java,%
         style=eclipse,%
         xleftmargin=\lst@numbersep,%
@@ -176,7 +174,6 @@
   \StrSubstitute{#2}{.}{/}[\mydef]%
   \vbox{%
     \lstinputlisting[%
-      belowskip=-0.5ex,
       language=java,%
       style=eclipse,%
       xleftmargin=\lst@numbersep,%
@@ -238,7 +235,6 @@
   \href{run:\cppsourcepath/#2}{%
     \vbox{
       \lstinputlisting[%
-        belowskip=-0.5ex,
         language=c++,%
         style=eclipse,%
         xleftmargin=\lst@numbersep,%

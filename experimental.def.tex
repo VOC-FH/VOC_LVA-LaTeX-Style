@@ -86,7 +86,7 @@
   \expandafter\newcommand\expandafter{\csname java#3\endcsname}[1][#2]{%  ##1 = endoptions
     \edef\@endoptions{[linerange=##1-#2,firstnumber=##1,\@globalargs]{#3}}%
     \def\@endcmd{\expandafter\includejavacode\@endoptions}%
-    \edef\@startoptions{[\@startendlinenumber,caption=,\@globalargs]{#3}}%
+    \edef\@startoptions{[\@startendlinenumber,caption=,belowskip=-0.5ex,\@globalargs]{#3}}%
     \def\@startcmd{\expandafter\includejavacode\@startoptions}%
     \@startcmd\newline%
     \ignorespaces%
@@ -98,7 +98,7 @@
   }%
 %
   \expandafter\newcommand\expandafter{\csname javarange#3\endcsname}[3][]{% ##1 = rangeoptions, ##2 = startline, ##3 = endline
-    \edef\@rangeoptions{[linerange=##2-##3,firstnumber=##2,caption=,\@globalargs,##1]{#3}}%
+    \edef\@rangeoptions{[linerange=##2-##3,firstnumber=##2,belowskip=-0.5ex,caption=,\@globalargs,##1]{#3}}%
     \expandafter\includejavacode\@rangeoptions\newline%
     \ignorespaces
   }%
@@ -121,7 +121,7 @@
   \expandafter\newcommand\expandafter{\csname cpp#3\endcsname}[1][#2]{%  ##1 = endoptions
     \edef\@endoptions{[linerange=##1-#2,firstnumber=##1,\@globalargs]{#3}}%
     \def\@endcmd{\expandafter\includecppcode\@endoptions}%
-    \edef\@startoptions{[\@startendlinenumber,caption=,\@globalargs]{#3}}%
+    \edef\@startoptions{[\@startendlinenumber,caption=,belowskip=-0.5ex,\@globalargs]{#3}}%
     \def\@startcmd{\expandafter\includecppcode\@startoptions}%
     \@startcmd\newline%
     \ignorespaces%
@@ -133,7 +133,7 @@
   }%
 %
   \expandafter\newcommand\expandafter{\csname cpprange#3\endcsname}[3][]{% ##1 = rangeoptions, ##2 = startline, ##3 = endline
-    \edef\@rangecmd{[linerange=##2-##3,firstnumber=##2,caption=,\@globalargs,##1]{#3}}%
+    \edef\@rangecmd{[linerange=##2-##3,firstnumber=##2,caption=,belowskip=-0.5ex,\@globalargs,##1]{#3}}%
     \expandafter\includecppcode\@rangecmd\newline%
   }%
 }%

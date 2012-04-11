@@ -130,12 +130,12 @@ order=1
 
 [item:experimental.def.tex]
 archive=true
-column=46
+column=81
 encoding=UTF-8
 highlight=LaTeX
-line=101
+line=135
 mode=LaTeX
-open=true
+open=false
 order=0
 
 [item:fh-ooe-class.kilepr]
@@ -150,20 +150,20 @@ order=-1
 
 [item:fh-ooe.cls]
 archive=true
-column=42
+column=23
 encoding=UTF-8
 highlight=LaTeX
-line=92
+line=103
 mode=LaTeX
-open=true
+open=false
 order=1
 
 [item:fh-ooe.def.tex]
 archive=true
-column=0
+column=25
 encoding=UTF-8
 highlight=LaTeX
-line=65
+line=81
 mode=LaTeX
 open=false
 order=1
@@ -205,16 +205,16 @@ CursorColumn=0
 CursorLine=19
 
 [view-settings,view=0,item:experimental.def.tex]
-CursorColumn=46
-CursorLine=101
+CursorColumn=81
+CursorLine=135
 
 [view-settings,view=0,item:fh-ooe.cls]
-CursorColumn=42
-CursorLine=92
+CursorColumn=23
+CursorLine=103
 
 [view-settings,view=0,item:fh-ooe.def.tex]
-CursorColumn=0
-CursorLine=65
+CursorColumn=25
+CursorLine=81
 
 [view-settings,view=0,item:fh-ooe.multiscreen.sty]
 CursorColumn=32
