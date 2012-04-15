@@ -98,12 +98,12 @@
 \newcommand{\includejavacodenostar}[2][]{%
   \addsourcefile{\javasourcepath/#2}%
   \href{run:\javasourcepath/#2}{%
-    \vbox{
+    \hspace*{-\@itemdepth\leftmargin}%
+    \vbox{%
       \lstinputlisting[%
         language=java,%
         style=eclipse,%
         xleftmargin=\lst@numbersep,%
-        resetmargins=true,%
         caption=\codefontfamily #2,%
         #1%
       ]{%
@@ -114,12 +114,12 @@
 }%
 
 \newcommand{\includejavacodestar}[2][]{%
+  \hspace*{-\@itemdepth\leftmargin}%
   \vbox{%
     \lstinputlisting[%
       language=java,%
       style=eclipse,%
       xleftmargin=\lst@numbersep,%
-      resetmargins=true,%
       #1
     ]{%
       \javasourcepath/#2%
@@ -137,12 +137,12 @@
   \StrSubstitute{#2}{.}{/}[\mydef]%
   \expandafter\addsourcefile\expandafter{\expandafter\javasourcepath\expandafter/\mydef/#3}%
   \href{run:\javasourcepath/\mydef/#3}{%
+    \hspace*{-\@itemdepth\leftmargin}%
     \vbox{%
       \lstinputlisting[%
         language=java,%
         style=eclipse,%
         xleftmargin=\lst@numbersep,%
-        resetmargins=true,%
         caption=\codefontfamily #3,%
         #1
       ]{%
@@ -172,12 +172,12 @@
 
 \newcommand{\includejavacodeinpackagestar}[3][]{%
   \StrSubstitute{#2}{.}{/}[\mydef]%
+  \hspace*{-\@itemdepth\leftmargin}%
   \vbox{%
     \lstinputlisting[%
       language=java,%
       style=eclipse,%
       xleftmargin=\lst@numbersep,%
-      resetmargins=true,%
       #1
     ]{%
       \javasourcepath/\mydef/#3%
