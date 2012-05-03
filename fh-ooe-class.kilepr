@@ -100,10 +100,10 @@ order=3
 
 [item:beamerinnerthemefh-ooe.sty]
 archive=true
-column=18
+column=77
 encoding=UTF-8
 highlight=LaTeX
-line=88
+line=276
 mode=LaTeX
 open=false
 order=1
@@ -193,8 +193,8 @@ CursorColumn=0
 CursorLine=13
 
 [view-settings,view=0,item:beamerinnerthemefh-ooe.sty]
-CursorColumn=18
-CursorLine=88
+CursorColumn=77
+CursorLine=276
 
 [view-settings,view=0,item:beamerouterthemefh-ooe.sty]
 CursorColumn=68
