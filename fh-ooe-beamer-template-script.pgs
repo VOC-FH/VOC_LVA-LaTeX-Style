@@ -17,6 +17,8 @@
 \newsavebox{\mybox}
 
 \def\mymeasure{fdf}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
 
 \begin{document}[without titlepage]%
   \begin{frame}%

@@ -115,6 +115,8 @@
   \ifbeamer@inlecture
     \pdfbookmark[0]{\insertlecturenumbername\ \insertlecturenumber\ifx\insertlecturehead\@empty\else: \insertlecture\fi}{Inhalt-\beamer@currentlecturelabel}
   \fi
+  \fhooe@maketitle
+  \gdef\fhooe@maketitle{}
   \makelectureframe
 }
 

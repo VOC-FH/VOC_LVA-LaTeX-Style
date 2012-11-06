@@ -305,8 +305,8 @@
 \newcommand{\fhooe@documentRelay}[1][]
 {
   \gdef\fhooe@ArgII{{#1}}
-  \gdef\fhooe@maketitle{\relax}
-  \gdef\fhooe@includeonlylecture{\relax}
+  \gdef\fhooe@maketitle{}%\relax}
+  \gdef\fhooe@includeonlylecture{}%\relax}
 
   \ifthenelse{\expandafter\equal\fhooe@ArgI{with titlepage}}{
     \gdef\fhooe@maketitle{\maketitle}
@@ -334,8 +334,8 @@
   }
 
   \orig@document
+%  \fhooe@maketitle
   \fhooe@includeonlylecture
-  \fhooe@maketitle
 }
 
 \def\fhooepresentationoptions{\beamertemplatenavigationsymbolsempty}
