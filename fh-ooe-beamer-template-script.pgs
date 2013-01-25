@@ -1,46 +1,31 @@
-\documentclass[utf8x,trans]{beamer}
-%\RequirePackage{etex}
-
-\usepackage[english]{babel}
-%\usepackage[latin1]{inputenc}
-
-\renewcommand{\thepage}{}
+\documentclass[utf8x,trans]{fh-ooe}
+\usetikzlibrary{positioning,shapes.multipart,shadows,calc,arrows,fit,trees,intersections}
+\usepackage{pgfkeys}
+\usepackage{tikz-qtree}
 \usepackage{pgfplots}
+\pgfplotsset{compat=1.5.1}
 
-\usepackage{tikz}
-\usetikzlibrary{spy} %  Zoom
+\newlength{\codebaselineskip} 
+\tiny
+\setlength{\codebaselineskip}{\baselineskip}
+\normalsize
+%\usepackage{pgfpages}
+%\pgfpagesuselayout{8 on 1}[a4paper,portrait,border shrink=5mm]
 
+\newdimen\height
+\newdimen\width
+\newsavebox{\mybox}
 
-
-%\usepackage{pgfplots}
-%\usepackage{tikz}
-%\usetikzlibrary{positioning,shapes.multipart,shadows,calc,arrows,fit,trees,intersections}
-%\usetikzlibrary{spy} %  Zoom
-%\usepackage{pgfkeys}
-%\usepackage{tikz-qtree}
-
-%\newlength{\codebaselineskip} 
-%\tiny
-%\setlength{\codebaselineskip}{\baselineskip}
-%\normalsize
-%%\usepackage{pgfpages}
-%%\pgfpagesuselayout{8 on 1}[a4paper,portrait,border shrink=5mm]
-
-%\newdimen\height
-%\newdimen\width
-%\newsavebox{\mybox}
-
-%\def\mymeasure{fdf}
-%\pgfdeclarelayer{foreground}
-%\pgfsetlayers{background,main,foreground}
+\def\mymeasure{fdf}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
 
 \begin{document}[without titlepage]%
-  <>
-%  \begin{frame}%
-%    \sbox{\mybox}{<>}%
-%    \settototalheight\height{\usebox{\mybox}}%
-%    \settowidth\width{\usebox{\mybox}}%
-%    \centering\fbox{\usebox{\mybox}}\\%
-%    \scriptsize width = \the\width, height = \the\height%
-%  \end{frame}%
+  \begin{frame}%
+    \sbox{\mybox}{<>}%
+    \settototalheight\height{\usebox{\mybox}}%
+    \settowidth\width{\usebox{\mybox}}%
+    \centering\fbox{\usebox{\mybox}}\\%
+    \scriptsize width = \the\width, height = \the\height%
+  \end{frame}%
 \end{document}
