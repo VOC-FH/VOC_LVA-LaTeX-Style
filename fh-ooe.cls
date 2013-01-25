@@ -33,6 +33,7 @@
 \usetheme{FH-OOE}
 
 \RequirePackage[T1]{fontenc}
+\RequirePackage{pgfplots}
 \RequirePackage{tikz}
 \RequirePackage{tikz-uml}
 \RequirePackage{tikz-uml-extension}
@@ -150,24 +151,6 @@
       }%
     }%
   }%
-%  \StrSubstitute{#2}{.}{/}[\mydef]%
-%  \codefontsize%
-%  \lstset{style=eclipse}%
-%  \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
-%  \addtolength{\fhooe@lenaa}{\lst@numbersep}%
-%  \expandafter\addsourcefile\expandafter{\expandafter\javasourcepath\expandafter/\mydef/#3}%
-%  \href{run:\javasourcepath/\mydef/#3}{%
-%    \vbox{%\hbox{%
-%      \lstinputlisting[%
-%        language=java,%
-%        xleftmargin=\fhooe@lenaa,%
-%        caption=\codefontfamily #3,%
-%        #1
-%      ]{%
-%        \javasourcepath/\mydef/#3%
-%      }%
-%    }%}%
-%  }%\\%
 }%
 
 \newcommand{\includejavacodeinpackagestar}[3][]{%
@@ -183,20 +166,6 @@
       \javasourcepath/\mydef/#3%
     }%
   }%
-%  \StrSubstitute{#2}{.}{/}[\mydef]%
-%  \codefontsize%
-%  \lstset{style=eclipse}%
-%  \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
-%  \addtolength{\fhooe@lenaa}{\lst@numbersep}%
-%  \vbox{%\hbox{%
-%    \lstinputlisting[%
-%      language=java,%
-%      xleftmargin=\fhooe@lenaa,%
-%      #1
-%    ]{%
-%      \javasourcepath/\mydef/#3%
-%    }%
-%  }%}%
 }
 
 \newcommand{\includejavacodeinpackage}{\@ifstar
@@ -246,23 +215,6 @@
       }%
     }%
   }%
-%  \codefontsize
-%  \lstset{style=eclipse,#1}%
-%  \settowidth{\fhooe@lenaa}{\lst@numberstyle{88}}%
-%  \addtolength{\fhooe@lenaa}{\lst@numbersep}%
-%  \addsourcefile{\cppsourcepath/#2}%
-%  \href{run:\cppsourcepath/#2}{%
-%    \makebox[\linewidth][l]{
-%      \lstinputlisting[%
-%        language=c++,%
-%        xleftmargin=\fhooe@lenaa,%
-%        caption=\codefontfamily #2,%
-%        #1
-%      ]{%
-%        \cppsourcepath/#2%
-%      }%
-%    }
-%  }
 }
 
 \lstnewenvironment{cppapi}[1][]{
