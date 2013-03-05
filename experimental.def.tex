@@ -69,6 +69,8 @@
 % %\message\expandafter{\strip@pt\the\paperwidth}
 % \message{----------------------}
 
+\let\begincode\begin
+\let\endcode\end
 
 \def\definejavacoderangeenvironment#1#2#3{%  #1 startlinenumber, #2 = linenumbercount #3 javafile
   \newenvironment{#3}[1][]{% #1 globaloptions
@@ -78,7 +80,7 @@
       \expandafter\def\expandafter\range\expandafter{\csname javarange#3\endcsname}%
       \csname javarel#3\endcsname%
   }{
-      \@endcmd\newline%
+    \@endcmd\newline%
     \endgroup%
     \ignorespacesafterend
   }%
@@ -104,36 +106,20 @@
   }%
 }%
 
-
-\def\definecppcoderangeenvironment#1#2#3{%  #1 startlinenumber, #2 = linenumbercount #3 cppfile
-  \newenvironment{#3}[1][]{% #1 globaloptions
+\def\definecppcoderangeenvironment#1{%  #1 startlinenumber, #2 = linenumbercount #3 javafile
+  \newenvironment{#1}[1][]{% #1 globaloptions
     \begingroup%
       \offinterlineskip%
       \def\@globalargs{##1}%
-      \expandafter\def\expandafter\range\expandafter{\csname cpprange#3\endcsname}%
-      \csname cpprel#3\endcsname%
+      \expandafter\def\expandafter\range\expandafter{\csname cpprange#1\endcsname}%
   }{
-      \@endcmd%
     \endgroup%
     \ignorespacesafterend
   }%
-%
-  \expandafter\newcommand\expandafter{\csname cpp#3\endcsname}[1][#2]{%  ##1 = endoptions
-    \edef\@endoptions{[linerange=##1-#2,firstnumber=##1,\@globalargs]{#3}}%
-    \def\@endcmd{\expandafter\includecppcode\@endoptions}%
-    \edef\@startoptions{[\@startendlinenumber,caption=,belowskip=-0.5ex,\@globalargs]{#3}}%
-    \def\@startcmd{\expandafter\includecppcode\@startoptions}%
-    \@startcmd\newline%
-    \ignorespaces%
-  }%
-%
-  \expandafter\newcommand\expandafter{\csname cpprel#3\endcsname}[1][#1]{% ##1 = startargs
-    \def\@startendlinenumber{linerange=#1-##1}%
-    \expandafter\csname cpp#3\expandafter\endcsname%
-  }%
-%
-  \expandafter\newcommand\expandafter{\csname cpprange#3\endcsname}[3][]{% ##1 = rangeoptions, ##2 = startline, ##3 = endline
-    \edef\@rangecmd{[linerange=##2-##3,firstnumber=##2,caption=,belowskip=-0.5ex,\@globalargs,##1]{#3}}%
-    \expandafter\includecppcode\@rangecmd\newline%
+
+  \expandafter\newcommand\expandafter{\csname cpprange#1\endcsname}[3][]{% ##1 = rangeoptions, ##2 = startline, ##3 = endline
+    \edef\@rangeoptions{[linerange=##2-##3,firstnumber=##2,belowskip=-0.5ex,\@globalargs,##1]{#1}}%
+    \expandafter\includecppcode\@rangeoptions\newline%
+    \ignorespaces
   }%
 }%
