@@ -240,8 +240,16 @@
   \orig@lecture[#1]{#2}{#3}
 }
 
-\AtBeginDocument{\newwrite\srcf\openout\srcf=\jobname.src\write\srcf{\jobname.pdf}}
-\AtEndDocument{\closeout\srcf}
+\AtBeginDocument{%
+  \newwrite\srcf\openout\srcf=\jobname.src%
+  \write\srcf{\jobname.pdf}%
+  \fhooe@maketitle%
+  \fhooe@includeonlylecture%
+}
+
+\AtEndDocument{%
+  \closeout\srcf%
+}
 
 \let\orig@document\document
 \let\orig@enddocument\enddocument
@@ -287,7 +295,7 @@
 
   \orig@document
 %  \fhooe@maketitle
-  \fhooe@includeonlylecture
+%  \fhooe@includeonlylecture
 }
 
 \def\fhooepresentationoptions{\beamertemplatenavigationsymbolsempty}
