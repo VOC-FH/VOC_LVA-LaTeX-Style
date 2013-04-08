@@ -68,13 +68,13 @@
 \setbeamertemplate{part page}[fh-ooe][colsep=-4bp,rounded=true,shadow=\beamer@themerounded@shadow]
 
 \let\orig@maketitle=\maketitle
-\def\maketitle{
-  \setbeamertemplate{headline}[fh-ooe theme title page]
-  \setbeamertemplate{footline}[fh-ooe theme title page]
+\def\maketitle{%
+  \setbeamertemplate{headline}[fh-ooe theme title page]%
+  \setbeamertemplate{footline}[fh-ooe theme title page]%
 %  \pdfbookmark[0]{\inserttitle}{titlepage}
-  \orig@maketitle
+  \orig@maketitle%
   \global\advance\c@framenumber by-1\relax%
-}
+}%
 
 \def\lecturepage{\usebeamertemplate*{lecture page}}
 \def\makelectureframe{

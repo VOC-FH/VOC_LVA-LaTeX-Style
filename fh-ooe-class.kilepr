@@ -9,7 +9,7 @@ kile_livePreviewStatusUserSpecified=false
 kile_livePreviewTool=LivePreview-PDFLaTeX
 kileprversion=2
 kileversion=2.9.60
-lastDocument=fh-ooe.def.tex
+lastDocument=fh-ooe.cls
 masterDocument=
 name=FH-OOE-Class
 pkg_extIsRegExp=false
@@ -121,13 +121,13 @@ order=3
 
 [item:beamerinnerthemefh-ooe.sty]
 archive=true
-column=1
+column=14
 encoding=UTF-8
 highlight=LaTeX
-line=117
+line=70
 mode=LaTeX
 open=false
-order=0
+order=1
 
 [item:beamerouterthemefh-ooe.sty]
 archive=true
@@ -147,7 +147,7 @@ highlight=LaTeX
 line=19
 mode=LaTeX
 open=false
-order=1
+order=2
 
 [item:experimental.def.tex]
 archive=true
@@ -171,13 +171,13 @@ order=-1
 
 [item:fh-ooe.cls]
 archive=true
-column=1
+column=34
 encoding=UTF-8
 highlight=LaTeX
-line=297
+line=258
 mode=LaTeX
 open=false
-order=2
+order=0
 
 [item:fh-ooe.def.tex]
 archive=true
@@ -186,7 +186,7 @@ encoding=UTF-8
 highlight=LaTeX
 line=2
 mode=LaTeX
-open=true
+open=false
 order=0
 
 [item:fh-ooe.multiscreen.sty]
@@ -197,7 +197,7 @@ highlight=LaTeX
 line=234
 mode=LaTeX
 open=false
-order=1
+order=3
 
 [item:tikz-uml-extension.sty]
 archive=true
@@ -216,8 +216,8 @@ JumpList=
 ViMarks=
 
 [view-settings,view=0,item:beamerinnerthemefh-ooe.sty]
-CursorColumn=1
-CursorLine=117
+CursorColumn=14
+CursorLine=70
 JumpList=
 ViMarks=
 
@@ -240,8 +240,8 @@ JumpList=
 ViMarks=
 
 [view-settings,view=0,item:fh-ooe.cls]
-CursorColumn=1
-CursorLine=297
+CursorColumn=34
+CursorLine=258
 JumpList=
 ViMarks=
 

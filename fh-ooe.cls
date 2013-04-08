@@ -199,6 +199,10 @@
   \ignorespacesafterend%
 }%
 
+\newcommand{\addcppfile}[1]{
+  \addsourcefile{\cppsourcepath/#1}%
+}
+
 \newcommand{\includecppcode}[2][]{%
   \addsourcefile{\cppsourcepath/#2}%
   \href{run:\cppsourcepath/#2}{%
@@ -241,59 +245,58 @@
 }
 
 \AtBeginDocument{%
-  \newwrite\srcf\openout\srcf=\jobname.src%
-  \write\srcf{\jobname.pdf}%
   \fhooe@maketitle%
   \fhooe@includeonlylecture%
-}
+  \newwrite\srcf\openout\srcf=\jobname.src%
+  \write\srcf{\jobname.pdf}%
+}%
 
 \AtEndDocument{%
   \closeout\srcf%
-}
+}%
 
-\let\orig@document\document
-\let\orig@enddocument\enddocument
+\let\orig@document\document%
+\let\orig@enddocument\enddocument%
 
-\renewenvironment{document}[1][]
-{
-  \gdef\fhooe@ArgI{{#1}}
-  \fhooe@documentRelay
-}{
-  \orig@enddocument
-}
+\renewenvironment{document}[1][]%
+{%
+  \gdef\fhooe@ArgI{{#1}}%
+  \fhooe@documentRelay%
+}{%
+  \orig@enddocument%
+}%
 
-\newcommand{\fhooe@documentRelay}[1][]
-{
-  \gdef\fhooe@ArgII{{#1}}
+\newcommand{\fhooe@documentRelay}[1][]%
+{%
+  \gdef\fhooe@ArgII{{#1}}%
   \gdef\fhooe@maketitle{}%\relax}
   \gdef\fhooe@includeonlylecture{}%\relax}
-
-  \ifthenelse{\expandafter\equal\fhooe@ArgI{with titlepage}}{
-    \gdef\fhooe@maketitle{\maketitle}
-    \ifthenelse{\expandafter\equal\fhooe@ArgII{}}
-    {}{
-      \gdef\fhooe@includeonlylecture{\expandafter\includeonlylecture\fhooe@ArgII}
-    }
-  }{
-    \ifthenelse{\expandafter\equal\fhooe@ArgI{without titlepage}}{
-      \ifthenelse{\expandafter\equal\fhooe@ArgII{}}
-      {}{
-        \gdef\fhooe@includeonlylecture{\expandafter\includeonlylecture\fhooe@ArgII}
-      }
-    }{
-      \ifthenelse{\expandafter\equal\fhooe@ArgII{}}{
-        \ifthenelse{\expandafter\equal\fhooe@ArgI{}}{
-          \gdef\fhooe@maketitle{\maketitle}
-        }{
-          \gdef\fhooe@includeonlylecture{\expandafter\includeonlylecture\fhooe@ArgI}
-        }
-      }{
-        \errormessage{Error: Wrong arguments to macro \noexpand\typeset}
-      }
-    }
-  }
-
-  \orig@document
+%
+  \ifthenelse{\expandafter\equal\fhooe@ArgI{with titlepage}}{%
+    \gdef\fhooe@maketitle{\maketitle}%
+    \ifthenelse{\expandafter\equal\fhooe@ArgII{}}%
+    {}{%
+      \gdef\fhooe@includeonlylecture{\expandafter\includeonlylecture\fhooe@ArgII}%
+    }%
+  }{%
+    \ifthenelse{\expandafter\equal\fhooe@ArgI{without titlepage}}{%
+      \ifthenelse{\expandafter\equal\fhooe@ArgII{}}%
+      {}{%
+        \gdef\fhooe@includeonlylecture{\expandafter\includeonlylecture\fhooe@ArgII}%
+      }%
+    }{%
+      \ifthenelse{\expandafter\equal\fhooe@ArgII{}}{%
+        \ifthenelse{\expandafter\equal\fhooe@ArgI{}}{%
+          \gdef\fhooe@maketitle{\maketitle}%
+        }{%
+          \gdef\fhooe@includeonlylecture{\expandafter\includeonlylecture\fhooe@ArgI}%
+        }%
+      }{%
+        \errormessage{Error: Wrong arguments to macro \noexpand\typeset}%
+      }%
+    }%
+  }%
+  \orig@document%
 %  \fhooe@maketitle
 %  \fhooe@includeonlylecture
 }
