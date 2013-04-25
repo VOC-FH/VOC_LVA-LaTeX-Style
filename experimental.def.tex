@@ -72,6 +72,7 @@
 \let\begincode\begin
 \let\endcode\end
 
+\newcommand\inlinejavacode[1][]{\lstinline[style=eclipse-inline,language=java,#1]}
 
 \newcommand{\setjavapath}[1]{%
   \def\javasourcepath{sources/#1/src}%
@@ -179,7 +180,9 @@
     }%
 %
     \expandafter\newcommand\expandafter{\csname javarelay1#4\endcsname}[1][#1]{% ##1 = start-endlinenumber
-      \ifthenelse{\equal{##1}{none}}{\def\@startcmd{}}{%
+      \ifthenelse{\equal{##1}{none}}{%
+        \def\@startcmd{}%
+      }{%
         \def\@startendlinenumber{linerange=#1-##1}%
         \edef\@startoptions{[\@startendlinenumber,caption=,belowskip=-0.5ex,\@globalargs]{#3}{#4}}%
         \def\@startcmd{\expandafter\includejavacodeinpackage\@startoptions\newline}%
@@ -188,7 +191,9 @@
     }%
 %
     \expandafter\newcommand\expandafter{\csname javarelay2#4\endcsname}[1][#2]{%  ##1 = end-startlinenumber
-      \ifthenelse{\equal{##1}{none}}{\def\@endcmd{\expandafter\includejavacodeinpackage[print=false]{#3}{#4}}}{
+      \ifthenelse{\equal{##1}{none}}{%
+        \def\@endcmd{\expandafter\includejavacodeinpackage[print=false]{#3}{#4}}%
+      }{
         \firstnumbercounterend=##1%
         \advance\firstnumbercounterend by 1%
         \advance\firstnumbercounterend by -#1%

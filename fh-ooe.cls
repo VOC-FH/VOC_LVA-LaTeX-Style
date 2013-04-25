@@ -64,21 +64,13 @@
 \renewcommand{\include}[2][.]{
   \graphicspath{{#1/material/}}
   \def\pgfpath{#1/material/pgf/}
-  \setjavapath{#1}
-%  \def\javasourcepath{sources/#1/src}
   \def\cppsourcepath{c++sources/#1}
   \orig@include{#1/#2}
 }
 
-% \newcommand{\setjavapath}[1]{%
-%   \def\javasourcepath{sources/#1/src}%
-% }
-
 \newcommand{\setpath}[1]{%
   \graphicspath{{#1/material/}}%
   \def\pgfpath{#1/material/pgf/}%
-  \setjavapath{#1}
-%  \def\javasourcepath{sources/#1/src}%
   \def\cppsourcepath{c++sources/#1}%
 }
 
@@ -91,93 +83,6 @@
 \newcommand{\addsourcefile}[1]{%
   \write\srcf{#1}%
 }
-
-\newlength{\fhooe@lenaa}%
-
-\newcommand\inlinejavacode[1][]{\lstinline[style=eclipse-inline,language=java,#1]}
-
-% \lstnewenvironment{javacode}[1][]{
-%   \codefontsize
-%   \lstset{style=eclipse,language=java,#1}%
-%   \lstset{xleftmargin=\lst@numbersep}%
-% }{}
-% 
-% \newcommand{\includejavacodenostar}[2][]{%
-%   \addsourcefile{\javasourcepath/#2}%
-%   \href{run:\javasourcepath/#2}{%
-%     \hspace*{-\@itemdepth\leftmargin}%
-%     \vbox{%
-%       \lstinputlisting[%
-%         language=java,%
-%         style=eclipse,%
-%         xleftmargin=\lst@numbersep,%
-%         caption=\codefontfamily #2,%
-%         #1%
-%       ]{%
-%         \javasourcepath/#2%
-%       }%
-%     }%
-%   }%
-% }%
-% 
-% \newcommand{\includejavacodestar}[2][]{%
-%   \hspace*{-\@itemdepth\leftmargin}%
-%   \vbox{%
-%     \lstinputlisting[%
-%       language=java,%
-%       style=eclipse,%
-%       xleftmargin=\lst@numbersep,%
-%       #1
-%     ]{%
-%       \javasourcepath/#2%
-%     }%
-%   }%
-% }%
-% 
-% 
-% \newcommand{\includejavacode}{\@ifstar
-%   \includejavacodestar%
-%   \includejavacodenostar%
-% }
-% 
-% \newcommand{\includejavacodeinpackagenostar}[3][]{%
-%   \StrSubstitute{#2}{.}{/}[\mydef]%
-%   \expandafter\addsourcefile\expandafter{\expandafter\javasourcepath\expandafter/\mydef/#3}%
-%   \href{run:\javasourcepath/\mydef/#3}{%
-%     \hspace*{-\@itemdepth\leftmargin}%
-%     \vbox{%
-%       \lstinputlisting[%
-%         language=java,%
-%         style=eclipse,%
-%         xleftmargin=\lst@numbersep,%
-%         caption=\codefontfamily #3,%
-%         #1
-%       ]{%
-%         \javasourcepath/\mydef/#3%
-%       }%
-%     }%
-%   }%
-% }%
-% 
-% \newcommand{\includejavacodeinpackagestar}[3][]{%
-%   \StrSubstitute{#2}{.}{/}[\mydef]%
-%   \hspace*{-\@itemdepth\leftmargin}%
-%   \vbox{%
-%     \lstinputlisting[%
-%       language=java,%
-%       style=eclipse,%
-%       xleftmargin=\lst@numbersep,%
-%       #1
-%     ]{%
-%       \javasourcepath/\mydef/#3%
-%     }%
-%   }%
-% }
-% 
-% \newcommand{\includejavacodeinpackage}{\@ifstar
-%   \includejavacodeinpackagestar%
-%   \includejavacodeinpackagenostar%
-% }
 
 \newcommand\inlinecppcode[1][]{\lstinline[style=eclipse-inline,language=c++,#1]}
 
@@ -313,5 +218,5 @@
 
 % Read options from file
 \InputIfFileExists{fh-ooe.def.tex}{}{}
-\InputIfFileExists{private.def.tex}{}{}
 \InputIfFileExists{experimental.def.tex}{}{}
+\InputIfFileExists{private.def.tex}{}{}
