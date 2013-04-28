@@ -69,168 +69,168 @@
 % %\message\expandafter{\strip@pt\the\paperwidth}
 % \message{----------------------}
 
-\let\begincode\begin
-\let\endcode\end
+% \let\begincode\begin
+% \let\endcode\end
 
-\newcommand\inlinejavacode[1][]{\lstinline[style=eclipse-inline,language=java,#1]}
-
-\newcommand{\setjavapath}[1]{%
-  \def\javasourcepath{sources/#1/src}%
-}
-
-\lstnewenvironment{javacode}[1][]{
-  \codefontsize
-  \lstset{style=eclipse,language=java,#1}%
-  \lstset{xleftmargin=\lst@numbersep}%
-}{}
-
-\newcommand{\includejavacodenostar}[2][]{%
-  \addsourcefile{\javasourcepath/#2}%
-  \href{run:\javasourcepath/#2}{%
-    \hspace*{-\@itemdepth\leftmargin}%
-    \vbox{%
-      \lstinputlisting[%
-        language=java,%
-        style=eclipse,%
-        xleftmargin=\lst@numbersep,%
-        caption=\codefontfamily #2,%
-        #1%
-      ]{%
-        \javasourcepath/#2%
-      }%
-    }%
-  }%
-}%
-
-\newcommand{\includejavacodestar}[2][]{%
-  \hspace*{-\@itemdepth\leftmargin}%
-  \vbox{%
-    \lstinputlisting[%
-      language=java,%
-      style=eclipse,%
-      xleftmargin=\lst@numbersep,%
-      #1
-    ]{%
-      \javasourcepath/#2%
-    }%
-  }%
-}%
-
-
-\newcommand{\includejavacode}{\@ifstar
-  \includejavacodestar%
-  \includejavacodenostar%
-}
-
-\newcommand{\includejavacodeinpackagenostar}[3][]{%
-  \StrSubstitute{#2}{.}{/}[\mydef]%
-  \expandafter\addsourcefile\expandafter{\expandafter\javasourcepath\expandafter/\mydef/#3}%
-  \href{run:\javasourcepath/\mydef/#3}{%
-    \hspace*{-\@itemdepth\leftmargin}%
-    \vbox{%
-      \lstinputlisting[%
-        language=java,%
-        style=eclipse,%
-        xleftmargin=\lst@numbersep,%
-        caption=\codefontfamily #3,%
-        #1
-      ]{%
-        \javasourcepath/\mydef/#3%
-      }%
-    }%
-  }%
-}%
-
-\newcommand{\includejavacodeinpackagestar}[3][]{%
-  \StrSubstitute{#2}{.}{/}[\mydef]%
-  \hspace*{-\@itemdepth\leftmargin}%
-  \vbox{%
-    \lstinputlisting[%
-      language=java,%
-      style=eclipse,%
-      xleftmargin=\lst@numbersep,%
-      #1
-    ]{%
-      \javasourcepath/\mydef/#3%
-    }%
-  }%
-}%
-
-\newcommand{\includejavacodeinpackage}{\@ifstar
-  \includejavacodeinpackagestar%
-  \includejavacodeinpackagenostar%
-}
-
-
-\newcount\firstnumbercounterend%
-\newcount\firstnumbercounterrange%
-
-\newenvironment{java}[4]{%  #1 startlinenumber, #2 = linenumbercount #3 javapackage #4 javasource
-  \begingroup%
-    \newenvironment{#4}[1][]{% #1 globaloptions
-      \begingroup%
-        \offinterlineskip%
-        \def\@globalargs{##1}%
-        \expandafter\def\expandafter\range{\csname javarange#4\endcsname}%
-        \csname javarelay1#4\endcsname%
-    }{
-      \@endcmd%
-      \endgroup%
-      \ignorespacesafterend%
-    }%
-%
-    \expandafter\newcommand\expandafter{\csname javarelay1#4\endcsname}[1][#1]{% ##1 = start-endlinenumber
-      \ifthenelse{\equal{##1}{none}}{%
-        \def\@startcmd{}%
-      }{%
-        \def\@startendlinenumber{linerange=#1-##1}%
-        \edef\@startoptions{[\@startendlinenumber,caption=,belowskip=-0.5ex,\@globalargs]{#3}{#4}}%
-        \def\@startcmd{\expandafter\includejavacodeinpackage\@startoptions\newline}%
-      }%
-      \csname javarelay2#4\endcsname%
-    }%
-%
-    \expandafter\newcommand\expandafter{\csname javarelay2#4\endcsname}[1][#2]{%  ##1 = end-startlinenumber
-      \ifthenelse{\equal{##1}{none}}{%
-        \def\@endcmd{\expandafter\includejavacodeinpackage[print=false]{#3}{#4}}%
-      }{
-        \firstnumbercounterend=##1%
-        \advance\firstnumbercounterend by 1%
-        \advance\firstnumbercounterend by -#1%
-        \edef\@endoptions{[linerange=##1-#2,firstnumber=\firstnumbercounterend,\@globalargs]{#3}{#4}}%
-        \def\@endcmd{\expandafter\includejavacodeinpackage\@endoptions\newline}%
-      }
-      \@startcmd%
-      \ignorespaces%
-    }%
-%
-    \expandafter\newcommand\expandafter{\csname javarange#4\endcsname}[3][]{% ##1 = rangeoptions, ##2 = startlinenumber, ##3 = endlinenumber
-      \firstnumbercounterrange=##2%
-      \advance\firstnumbercounterrange by 1%
-      \advance\firstnumbercounterrange by -#1%
-      \edef\@rangeoptions{[linerange=##2-##3,firstnumber=\firstnumbercounterrange,belowskip=-0.5ex,caption=,\@globalargs,##1]{#3}{#4}}%
-      \expandafter\includejavacodeinpackage\@rangeoptions\newline%
-      \ignorespaces%
-    }%
-}{%
-  \endgroup%
-}%
-
-
-\def\definecppcoderangeenvironment#1{%  #1 startlinenumber, #2 = linenumbercount #3 javafile
-  \newenvironment{#1}[1][]{% #1 globaloptions
-    \begingroup%
-      \offinterlineskip%
-      \def\@globalargs{##1}%
-      \expandafter\def\expandafter\range\expandafter{\csname cpprange#1\endcsname}%
-  }{
-    \endgroup%
-    \ignorespacesafterend
-  }%
-
-  \expandafter\newcommand\expandafter{\csname cpprange#1\endcsname}[3][]{% ##1 = rangeoptions, ##2 = startline, ##3 = endline
-    \edef\@rangeoptions{[linerange=##2-##3,firstnumber=##2,belowskip=-0.5ex,\@globalargs,##1]{#1}}%
-    \expandafter\includecppcode\@rangeoptions\newline%
-    \ignorespaces
-  }%
-}%
+% \newcommand\inlinejavacode[1][]{\lstinline[style=eclipse-inline,language=java,#1]}
+% 
+% \newcommand{\setjavapath}[1]{%
+%   \def\javasourcepath{sources/#1/src}%
+% }
+% 
+% \lstnewenvironment{javacode}[1][]{
+%   \codefontsize
+%   \lstset{style=eclipse,language=java,#1}%
+%   \lstset{xleftmargin=\lst@numbersep}%
+% }{}
+% 
+% \newcommand{\includejavacodenostar}[2][]{%
+%   \addsourcefile{\javasourcepath/#2}%
+%   \href{run:\javasourcepath/#2}{%
+%     \hspace*{-\@itemdepth\leftmargin}%
+%     \vbox{%
+%       \lstinputlisting[%
+%         language=java,%
+%         style=eclipse,%
+%         xleftmargin=\lst@numbersep,%
+%         caption=\codefontfamily #2,%
+%         #1%
+%       ]{%
+%         \javasourcepath/#2%
+%       }%
+%     }%
+%   }%
+% }%
+% 
+% \newcommand{\includejavacodestar}[2][]{%
+%   \hspace*{-\@itemdepth\leftmargin}%
+%   \vbox{%
+%     \lstinputlisting[%
+%       language=java,%
+%       style=eclipse,%
+%       xleftmargin=\lst@numbersep,%
+%       #1
+%     ]{%
+%       \javasourcepath/#2%
+%     }%
+%   }%
+% }%
+% 
+% 
+% \newcommand{\includejavacode}{\@ifstar
+%   \includejavacodestar%
+%   \includejavacodenostar%
+% }
+% 
+% \newcommand{\includejavacodeinpackagenostar}[3][]{%
+%   \StrSubstitute{#2}{.}{/}[\mydef]%
+%   \expandafter\addsourcefile\expandafter{\expandafter\javasourcepath\expandafter/\mydef/#3}%
+%   \href{run:\javasourcepath/\mydef/#3}{%
+%     \hspace*{-\@itemdepth\leftmargin}%
+%     \vbox{%
+%       \lstinputlisting[%
+%         language=java,%
+%         style=eclipse,%
+%         xleftmargin=\lst@numbersep,%
+%         caption=\codefontfamily #3,%
+%         #1
+%       ]{%
+%         \javasourcepath/\mydef/#3%
+%       }%
+%     }%
+%   }%
+% }%
+% 
+% \newcommand{\includejavacodeinpackagestar}[3][]{%
+%   \StrSubstitute{#2}{.}{/}[\mydef]%
+%   \hspace*{-\@itemdepth\leftmargin}%
+%   \vbox{%
+%     \lstinputlisting[%
+%       language=java,%
+%       style=eclipse,%
+%       xleftmargin=\lst@numbersep,%
+%       #1
+%     ]{%
+%       \javasourcepath/\mydef/#3%
+%     }%
+%   }%
+% }%
+% 
+% \newcommand{\includejavacodeinpackage}{\@ifstar
+%   \includejavacodeinpackagestar%
+%   \includejavacodeinpackagenostar%
+% }
+% 
+% 
+% \newcount\firstnumbercounterend%
+% \newcount\firstnumbercounterrange%
+% 
+% \newenvironment{java}[4]{%  #1 startlinenumber, #2 = linenumbercount #3 javapackage #4 javasource
+%   \begingroup%
+%     \newenvironment{#4}[1][]{% #1 globaloptions
+%       \begingroup%
+%         \offinterlineskip%
+%         \def\@globalargs{##1}%
+%         \expandafter\def\expandafter\range{\csname javarange#4\endcsname}%
+%         \csname javarelay1#4\endcsname%
+%     }{
+%       \@endcmd%
+%       \endgroup%
+%       \ignorespacesafterend%
+%     }%
+% %
+%     \expandafter\newcommand\expandafter{\csname javarelay1#4\endcsname}[1][#1]{% ##1 = start-endlinenumber
+%       \ifthenelse{\equal{##1}{none}}{%
+%         \def\@startcmd{}%
+%       }{%
+%         \def\@startendlinenumber{linerange=#1-##1}%
+%         \edef\@startoptions{[\@startendlinenumber,caption=,belowskip=-0.5ex,\@globalargs]{#3}{#4}}%
+%         \def\@startcmd{\expandafter\includejavacodeinpackage\@startoptions\newline}%
+%       }%
+%       \csname javarelay2#4\endcsname%
+%     }%
+% %
+%     \expandafter\newcommand\expandafter{\csname javarelay2#4\endcsname}[1][#2]{%  ##1 = end-startlinenumber
+%       \ifthenelse{\equal{##1}{none}}{%
+%         \def\@endcmd{\expandafter\includejavacodeinpackage[print=false]{#3}{#4}}%
+%       }{
+%         \firstnumbercounterend=##1%
+%         \advance\firstnumbercounterend by 1%
+%         \advance\firstnumbercounterend by -#1%
+%         \edef\@endoptions{[linerange=##1-#2,firstnumber=\firstnumbercounterend,\@globalargs]{#3}{#4}}%
+%         \def\@endcmd{\expandafter\includejavacodeinpackage\@endoptions\newline}%
+%       }
+%       \@startcmd%
+%       \ignorespaces%
+%     }%
+% %
+%     \expandafter\newcommand\expandafter{\csname javarange#4\endcsname}[3][]{% ##1 = rangeoptions, ##2 = startlinenumber, ##3 = endlinenumber
+%       \firstnumbercounterrange=##2%
+%       \advance\firstnumbercounterrange by 1%
+%       \advance\firstnumbercounterrange by -#1%
+%       \edef\@rangeoptions{[linerange=##2-##3,firstnumber=\firstnumbercounterrange,belowskip=-0.5ex,caption=,\@globalargs,##1]{#3}{#4}}%
+%       \expandafter\includejavacodeinpackage\@rangeoptions\newline%
+%       \ignorespaces%
+%     }%
+% }{%
+%   \endgroup%
+% }%
+% 
+% 
+% \def\definecppcoderangeenvironment#1{%  #1 startlinenumber, #2 = linenumbercount #3 javafile
+%   \newenvironment{#1}[1][]{% #1 globaloptions
+%     \begingroup%
+%       \offinterlineskip%
+%       \def\@globalargs{##1}%
+%       \expandafter\def\expandafter\range\expandafter{\csname cpprange#1\endcsname}%
+%   }{
+%     \endgroup%
+%     \ignorespacesafterend
+%   }%
+% 
+%   \expandafter\newcommand\expandafter{\csname cpprange#1\endcsname}[3][]{% ##1 = rangeoptions, ##2 = startline, ##3 = endline
+%     \edef\@rangeoptions{[linerange=##2-##3,firstnumber=##2,belowskip=-0.5ex,\@globalargs,##1]{#1}}%
+%     \expandafter\includecppcode\@rangeoptions\newline%
+%     \ignorespaces
+%   }%
+% }%
