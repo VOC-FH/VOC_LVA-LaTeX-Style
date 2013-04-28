@@ -38,7 +38,7 @@
 \RequirePackage{tikz-uml}
 \RequirePackage{tikz-uml-extension}
 \RequirePackage[lighttt]{lmodern}
-\RequirePackage{listings}
+\RequirePackage{listings-extension}
 \RequirePackage[scriptsize]{subfigure}
 \RequirePackage{caption}
 \RequirePackage{xstring}
@@ -75,74 +75,6 @@
 }
 
 \def\includegraphicswrapper[{\includegraphics[}
-
-\def\codelistingname{Listing}
-\def\lstlistingname{\codelistingname}
-
-
-\newcommand{\addsourcefile}[1]{%
-  \write\srcf{#1}%
-}
-
-\newcommand\inlinecppcode[1][]{\lstinline[style=eclipse-inline,language=c++,#1]}
-
-\lstnewenvironment{cppcode}[1][]{
-  \lstset{style=eclipse,language=c++,#1}%
-  \lstset{xleftmargin=\lst@numbersep}%
-}{}
-
-\newcommand{\@cppcoderangerelay}[3][]{%
-  \edef\@eargs{[linerange=#2-#2,firstnumber=#2,\@begarg,#1]{#3}}
-  \def\@endcmd{\expandafter\includecppcode\@eargs}
-  \newcommand\range[3][]{%
-    \edef\@rargs{[linerange=##2-##3,firstnumber=##2,#1,caption=,\@begarg,##1]{#3}}
-    \expandafter\includecppcode\@rargs
-  }
-  \edef\@sargs{[linerange=1-1,caption=,\@begarg]{#3}}
-  \expandafter\includecppcode\@sargs%
-}
-
-\newenvironment{cppcoderange}[1][]{%
-  \def\@begarg{#1}%
-  \@cppcoderangerelay%
-}{
-  \@endcmd%
-  \ignorespacesafterend%
-}%
-
-\newcommand{\addcppfile}[1]{
-  \addsourcefile{\cppsourcepath/#1}%
-}
-
-\newcommand{\includecppcode}[2][]{%
-  \addsourcefile{\cppsourcepath/#2}%
-  \href{run:\cppsourcepath/#2}{%
-    \vbox{
-      \lstinputlisting[%
-        language=c++,%
-        style=eclipse,%
-        xleftmargin=\lst@numbersep,%
-        resetmargins=true,%
-        caption=\codefontfamily #2,%
-        #1%
-      ]{%
-        \cppsourcepath/#2%
-      }%
-    }%
-  }%
-}
-
-\lstnewenvironment{cppapi}[1][]{
-  \lstset{%
-    style=eclipse,
-    language=c++,
-    basicstyle=\normalsize\codefontfamily,
-    resetmargins=true,
-    xleftmargin=\lst@numbersep,
-    numbers=none,
-    #1
-  }%
-}{}
 
 \def\pgfinput#1{\input{\pgfpath/#1.pgf}}
 
