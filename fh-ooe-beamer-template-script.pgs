@@ -1,7 +1,7 @@
 \documentclass[utf8x,trans]{fh-ooe}
 \usetikzlibrary{positioning,shapes.multipart,shadows,calc,arrows,fit,trees,intersections}
 \usepackage{pgfkeys}
-\usepackage{tikz-qtree}
+%\usepackage{tikz-qtree}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.5.1}
 
