@@ -1,9 +1,9 @@
-\documentclass[utf8x,trans]{fh-ooe}
+\documentclass[utf8x]{fh-ooe}
 \usetikzlibrary{positioning,shapes.multipart,shadows,calc,arrows,fit,trees,intersections}
-\usepackage{pgfkeys}
+%\usepackage{pgfkeys}
 %\usepackage{tikz-qtree}
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.5.1}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.5.1}
 
 \newlength{\codebaselineskip} 
 \tiny
