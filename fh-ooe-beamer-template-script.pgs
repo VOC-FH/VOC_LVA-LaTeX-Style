@@ -1,5 +1,6 @@
 \documentclass[utf8x]{fh-ooe}
 \usetikzlibrary{positioning,shapes.multipart,shadows,calc,arrows,fit,trees,intersections}
+\usepackage{pgffor}
 %\usepackage{pgfkeys}
 %\usepackage{tikz-qtree}
 %\usepackage{pgfplots}
