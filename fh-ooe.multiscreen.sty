@@ -31,6 +31,7 @@
 
 \mode<handout>{%
   \RequirePackage{pgfpages}
+  
   \def\fhooe@handoutlayout{4 on 1}
   \def\fhooe@handoutlayoutoptions{[a4paper,landscape,border shrink=5mm]}
 
@@ -47,25 +48,47 @@
 \else
   \RequirePackage{pgfpages}
   \define@key{pgfpages@main}{backgroundcolor}{\gdef\pgfphysicalbackgroundcolor{#1}}
+ 
+  \def\fhooe@inittwoscreens{%
+    \beamer@twoscreenstexttrue%
+    \nofiles%
+    
+    \def\fhooe@buildshipoutbox{%
+      \setbox\pgfpages@shipoutbox=\vbox{%
+        \set@typeset@protect%
+        \pgfsys@beginpicture%
+        \ifdefined\pgfphysicalbackgroundcolor%
+          \color{\pgfphysicalbackgroundcolor}%
+          \pgfpathrectangle{\pgfpointorigin}{\pgfpoint{\pgfphysicalwidth}{\pgfphysicalwidth}}%
+          \pgfusepath{fill}%
+        \fi%
+        \pgfsys@endpicture%
+        \box\pgfpages@shipoutbox%
+      }%
+    }%
+    
+    \def\fhooe@shipoutshipoutbox{%
+      \fhooe@buildshipoutbox%
+      \fhooe@pgfpages@shipoutshipoutbox%
+    }%
+    
+    \let\fhooe@pgfpages@shipoutshipoutbox=\pgfpages@shipoutshipoutbox%
+    \let\pgfpages@shipoutshipoutbox=\fhooe@shipoutshipoutbox%
 
-  \def\inittwoscreens{
-    \beamer@twoscreenstexttrue
-    \nofiles
-
-    \AtEndDocument{
-      \beamer@inlecturetrue
-      \begin{frame}%[plain]
-        \begin{center}\fhooe@HUGE ENDE\end{center}
-      \end{frame}
-      \setbeamercolor{background canvas}{bg=black}
-      \begin{frame}[plain]
-      \end{frame}
-      \pgfshipoutphysicalpage
-    }
-  }
+    \AtEndDocument{%
+      \beamer@inlecturetrue%
+      \begin{frame}
+        \begin{center}\fhooe@HUGE ENDE\end{center}%
+      \end{frame}%
+      \setbeamercolor{background canvas}{bg=black}%
+      \begin{frame}[plain]%
+      \end{frame}%
+      \pgfshipoutphysicalpage%
+    }%
+  }%
 
   \pgfpagesdeclarelayout{1680x1050|1280x1024}{
-    \inittwoscreens
+    \fhooe@inittwoscreens
   }{
     \pgfpagesphysicalpageoptions{%
       logical pages=3,
@@ -95,7 +118,7 @@
   }
 
   \pgfpagesdeclarelayout{1680x1050|1024x768}{
-    \inittwoscreens
+    \fhooe@inittwoscreens
   }{
     \pgfpagesphysicalpageoptions{%
       logical pages=3,
@@ -127,7 +150,7 @@
   }
 
   \pgfpagesdeclarelayout{1920x1080|1024x768}{
-    \inittwoscreens
+    \fhooe@inittwoscreens
   }{
     \pgfpagesphysicalpageoptions{%
       logical pages=3,
@@ -159,7 +182,7 @@
   }
 
   \pgfpagesdeclarelayout{1920x1080|1920x1080}{
-    \inittwoscreens
+    \fhooe@inittwoscreens
   }{
     \pgfpagesphysicalpageoptions{%
       logical pages=3,
@@ -191,7 +214,7 @@
   }
 
   \pgfpagesdeclarelayout{1920x1080|1024x768|new}{
-    \inittwoscreens
+    \fhooe@inittwoscreens
   }{
     \pgfpagesphysicalpageoptions{%
       logical pages=4,
@@ -228,16 +251,5 @@
     }
   }
 
-  \ifdefined\pgfphysicalbackgroundcolor
-    \pagecolor{\pgfphysicalbackgroundcolor}
-  \fi
-
-  \gdef\fhoo@epagelayout#1{%
-    \pgfpagesuselayout{#1}
-    \ifdefined\pgfphysicalbackgroundcolor%
-      \pagecolor{\pgfphysicalbackgroundcolor}
-    \fi
-  }
-
-  \fhoo@epagelayout{\fhooe@twoscreens}
+  \pgfpagesuselayout{\fhooe@twoscreens}
 \fi
