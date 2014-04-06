@@ -88,10 +88,10 @@
 }
 
 \AtBeginDocument{%
-  \fhooe@maketitle%
   \fhooe@includeonlylecture%
   \newwrite\srcf\openout\srcf=\jobname.src%
   \write\srcf{\jobname.pdf}%
+%  \fhooe@maketitle%
 }%
 
 \AtEndDocument{%
@@ -140,9 +140,8 @@
     }%
   }%
   \orig@document%
-%  \fhooe@maketitle
-%  \fhooe@includeonlylecture
-}
+  \fhooe@maketitle%
+}%
 
 \def\fhooepresentationoptions{\beamertemplatenavigationsymbolsempty}
 
