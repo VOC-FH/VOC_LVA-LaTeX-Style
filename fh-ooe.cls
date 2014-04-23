@@ -91,7 +91,6 @@
   \fhooe@includeonlylecture%
   \newwrite\srcf\openout\srcf=\jobname.src%
   \write\srcf{\jobname.pdf}%
-%  \fhooe@maketitle%
 }%
 
 \AtEndDocument{%
