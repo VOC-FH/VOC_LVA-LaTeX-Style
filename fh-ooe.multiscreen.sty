@@ -250,6 +250,101 @@
       copy from=4
     }
   }
+  
+  \pgfpagesdeclarelayout{3200x1800|1024x768}{
+    \fhooe@inittwoscreens
+  }{
+    \pgfpagesphysicalpageoptions{%
+      logical pages=3,
+      physical width=4236pt,
+      physical height=1800pt,
+      last logical shipout=1,
+      backgroundcolor=black
+    }%
+    \pgfpageslogicalpageoptions{1}{%
+      resized width=1305pt,
+      resized height=978pt,
+      center=\pgfpoint{2559.5pt}{1310.0pt},
+      border shrink=10pt,
+    }%
+    \pgfpageslogicalpageoptions{2}{%
+      resized width=1907pt,
+      resized height=1430pt,
+      center=\pgfpoint{953.5pt}{1084.0pt},
+      border shrink=10pt,
+      copy from=1,
+    }%
+    \pgfpageslogicalpageoptions{3}{%
+      resized width=1024pt,
+      resized height=768pt,
+      center=\pgfpoint{3723pt}{1416.0pt},
+      copy from=2
+    }
+  }
+  
+    \pgfpagesdeclarelayout{3200x1800|1280x1024}{
+    \fhooe@inittwoscreens
+  }{
+    \pgfpagesphysicalpageoptions{%
+      logical pages=3,
+      physical width=4480pt,
+      physical height=1780pt,
+      last logical shipout=1,
+      backgroundcolor=black
+    }%
+    \pgfpageslogicalpageoptions{1}{%
+      resized width=1300pt,
+      resized height=975pt,
+      center=\pgfpoint{2550.5pt}{1292.0pt},
+      border shrink=10pt,
+    }%
+    \pgfpageslogicalpageoptions{2}{%
+      resized width=1900pt,
+      resized height=1425pt,
+      center=\pgfpoint{950.5pt}{1067.0pt},
+      border shrink=10pt,
+      copy from=1,
+    }%
+    \pgfpageslogicalpageoptions{3}{%
+      resized width=1280pt,
+      resized height=960pt,
+      center=\pgfpoint{3840.0pt}{1278.0pt},
+      copy from=2
+    }
+  }
 
+  
+  \pgfpagesdeclarelayout{3200x1800|1920x1080}{
+    \fhooe@inittwoscreens
+  }{
+    \pgfpagesphysicalpageoptions{%
+      logical pages=3,
+      physical width=5120pt,
+      physical height=1800pt,
+      last logical shipout=1,
+      backgroundcolor=black
+    }%
+    \pgfpageslogicalpageoptions{1}{%
+      resized width=1300pt,
+      resized height=975pt,
+      center=\pgfpoint{2550.5pt}{1312.0pt},
+      border shrink=10pt,
+    }%
+    \pgfpageslogicalpageoptions{2}{%
+      resized width=1900pt,
+      resized height=1425pt,
+      center=\pgfpoint{950.5pt}{1087.0pt},
+      border shrink=10pt,
+      copy from=1,
+    }%
+    \pgfpageslogicalpageoptions{3}{%
+      resized width=1440pt,
+      resized height=1080pt,
+      center=\pgfpoint{4160.0pt}{1260.0pt},
+      copy from=2
+    }
+  }
+
+  
   \pgfpagesuselayout{\fhooe@twoscreens}
 \fi
