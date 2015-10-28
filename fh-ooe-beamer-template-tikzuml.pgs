@@ -3,7 +3,7 @@
 \RequirePackage[T1]{fontenc}
 
 \usepackage{tikz-uml}
-
+\usepackage{pgfmath}
 
 \RequirePackage[lighttt]{lmodern}
 

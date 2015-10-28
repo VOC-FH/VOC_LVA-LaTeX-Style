@@ -30,4 +30,7 @@
     \centering\fbox{\usebox{\mybox}}\\%
     \scriptsize width = \the\width, height = \the\height%
   \end{frame}%
+  \begin{frame}
+  <>
+  \end{frame}
 \end{document}
