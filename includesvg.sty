@@ -1,0 +1,156 @@
+\ProvidesPackage{includesvg}[2016/01/02 ver 0.01]
+
+\RequirePackage{xcolor}
+\RequirePackage{transparent}
+\RequirePackage{graphicx}
+\RequirePackage{calc}
+\RequirePackage{import}
+\RequirePackage{keyval}
+
+
+\define@key{svgoptions}{width}{\def\svgwidth{#1}}
+\define@key{svgoptions}{scale}{\def\svgscale{#1}}
+\define@key{svgoptions}{rerender}{%
+  \def\rerender{#1}%
+  \def\rTrue{true}%
+  \def\rFalse{false}%
+  \ifx\rTrue\rerender%
+  \else%
+    \ifx\rFalse\rerender%
+    \else%
+      \@warning{Warning: Wrong value #1 for option rerender! Possible values: true false}%
+    \fi%
+  \fi%
+}%
+\define@key{svgoptions}{inkscape}{\def\inkscapeoptions{#1}}
+\define@key{svgoptions}{export}{%
+  \def\option{#1}
+  \def\drawing{drawing}
+  \def\page{page}
+  \ifx\drawing\option%
+    \def\inkscapeexport{--export-area-drawing}%
+  \else%
+    \ifx\page\option%
+      \def\inkscapeexport{--export-area-page}%
+    \else%
+      \@warning{Warning: Wrong value #1 for option export! Possible values: page drawing}%
+    \fi%
+  \fi%
+}%
+
+\def\inkscapeoptions#1{\def\ink@skapeoptions{#1}}
+\def\ink@skapeoptions{}
+
+\newcommand{\forAllInputpaths}[2][\path]{\@for#1:=\@inputpaths\do{#2}}%
+
+\newif\if@Rerender%
+\@Rerenderfalse
+\def\svgenablererender{\@Rerendertrue}
+\def\svgdisablererender{\@Rerenderfalse}
+
+\newcommand{\executeiffilenewer}[3]{%
+  \ifnum\pdfstrcmp{\pdffilemoddate{#1}}{\pdffilemoddate{#2}}>0%
+    \immediate\write18{#3}%
+  \else%
+    \if@Rerender%
+      \ifx\rerender\undefined%
+        \immediate\write18{#3}%
+      \else%
+        \ifx\rerender\rTrue%
+          \immediate\write18{#3}%
+        \fi%
+      \fi%
+    \else%
+      \ifx\rerender\undefined%
+      \else%
+        \ifx\rerender\rTrue%
+          \immediate\write18{#3}%
+        \fi%
+      \fi%
+    \fi%
+  \fi%
+}%
+
+\newcommand{\includesvg}[2][]{%
+  \newif\ifBreak%
+  \Breakfalse%
+  \def\inkscapeoptions{}%
+  \def\inkscapeexport{--export-area-drawing}%
+  \setkeys{svgoptions}{#1}%
+  \ifx\Ginput@path\@undefined%
+    \let\@inputpaths\input@path%
+  \else%
+    \let\@inputpaths\Ginput@path%
+  \fi%
+  \ifx\@inputpaths\@undefined%
+    \def\@inputpaths{}%
+  \fi
+  \IfFileExists{#2.svg} {%
+    \def\svg@path{.}%
+  }{%
+    \forAllInputpaths[\svg@@path] {%
+      \ifBreak%
+      \else%
+        \IfFileExists{\svg@@path/#2.svg} {%
+          \edef\svg@path{\svg@@path}%
+          \Breaktrue%
+        }{}%
+      \fi%
+    }%
+    \Breakfalse%
+  }%
+  \ifx\svg@path\@undefined%
+    \@warning{Warning: File #2.svg not found in search path}%
+  \else%
+    \executeiffilenewer{\svg@path/#2.svg}
+      {\svg@path/#2.pdf}%
+      {inkscape -z --file=\svg@path/#2.svg %
+        --export-pdf=\svg@path/#2.pdf %
+        --export-latex \inkscapeexport\space%
+        \ink@skapeoptions\space\inkscapeoptions%
+      }%
+    \subimport{\svg@path/}{#2.pdf_tex}%
+  \fi%
+}%
+
+\newcommand{\includeeps}[2][]{%
+  \newif\ifBreak%
+  \Breakfalse%
+  \def\inkscapeoptions{}%
+  \def\inkscapeexport{--export-area-drawing}%
+  \setkeys{svgoptions}{#1}%
+  \ifx\Ginput@path\@undefined%
+    \let\@inputpaths\input@path%
+  \else%
+    \let\@inputpaths\Ginput@path%
+  \fi%
+  \ifx\@inputpaths\@undefined%
+    \def\@inputpaths{}%
+  \fi
+  \IfFileExists{#2.eps} {%
+    \def\eps@path{.}%
+  }{%
+    \forAllInputpaths[\eps@@path] {%
+      \ifBreak%
+      \else%
+        \IfFileExists{\eps@@path/#2.eps} {%
+          \edef\eps@path{\eps@@path}%
+          \Breaktrue%
+        }{}%
+      \fi%
+    }%
+    \Breakfalse%
+  }%
+  \ifx\eps@path\@undefined%
+    \@warning{Warning: File #2.eps not found in search path}%
+  \else%
+    \executeiffilenewer{\eps@path/#2.eps}
+      {\eps@path/#2.pdf}%
+      {inkscape -z -D --file=\eps@path/#2.eps %
+        --export-pdf=\eps@path/#2.pdf %
+        --export-latex \inkscapeexport\space%
+        \inkscapeoptions\space\ink@skapeoptions%
+      }%
+    \subimport{\eps@path/}{#2.pdf_tex}%
+  \fi%
+}%
