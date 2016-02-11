@@ -10,6 +10,7 @@
 
 \define@key{svgoptions}{width}{\def\svgwidth{#1}}
 \define@key{svgoptions}{scale}{\def\svgscale{#1}}
+\define@key{svgoptions}{rename}{\def\pdfrename{_#1}}
 \define@key{svgoptions}{rerender}{%
   \def\rerender{#1}%
   \def\rTrue{true}%
@@ -18,7 +19,7 @@
   \else%
     \ifx\rFalse\rerender%
     \else%
-      \@warning{Warning: Wrong value #1 for option rerender! Possible values: true false}%
+      \PackageWarning{Warning: Wrong value #1 for option rerender! Using global rerendering setting! Usage: rerender={true, false}}%
     \fi%
   \fi%
 }%
@@ -33,7 +34,7 @@
     \ifx\page\option%
       \def\inkscapeexport{--export-area-page}%
     \else%
-      \@warning{Warning: Wrong value #1 for option export! Possible values: page drawing}%
+      \PackageWarning{Warning: Wrong value #1 for option export! Using ''drawing''! Usage: export={page, drawing}}%
     \fi%
   \fi%
 }%
@@ -71,11 +72,12 @@
   \fi%
 }%
 
-\newcommand{\includesvg}[2][]{%
+\newcommand{\ink@include}[3][]{%
   \newif\ifBreak%
   \Breakfalse%
   \def\inkscapeoptions{}%
   \def\inkscapeexport{--export-area-drawing}%
+  \def\pdfrename{}%
   \setkeys{svgoptions}{#1}%
   \ifx\Ginput@path\@undefined%
     \let\@inputpaths\input@path%
@@ -85,72 +87,42 @@
   \ifx\@inputpaths\@undefined%
     \def\@inputpaths{}%
   \fi
-  \IfFileExists{#2.svg} {%
-    \def\svg@path{.}%
+  \IfFileExists{#2.#3} {%
+    \def\inputpath{.}%
   }{%
-    \forAllInputpaths[\svg@@path] {%
+    \forAllInputpaths[\path] {%
       \ifBreak%
       \else%
-        \IfFileExists{\svg@@path/#2.svg} {%
-          \edef\svg@path{\svg@@path}%
+        \IfFileExists{\path/#2.#3} {%
+          \edef\inputpath{\path}%
           \Breaktrue%
         }{}%
       \fi%
     }%
     \Breakfalse%
   }%
-  \ifx\svg@path\@undefined%
-    \@warning{Warning: File #2.svg not found in search path}%
+  \ifx\inputpath\@undefined%
+    \@warning{Warning: File #2.#3 not found in search path}%
   \else%
-    \executeiffilenewer{\svg@path/#2.svg}
-      {\svg@path/#2.pdf}%
-      {inkscape -z --file=\svg@path/#2.svg %
-        --export-pdf=\svg@path/#2.pdf %
+    \executeiffilenewer{\inputpath/#2.#3}
+      {\inputpath/#2_#3\pdfrename.pdf}%
+      {inkscape -z --file=\inputpath/#2.#3\space%
+        --export-pdf=\inputpath/#2_#3\pdfrename.pdf\space%
         --export-latex \inkscapeexport\space%
         \ink@skapeoptions\space\inkscapeoptions%
       }%
-    \subimport{\svg@path/}{#2.pdf_tex}%
+    \subimport{\inputpath/}{#2_#3\pdfrename.pdf_tex}%
   \fi%
 }%
 
+\newcommand{\includesvg}[2][]{%
+  \ink@include[#1]{#2}{svg}%
+}%
+
 \newcommand{\includeeps}[2][]{%
-  \newif\ifBreak%
-  \Breakfalse%
-  \def\inkscapeoptions{}%
-  \def\inkscapeexport{--export-area-drawing}%
-  \setkeys{svgoptions}{#1}%
-  \ifx\Ginput@path\@undefined%
-    \let\@inputpaths\input@path%
-  \else%
-    \let\@inputpaths\Ginput@path%
-  \fi%
-  \ifx\@inputpaths\@undefined%
-    \def\@inputpaths{}%
-  \fi
-  \IfFileExists{#2.eps} {%
-    \def\eps@path{.}%
-  }{%
-    \forAllInputpaths[\eps@@path] {%
-      \ifBreak%
-      \else%
-        \IfFileExists{\eps@@path/#2.eps} {%
-          \edef\eps@path{\eps@@path}%
-          \Breaktrue%
-        }{}%
-      \fi%
-    }%
-    \Breakfalse%
-  }%
-  \ifx\eps@path\@undefined%
-    \@warning{Warning: File #2.eps not found in search path}%
-  \else%
-    \executeiffilenewer{\eps@path/#2.eps}
-      {\eps@path/#2.pdf}%
-      {inkscape -z -D --file=\eps@path/#2.eps %
-        --export-pdf=\eps@path/#2.pdf %
-        --export-latex \inkscapeexport\space%
-        \inkscapeoptions\space\ink@skapeoptions%
-      }%
-    \subimport{\eps@path/}{#2.pdf_tex}%
-  \fi%
+  \ink@include[#1]{#2}{eps}%
+}%
+
+\newcommand{\includepdf}[2][]{%
+  \ink@include[#1]{#2}{pdf}%
 }%
