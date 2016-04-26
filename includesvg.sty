@@ -42,8 +42,6 @@
 \def\inkscapeoptions#1{\def\ink@skapeoptions{#1}}
 \def\ink@skapeoptions{}
 
-\newcommand{\forAllInputpaths}[2][\path]{\@for#1:=\@inputpaths\do{#2}}%
-
 \newif\if@Rerender%
 \@Rerenderfalse
 \def\svgenablererender{\@Rerendertrue}
@@ -71,6 +69,8 @@
     \fi%
   \fi%
 }%
+
+\newcommand{\forAllInputpaths}[2][\path]{\@for#1:=\@inputpaths\do{#2}}%
 
 \newcommand{\ink@include}[3][]{%
   \newif\ifBreak%

@@ -251,10 +251,10 @@
       \ifthenelse{\equal{##1}{none}}{%
         \def\@endcmd{\expandafter\includecppcode[print=false]{#3}}%
       }{
-        \firstnumbercounterend=##1%
-        \advance\firstnumbercounterend by 1%
-        \advance\firstnumbercounterend by -#1%
-        \edef\@endoptions{[linerange=##1-#2,firstnumber=\firstnumbercounterend,\@globalargs]{#3}}%
+        \@firstnumbercounterend=##1%
+        \advance\@firstnumbercounterend by 1%
+        \advance\@firstnumbercounterend by -#1%
+        \edef\@endoptions{[linerange=##1-#2,firstnumber=\@firstnumbercounterend,\@globalargs]{#3}}%
         \def\@endcmd{\expandafter\includecppcode\@endoptions\newline}%
       }
       \@startcmd%
@@ -262,10 +262,10 @@
     }%
 %
     \expandafter\newcommand\expandafter{\csname cpprange#3\endcsname}[3][]{% ##1 = rangeoptions, ##2 = startlinenumber, ##3 = endlinenumber
-      \firstnumbercounterrange=##2%
-      \advance\firstnumbercounterrange by 1%
-      \advance\firstnumbercounterrange by -#1%
-      \edef\@rangeoptions{[linerange=##2-##3,firstnumber=\firstnumbercounterrange,belowskip=-0.5ex,caption=,\@globalargs,##1]{#3}}%
+      \@firstnumbercounterrange=##2%
+      \advance\@firstnumbercounterrange by 1%
+      \advance\@firstnumbercounterrange by -#1%
+      \edef\@rangeoptions{[linerange=##2-##3,firstnumber=\@firstnumbercounterrange,belowskip=-0.5ex,caption=,\@globalargs,##1]{#3}}%
       \expandafter\includecppcode\@rangeoptions\newline%
       \ignorespaces%
     }%
