@@ -34,6 +34,7 @@
 
 \RequirePackage[T1]{fontenc}
 \RequirePackage{pgfplots}
+\pgfplotsset{compat=1.13}
 \RequirePackage{tikz}
 \RequirePackage{tikz-uml}
 \RequirePackage{tikz-uml-extension}
@@ -64,14 +65,14 @@
 \renewcommand{\include}[2][.]{
   \graphicspath{{#1/material/}}
   \def\pgfpath{#1/material/pgf/}
-  \def\cppsourcepath{c++sources/#1}
+%  \def\cppsourcepath{c++sources/#1}
   \orig@include{#1/#2}
 }
 
 \newcommand{\setpath}[1]{%
   \graphicspath{{#1/material/}}%
   \def\pgfpath{#1/material/pgf/}%
-  \def\cppsourcepath{c++sources/#1}%
+%  \def\cppsourcepath{c++sources/#1}%
 }
 
 \def\includegraphicswrapper[{\includegraphics[}
