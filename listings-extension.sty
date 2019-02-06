@@ -2,6 +2,86 @@
 \RequirePackage{listings}
 \RequirePackage{etoolbox}
 
+\AtBeginDocument{
+  \newwrite\srcf\openout\srcf=\jobname.src%
+  \write\srcf{\jobname.pdf}%
+  \writesourcestofile{\srcf}%
+}
+
+\AtEndDocument{%
+  \closeout\srcf%
+}%
+
+\lstdefinestyle{eclipse-inline}{
+  morecomment=[s][\color{lightblue}]{/**}{*/},
+  escapeinside={/*@}{@*/},
+  basicstyle=\codefontfamily,
+  basewidth={0.5em,0.45em},
+  inputencoding=utf8x,
+  extendedchars=\true,
+  commentstyle=\color{darkgreen},
+  stringstyle=\color{darkblue},
+  keywordstyle=\color{darkviolet}\bfseries,
+  ndkeywordstyle=\color{yellow}\bfseries,
+  identifierstyle=,
+  emphstyle=\color{red}\bfseries,
+  rangeprefix=/*\{\ ,
+  rangesuffix=\ \}*/,
+  includerangemarker=false,
+  breaklines=true,
+  breakatwhitespace=true,
+  breakautoindent=false,
+%   prebreak={\space\hbox{\color{red}{!}}},
+  prebreak=\mbox{{\tiny$\hookleftarrow$}},
+  postbreak=\space\space,
+%  postbreak=\mbox{{\color{black}\tiny$\hookrightarrow$}},
+  mathescape=true,
+  texcl=true
+}
+
+\lstdefinestyle{eclipse}{
+  morecomment=[s][\color{lightblue}]{/**}{*/},
+  escapeinside={/*@}{@*/},
+  basicstyle=\codefontsize\codefontfamily,
+  basewidth={0.5em,0.45em},
+  inputencoding=utf8x,
+  extendedchars=\true,
+  numbers=left,
+  stepnumber=1,
+  numberstyle=\numberfontsize\numberfontfamily,
+  numbersep=5pt,
+  frame=l,
+%  linewidth=\linewidth,
+  rulecolor=\color{fh-ooe-red},
+  abovecaptionskip=0pt,
+%  belowcaptionskip=0pt,
+  belowcaptionskip=-\medskipamount,
+%  aboveskip=0pt,
+%  belowskip=0pt,
+  commentstyle=\color{darkgreen},
+  stringstyle=\color{darkblue},
+  keywordstyle=\color{darkviolet}\bfseries,
+  ndkeywordstyle=\color{yellow}\bfseries,
+  identifierstyle=,
+  emphstyle=\color{red}\bfseries,
+  tabsize=4,
+  rangeprefix=/*\{\ ,
+  rangesuffix=\ \}*/,
+  includerangemarker=false,
+  breaklines=true,
+  breakatwhitespace=true,
+  breakautoindent=true,
+  prebreak=\mbox{{\tiny$\hookleftarrow$}},
+  postbreak=\space\space,
+%  postbreak=\mbox{{\color{black}\tiny$\hookrightarrow$}},
+  captionpos=b,
+  mathescape=true,
+  texcl=false,
+  framerule=0.3pt,%
+}
+
+\lstset{language=java, style=eclipse-inline}
+
 \def\codelistingname{Listing}
 \def\lstlistingname{\codelistingname}
 

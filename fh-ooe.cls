@@ -90,13 +90,6 @@
 
 \AtBeginDocument{%
   \fhooe@includeonlylecture%
-  \newwrite\srcf\openout\srcf=\jobname.src%
-  \write\srcf{\jobname.pdf}%
-  \writesourcestofile{\srcf}%
-}%
-
-\AtEndDocument{%
-  \closeout\srcf%
 }%
 
 \let\orig@document\document%
@@ -152,3 +145,12 @@
 \InputIfFileExists{fh-ooe.def.tex}{}{}
 \InputIfFileExists{experimental.def.tex}{}{}
 \InputIfFileExists{private.def.tex}{}{}
+
+% Temporary Fix
+\makeatletter
+\ifdefined\@@magyar@captionfix
+\else
+\let\@@magyar@captionfix\relax
+\fi
+\makeatother
+
