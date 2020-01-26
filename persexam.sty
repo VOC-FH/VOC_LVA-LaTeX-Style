@@ -1,0 +1,429 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{persexam}[2019/01/31 Personalized exam-class]
+
+\usepackage[strict]{changepage}
+\usepackage{filecontents}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[absolute]{textpos}
+\usepackage{fix-cm}
+\usepackage{filemod}
+\usepackage{caption}
+\captionsetup{width=17cm}
+
+\usepackage{xpatch}
+\makeatletter
+\xpatchcmd{\questions}
+    {question@\arabic{question}}
+    {question@\arabic{DTLrowi}@\arabic{question}}
+    {}{}
+\xpatchcmd{\questions}
+    {subpart@\arabic{question}@\arabic{partno}@\arabic{subpart}}
+    {subpart@\arabic{DTLrowi}@\arabic{question}@\arabic{partno}@\arabic{subpart}}
+    {}{}
+\xpatchcmd{\questions}
+    {subsubpart@\arabic{question}@\arabic{partno}@\arabic{subpart}@\arabic{subsubpart}}
+    {subsubpart@\arabic{DTLrowi}@\arabic{question}@\arabic{partno}@\arabic{subpart}@\arabic{subsubpart}}
+    {}{}
+\xpatchcmd{\parts}
+    {part@\arabic{question}@\arabic{partno}}
+    {part@\arabic{DTLrowi}@\arabic{question}@\arabic{partno}}
+    {}{}
+\makeatother
+
+\usepackage{titling}
+\pretitle{\begin{center}\Huge}
+\posttitle{\par\end{center}}
+\preauthor{\Large\begin{center}\begin{tabular}[t]{c}}
+\postauthor{\end{tabular}\end{center}}
+
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\usepackage{siunitx}
+\sisetup{round-mode = places, round-precision = 1, round-integer-to-decimal, detect-all = true}
+
+\usepackage{datatool}
+\def\IeC#1{#1}
+
+\def\setpoints#1{%
+    \let\totalpoints#1
+}
+
+\AtBeginDocument{%
+    \newwrite\splitfile
+    \newwrite\printfile
+    \newwrite\removefile
+    \immediate\write18{mkdir \jobname}%
+    \immediate\openout\splitfile \jobname/\jobname_split.sh %
+    \immediate\openout\printfile \jobname/\jobname_print.sh %
+    \immediate\openout\removefile \jobname/\jobname_remove.sh %
+    \csname protected@write\endcsname\splitfile{}{\string#!/bin/sh}%
+    \csname protected@write\endcsname\printfile{}{\string#!/bin/sh}%
+    \csname protected@write\endcsname\removefile{}{\string#!/bin/sh}%
+    \csname protected@write\endcsname\printfile{}{PRINTER=\printer}%
+    \csname protected@write\endcsname\printfile{}{PRINTOPTION=\printeroptions}%
+    \csname protected@write\endcsname\printfile{}{PRINTSTAPLE=\printerstaple}%
+    \newcounter{abspage}%
+    \stepcounter{abspage}%
+}%
+\AtEndDocument{%
+  \immediate\closeout\splitfile%
+  \immediate\closeout\printfile%
+  \immediate\closeout\removefile%
+  \immediate\write18{chmod 755 \jobname/\jobname_split.sh}%
+  \immediate\write18{chmod 755 \jobname/\jobname_print.sh}%
+  \immediate\write18{chmod 755 \jobname/\jobname_remove.sh}%
+}%
+
+\def\getlfdnum{\DTLifnumlt{\Platznummer}{10}{0}{}\Platznummer}
+
+\def\placenumberlist{
+    \pagestyle{empty}
+    \def\rightheader{Platznummern}
+    \dtlsort{Name}{studentsdb}{\dtlcompare}
+    \clearpage
+    \setcounter{page}{1}
+    \begin{longtable}{C{3cm}L{4cm}L{4cm}R{1cm}}
+        \multicolumn{4}{c}{\Huge \textbf{\lvabezeichnung{}}}\\
+        \multicolumn{4}{c}{\semester{} -- \termin{}\raise -1.5em\hbox{}}\\
+        \caption*{\Huge \textbf{Platznummern (PN)}}\\
+        \textbf{Kennzeichen} & \textbf{Name} & \textbf{Vorname} & \textbf{PN}\\\hline
+        \endfirsthead
+        \multicolumn{4}{c}{\Huge \textbf{\lvabezeichnung{}}}\\
+        \multicolumn{4}{c}{\semester{} -- \termin{}\raise -1.5em\hbox{}}\\
+        \caption*{\Huge \textbf{Platznummern (PN)}}\\
+        \textbf{Kennzeichen} & \textbf{Name} & \textbf{Vorname} & \textbf{PN}\\\hline
+        \endhead
+        \DTLforeach*{studentsdb}{%,
+            \Kennzeichen=Kennzeichen,%
+            \Name=Name,%
+            \Vorname=Vorname,%
+            \Platznummer=Platznummer%
+        }{%
+            \ifthenelse{\equal{\Name}{Dow}}{}{%
+                \Kennzeichen & \Name & \Vorname & \Platznummer \\%
+            }%
+        }
+    \end{longtable}
+    \csname protected@write\endcsname\splitfile{}{pdftk ../\jobname.pdf cat
+        \theabspage-\the\numexpr\value{abspage}+\value{page}-1\relax\space output
+        \jobname_seatnumber.pdf verbose}
+    \addtocounter{abspage}{\value{page}}%
+    \csname protected@write\endcsname\printfile{}{echo \jobname_seatnumber.pdf; 
+        lpr -P \dollar PRINTER \dollar PRINTOPTION -o RepeatJob=4 \jobname_seatnumber.pdf}
+    \csname protected@write\endcsname\removefile{}{rm \jobname_seatnumber.pdf 2> /dev/null}%
+}
+
+\def\@lectureroomlist#1{%
+    \dtlsort{Platznummer}{studentsdb}{\dtlcompare}
+    \setcounter{@leftstudents}{\the\numexpr\numberofstudents-\csname the@currentstudent\endcsname-\thejohndows\relax}%
+    \ifnum\csname the@leftstudents\endcsname<\csname thelr#1@sizec\endcsname%
+        \setcounter{@hsmax}{\the\numexpr\csname thelr#1@fromc\endcsname + \csname the@leftstudents\endcsname - 1\relax}%
+    \else%
+        \setcounter{@hsmax}{\the\numexpr\csname thelr#1@fromc\endcsname + \csname thelr#1@sizec\endcsname - 1\relax}%
+    \fi%
+    \ifnum\csname the@hsmax\endcsname<\csname thelr#1@fromc\endcsname\else%
+        \clearpage%
+        \setcounter{page}{1}%
+        \begin{longtable}{R{1cm}C{3cm}L{4cm}L{4cm}}%
+            \multicolumn{4}{c}{\Huge \textbf{\lvabezeichnung{}}}\\%
+            \multicolumn{4}{c}{\semester{} -- \termin{}\raise -1.5em\hbox{}}\\%
+            \multicolumn{4}{c}{\fontsize{40pt}{40pt}\selectfont\textbf{PN \arabic{lr#1@fromc}{} -- \arabic{@hsmax}}\raise -0.5em\hbox{}}\\%
+            \caption*{\Huge \textbf{\csname lr#1@name\endcsname}}\\%
+            \textbf{PN} & \textbf{Kennzeichen} & \textbf{Name} & \textbf{Vorname}\\\hline%
+            \endfirsthead%
+            \multicolumn{4}{c}{\Huge \textbf{\lvabezeichnung{}}}\\%
+            \multicolumn{4}{c}{\semester{} -- \termin{}\raise -1.5em\hbox{}}\\%
+            \multicolumn{4}{c}{\fontsize{40pt}{40pt}\selectfont\textbf{PN \arabic{lr#1@fromc}{} -- \arabic{@hsmax}}\raise -0.5em\hbox{}}\\%
+            \caption*{\Huge \textbf{\csname lr#1@name\endcsname}}\\%
+            \textbf{PN} & \textbf{Kennzeichen} & \textbf{Name} & \textbf{Vorname}\\\hline%
+            \endhead%
+            \DTLforeach*[\DTLisclosedbetween{\Platznummer}{\value{lr#1@fromc}}{\value{@hsmax}}]{studentsdb}{%
+                \Kennzeichen=Kennzeichen,%
+                \Name=Name,%
+                \Vorname=Vorname,%
+                \Platznummer=Platznummer%
+            }{%
+                \ifthenelse{\equal{\Name}{Dow}}{}{%
+                    \Platznummer & \Kennzeichen & \Name & \Vorname \\%
+                    \stepcounter{@currentstudent}%
+                }%
+            }%
+        \end{longtable}%
+        
+        \csname protected@write\endcsname\splitfile{}{pdftk ../\jobname.pdf cat
+            \theabspage-\the\numexpr\value{abspage}+\value{page}-1\relax\space output
+            \jobname_lr_#1{}.pdf verbose}
+        \addtocounter{abspage}{\value{page}}%
+
+        \csname protected@write\endcsname\printfile{}{echo \jobname_lr_#1{}.pdf; 
+            lpr -P \dollar PRINTER \dollar PRINTOPTION -o RepeatJob=2 \jobname_lr_#1{}.pdf}
+
+        \csname protected@write\endcsname\removefile{}{rm \jobname_lr_#1{}.pdf 2> /dev/null}%
+    \fi%
+    \clearpage% To write the final commands to the script-files also
+}
+
+\gdef\lectureroomlists{\placenumberlist}%
+\newcounter{@currentplaces}%
+\newcounter{@hsmax}%
+\newcounter{@currentstudent}%
+\newcounter{@leftstudents}%
+
+\def\lectureroom#1#2#3{%
+%     \gdef\lectureroomlists{\placenumberlist}%
+%     \newcounter{@currentplaces}%
+%     \newcounter{@hsmax}%
+%     \newcounter{@currentstudent}%
+%     \newcounter{@leftstudents}%
+    \newcounter{lr#1@fromc}%
+    \setcounter{lr#1@fromc}{\csname the@currentplaces\endcsname}%
+    \stepcounter{lr#1@fromc}%
+    \newcounter{lr#1@sizec}%
+    \setcounter{lr#1@sizec}{#3}%
+    \expandafter\def\csname lr#1@name\endcsname{#2}%
+    \addtocounter{@currentplaces}{#3}%
+    \expandafter\def\expandafter\lectureroomlists\expandafter{\lectureroomlists{} \@lectureroomlist{#1}}%
+}%
+
+\def\addlectureroom#1#2#3{%
+    \newcounter{lr#1@fromc}%
+    \setcounter{lr#1@fromc}{\csname the@currentplaces\endcsname}%
+    \stepcounter{lr#1@fromc}%
+    \newcounter{lr#1@sizec}%
+    \setcounter{lr#1@sizec}{#3}%
+    \expandafter\def\csname lr#1@name\endcsname{#2}%
+    \addtocounter{@currentplaces}{#3}%
+    \expandafter\def\expandafter\lectureroomlists\expandafter{\lectureroomlists{} \@lectureroomlist{#1}}%
+}%
+
+\def\lecture#1#2#3#4#5#6#7#8{%
+    \def\pruefer{#1}%
+    \def\studiengang{#2}%
+    \def\studiengangkurz{#3}%
+    \def\lvabezeichnung{#4}%
+    \def\lvabezeichnungkurz{#5}%
+    \def\lvanummer{#6}%
+    \def\semester{#7}%
+    \def\termin{#8}%
+    \title{\textbf{\lvabezeichnung}}%
+    \author{Pr\"ufer: \pruefer}%
+    \date{{\lvanummer{} -- \semester{} -- \termin}}%
+    \def\rightheader{Klausur}
+}
+
+\def\hints#1{
+    \def\hintss{#1}
+}
+
+\usepackage[first=0, last=100000]{lcg}
+\usepackage{environ}
+
+\NewEnviron{foreachstudent}[1][\jobname]{
+    \def\dollar{$}
+    \DTLsetseparator{,}
+    \IfFileExists{#1.csv}{%
+        \filemodcmp[2]{\jobname/\jobname_prepared.csv}{#1.csv}{%
+            \DTLloadrawdb[keys={Kennzeichen,Name,Vorname,Rand,Platznummer}]{studentsdb}{\jobname/#1_prepared.csv}%
+        }{%
+            \DTLloadrawdb[noheader, keys={Kennzeichen,Name,Vorname}]{studentsdb}{#1.csv}%
+            \DTLforeach{studentsdb}{%
+            }{%
+                \rand%
+                \DTLappendtorow{Rand}{\therand}%
+            }%
+            \DTLnewrow{studentsdb}%
+            \DTLnewdbentry{studentsdb}{Kennzeichen}{08/1/5471/101}%
+            \DTLnewdbentry{studentsdb}{Name}{Dow}%
+            \DTLnewdbentry{studentsdb}{Vorname}{Jane}%
+            \DTLnewdbentry{studentsdb}{Rand}{100002}%
+            \DTLnewrow{studentsdb}%
+            \DTLnewdbentry{studentsdb}{Kennzeichen}{08/1/5471/102}%
+            \DTLnewdbentry{studentsdb}{Name}{Dow}%
+            \DTLnewdbentry{studentsdb}{Vorname}{John}%
+            \DTLnewdbentry{studentsdb}{Rand}{100001}%
+            \dtlsort{Rand=descending}{studentsdb}{\dtlcompare}%
+            \DTLforeach{studentsdb}{%
+            }{%
+                \DTLappendtorow{Platznummer}{\DTLcurrentindex}%
+                \DTLremoveentryfromrow{Rand}%
+            }%
+            \DTLsavedb{studentsdb}{\jobname/#1_prepared.csv}%
+        }%
+    }{%
+        \DTLgnewdb{studentsdb}%
+        \DTLnewrow{studentsdb}%
+        \DTLnewdbentry{studentsdb}{Kennzeichen}{0123456789}%
+        \DTLnewdbentry{studentsdb}{Name}{Christian}%
+        \DTLnewdbentry{studentsdb}{Vorname}{Volker}%
+        \DTLnewdbentry{studentsdb}{Rand}{0}%
+        \DTLnewdbentry{studentsdb}{Platznummer}{1}%
+    }%
+    \edef\numberofstudents{\DTLrowcount{studentsdb}}%
+    \ifthenelse{\DTLisnumerical{\totalpoints}}{%
+        \DTLdiv{\numpointsperexam}{\totalpoints}{\numberofstudents}%
+        \DTLdiv{\fiftypercentpoints}{\numpointsperexam}{2}%
+        \DTLdiv{\gap}{\fiftypercentpoints}{4}%
+        \DTLsub{\lowerpoints}{\numpointsperexam}{\gap}\DTLround{\einslower}{\lowerpoints}{1}
+        \DTLsub{\lowerpoints}{\lowerpoints}{\gap}\DTLround{\zweilower}{\lowerpoints}{1}
+        \DTLsub{\lowerpoints}{\lowerpoints}{\gap}\DTLround{\dreilower}{\lowerpoints}{1}
+        \DTLsub{\lowerpoints}{\lowerpoints}{\gap}\DTLround{\vierlower}{\lowerpoints}{1}
+    }{}%
+}[
+    \newcounter{johndows}
+    \DTLforeach{studentsdb}{%,
+        \Kennzeichen=Kennzeichen,%
+        \Name=Name,%
+        \Vorname=Vorname,%
+        \Platznummer=Platznummer%
+    }{%
+        \xdef\rightheader{\Vorname{} \Name{}}%
+        \ifthenelse{\equal{\Name}{Dow}}{%
+            \stepcounter{johndows}%
+        }{}%
+        \setcounter{page}{1}
+        \maketitle%
+        \begin{textblock*}{100mm}(10mm,10mm)%
+            \fontsize{80pt}{80pt}\selectfont \textbf{PN \Platznummer}%
+        \end{textblock*}%
+        {\Huge%
+            \begin{center}
+                \textbf{\Vorname{} \Name{}}\\
+                \textbf{\Kennzeichen}\\
+                \vspace{\baselineskip}
+                \underline{\phantom{HHHHHHHHHHHHHHHH}}\\
+                \small Unterschrift
+            \end{center}%
+        }%
+        \vspace{\baselineskip}%
+        {%
+            \Large Bearbeitungszeit: \textbf {90 Minuten}\hfill
+            Punktemaximum: \textbf{\numpointsperexam{} Punkte}%
+        }
+        \vspace{0.5\baselineskip}%
+        \ifthenelse{\DTLisnumerical{\totalpoints}}{%
+            \begin{center}
+                \begin{tabular}{rr|l}
+                    \multicolumn{2}{c}{\textbf{Punkte $p$}} & \textbf{Note} \\
+                    \hline
+                    \multicolumn{1}{r@{\hspace*{\tabcolsep}\makebox[35pt]{$< p \le$}}}{
+                        \num{\einslower}
+                    } & 
+                    \multicolumn{1}{r@{\hspace*{\tabcolsep}\makebox[30pt]{\centering \ldots}}}{
+                        \num{\numpointsperexam}
+                    } & 
+                        Sehr gut\\
+                        
+                    \multicolumn{1}{r@{\hspace*{\tabcolsep}\makebox[35pt]{$< p \le$}}}{
+                        \num{\zweilower}
+                    } & 
+                    \multicolumn{1}{r@{\hspace*{\tabcolsep}\makebox[30pt]{\centering \ldots}}}{
+                        \num{\einslower}
+                    } & 
+                        Gut\\
+                        
+                    \multicolumn{1}{r@{\hspace*{\tabcolsep}\makebox[35pt]{$< p \le$}}}{
+                        \num{\dreilower}
+                    } & 
+                    \multicolumn{1}{r@{\hspace*{\tabcolsep}\makebox[30pt]{\centering \ldots}}}{
+                        \num{\zweilower}
+                    } & 
+                        Befriedigend\\
+                        
+                    \multicolumn{1}{r@{\hspace*{\tabcolsep}\makebox[35pt]{$< p \le$}}}{
+                        \num{\vierlower}
+                    } & 
+                    \multicolumn{1}{r@{\hspace*{\tabcolsep}\makebox[30pt]{\centering \ldots}}}{
+                        \num{\dreilower}
+                    } & 
+                        Gen\"ugend\\
+                        
+                    \multicolumn{1}{r@{\hspace*{\tabcolsep}\makebox[35pt]{$\le p \le$}}}{
+                        \num{0}
+                    } & 
+                    \multicolumn{1}{r@{\hspace*{\tabcolsep}\makebox[30pt]{\centering \ldots}}}{
+                        \num{\vierlower}
+                    } & 
+                        Nicht Gen\"ugend\\
+                    \hline
+                \end{tabular}
+            \end{center}
+        }{}
+        \vfill
+        {\Large Hinweise zur Ausf\"uhrung}
+        \hintss
+        \thispagestyle{empty}
+        \newpage
+%%%%%%%%%%%%%%%%%%%
+        \BODY
+%%%%%%%%%%%%%%%%%%%
+        \newpage
+        \phantom{Test for odd page}
+        \checkoddpage
+        \ifoddpage
+            \phantom{Odd detected, do nothing because this}
+            \newline
+            \phantom{is the first page of an empty sheet}
+            \newline
+        \else
+            \phantom{Even detected, do a newpage to ship}
+            \newline
+            \phantom{out the current (not empty) sheet}
+            \newpage
+        \fi
+        \phantom{First empty Page on odd page}
+        \newpage
+        \phantom{Second empty page on even page}  
+        
+        \dtlifnumlt{\Platznummer}{10}{%
+            \def\lfdn{0\Platznummer}}{%
+            \def\lfdn{\Platznummer}%
+        }%
+        \csname protected@write\endcsname\splitfile{}{pdftk ../\jobname.pdf cat
+            \theabspage-\the\numexpr\value{abspage}+\value{page}-1\relax\space output
+            \jobname_\lfdn.pdf verbose}
+        \addtocounter{abspage}{\value{page}}%
+        
+        \csname protected@write\endcsname\printfile{}{echo \jobname_\lfdn.pdf; 
+            lpr -P \dollar PRINTER \dollar PRINTOPTION \dollar PRINTSTAPLE \jobname_\lfdn.pdf}
+
+        \csname protected@write\endcsname\removefile{}{rm \jobname_\lfdn.pdf 2> /dev/null}%
+        \clearpage
+    }
+    \lectureroomlists
+    \DTLgdeletedb{studentsdb}
+]
+
+
+\def\deflectureroom#1#2#3#4 {%
+    \expandafter\newcommand\expandafter{\csname #1@shortname\endcsname}[1]{#1}
+    \expandafter\newcommand\expandafter{\csname #1@longname\endcsname}[1]{#2}
+    \expandafter\newcommand\expandafter{\csname #1@totalplaces\endcsname}[1]{#3}
+    \expandafter\newcommand\expandafter{\csname #1@usableplaces\endcsname}[1]{#4}
+}
+
+\def\setusableplaces#1#2 {
+    \expandafter\renewcommand\expandafter{\csname #1@usableplaces\endcsname}[1]{#2}
+}
+
+\deflectureroom{AM}{karriere.at AM (FH2.020)}{239}{61}
+\deflectureroom{HS1}{O\"ONachrichten HS1 (FH1.005)}{90}{24}
+\deflectureroom{HS2}{Celum HS2 (FH1.004)}{90}{24}
+\deflectureroom{HS3}{bet-at-home HS3 (FH2.025)}{120}{32}
+\deflectureroom{HS4}{Atikon HS4 (FH2.026)}{120}{32}
+\deflectureroom{HS7}{Dynatrace HS7 (FH3.305)}{60}{18}
+\deflectureroom{HS8}{Intel HS8 (FH3.304)}{60}{18}
+
+\def\uselectureroom#1 {%
+    \lectureroom{\csname #1@shortname\endcsname}{\csname #1@longname\endcsname}{\csname #1@usableplaces\endcsname}%
+}%
+
+%\def\useanotherlectureroom#1 {%
+%    \addlectureroom{\csname #1@shortname\endcsname}{\csname #1@longname\endcsname}{\csname #1@usableplaces\endcsname}%
+%}%
