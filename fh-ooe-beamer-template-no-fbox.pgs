@@ -60,14 +60,15 @@
 \newdimen\width
 \newsavebox{\mybox}
 
-\def\mymeasure{fdf}
+\makeatletter
+\long\def\beamer@part[#1]#2{}
+\long\def\beamer@section[#1]#2{}%
+\def\beamer@subsection[#1]#2{}%
+\def\beamer@subsubsection[#1]#2{}%
+\makeatother
 
 \begin{document}[without titlepage]%
-  \begin{frame}{Frame Title}%
-    \sbox{\mybox}{<>}%
-    \settototalheight\height{\usebox{\mybox}}%
-    \settowidth\width{\usebox{\mybox}}%
-    \framebox[\the\width]{\usebox{\mybox}}\\%
-    \scriptsize width = \the\width, height = \the\height%
-  \end{frame}%
+%  \begin{frame}{Frame Title}%
+    <>
+%  \end{frame}%
 \end{document}

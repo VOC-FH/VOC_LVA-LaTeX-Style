@@ -63,8 +63,10 @@
 
 \let\orig@include\include
 \renewcommand{\include}[2][.]{
-  \graphicspath{{#1/material/}}
+  \graphicspath{{#1/material/}{#1/images/}}
   \def\pgfpath{#1/material/pgf/}
+  \svgsetup{inkscapepath=./#1/images/svg-inkscape}
+  \svgpath{{#1/images/}}
 %  \def\cppsourcepath{c++sources/#1}
   \orig@include{#1/#2}
 }
@@ -72,6 +74,8 @@
 \newcommand{\setpath}[1]{%
   \graphicspath{{#1/material/}}%
   \def\pgfpath{#1/material/pgf/}%
+  \svgsetup{inkscapepath=./#1/images/svg-inkscape}
+  \svgpath{{#1/images/}}
 %  \def\cppsourcepath{c++sources/#1}%
 }
 
@@ -145,6 +149,15 @@
 \InputIfFileExists{fh-ooe.def.tex}{}{}
 \InputIfFileExists{experimental.def.tex}{}{}
 \InputIfFileExists{private.def.tex}{}{}
+
+\makeatletter
+  \def\app@exe{\immediate\write18}
+  \def\inputAllFiles#1{%
+    \app@exe{ls #1/*.tex | xargs cat >> #1/\jobname.tmp}%
+    \InputIfFileExists{#1/\jobname.tmp}{}{}%
+    \AtEndDocument{\app@exe{rm -f #1/\jobname.tmp}}%
+  }
+\makeatother
 
 % Temporary Fix
 \makeatletter

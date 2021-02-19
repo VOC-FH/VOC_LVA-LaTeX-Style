@@ -9,7 +9,7 @@
 
 \ProvidesPackage{beamerinnerthemefh-ooe}
 
-\useinnertheme[shadow=true]{rounded}
+\useinnertheme[shadow=false]{rounded}
 
 \defbeamertemplate*{title page}{fh-ooe}[1][]
 {
@@ -39,7 +39,7 @@
   \vfill
 }
 
-\setbeamertemplate{title page}[fh-ooe][colsep=-4bp,rounded=true,shadow=\beamer@themerounded@shadow]
+\setbeamertemplate{title page}[fh-ooe][colsep=-4bp]
 
 \defbeamertemplate*{lecture page}{fh-ooe}[1][]
 {
@@ -53,11 +53,11 @@
   \tableofcontents[justparts]
 }
 
-\setbeamertemplate{lecture page}[fh-ooe][colsep=-4bp,rounded=true,shadow=\beamer@themerounded@shadow]
+\setbeamertemplate{lecture page}[fh-ooe][colsep=-4bp]
 
 \defbeamertemplate*{part page}{fh-ooe}[1][]
 {
-  \frametitle{\begin{center}\vskip-1.5em\insertpart\end{center}\vskip-1.5em}
+  \frametitle{\begin{center}\vskip-1.5em\insertpart\end{center}\vskip-2.5em}
   \framesubtitle{\begin{center}\vskip-1em\ \insertpartframetitle\end{center}\vskip-2em}
   \tableofcontents[%
     hideallsubsections, % causes all subsections to be hidden.
@@ -65,7 +65,7 @@
   ]
 }
 
-\setbeamertemplate{part page}[fh-ooe][colsep=-4bp,rounded=true,shadow=\beamer@themerounded@shadow]
+\setbeamertemplate{part page}[fh-ooe][colsep=-4bp]
 
 \let\orig@maketitle=\maketitle%
 \def\maketitle{%
@@ -99,7 +99,7 @@
 \def\makesectionframe{
   \setbeamertemplate{headline}[fh-ooe theme section page]
   \setbeamertemplate{footline}[fh-ooe theme section page]
-  \begin{frame}[t]{\insertpart}
+  \begin{frame}[t]{\insertsection}
     \tableofcontents[%
       currentsection, % causes all sections but the current to be shown in a semi-transparent way.
 %      hideallsubsections, % causes all subsections to be hidden.
@@ -122,6 +122,8 @@
 
 \newboolean{fh-ooe@withpartpage}
 \setboolean{fh-ooe@withpartpage}{true}
+\newboolean{fh-ooe@withsectionpage}
+\setboolean{fh-ooe@withsectionpage}{false}
 \newcounter{fh-ooe@firstsectioninchapter}
 \setcounter{fh-ooe@firstsectioninchapter}{1}
 \AtBeginPart{
@@ -133,7 +135,12 @@
     \setbeamertemplate{footline}[fh-ooe theme part slide page]
   }
 }
-\AtBeginSection{\makesectionframe}
+\AtBeginSection{
+  \ifthenelse{\boolean{fh-ooe@withsectionpage}} {
+    \makesectionframe
+  } {
+  }
+}
 
 \let\orig@part=\part
 \renewcommand{\part}[1][]{%
@@ -143,6 +150,16 @@
     \setboolean{fh-ooe@withpartpage}{true}%
   }%
   \orig@part%
+}
+
+\let\orig@section=\section
+\renewcommand{\section}[1][]{%
+  \ifthenelse{\equal{#1}{nosectionpage}}{%
+    \setboolean{fh-ooe@withsectionpage}{false}%
+  }{%
+    \setboolean{fh-ooe@withsectionpage}{true}%
+  }%
+  \orig@section%
 }
 
 
