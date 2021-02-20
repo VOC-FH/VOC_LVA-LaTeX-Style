@@ -18,6 +18,7 @@
 \usepackage{filecontents}
 \usepackage{varwidth}
 \usepackage[euler]{textgreek}
+\usepackage{circuitikz}
 
 \pgfkeys{/pgf/number format/.cd,1000 sep={\,}}
 
