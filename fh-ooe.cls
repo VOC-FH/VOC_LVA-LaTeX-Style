@@ -34,6 +34,9 @@
 
 \RequirePackage[T1]{fontenc}
 \RequirePackage{pgfplots}
+\RequirePackage{pgfplotstable}
+\RequirePackage{filecontents}
+\RequirePackage{varwidth}
 \pgfplotsset{compat=1.13}
 \RequirePackage{tikz}
 \RequirePackage{tikz-uml}
@@ -43,6 +46,8 @@
 \RequirePackage[scriptsize]{subfigure}
 \RequirePackage{caption}
 \RequirePackage{xstring}
+\RequirePackage{svg}
+\RequirePackage[euler]{textgreek}
 
 \DeclareCaptionFont{cap-fh-ooe-red}{\color{fh-ooe-red}}
 \captionsetup{format=default,justification=centering,labelformat=simple,labelfont={scriptsize,cap-fh-ooe-red},textfont=scriptsize}
@@ -87,6 +92,7 @@
 \newcounter{lastframeoflastlecture}
 \setcounter{lastframeoflastlecture}{0}
 \renewcommand{\lecture}[3][]{
+  \def\insertlecturenumbername{#2}
   \setcounter{lastframeoflastlecture}{\value{framenumber}}
   \date{\insertshortlecture}
   \orig@lecture[#1]{#2}{#3}

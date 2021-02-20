@@ -45,7 +45,7 @@
 {
   \begin{centering}
     \begin{beamercolorbox}[sep=8pt,center,#1]{part title}
-      {\usebeamerfont{part name}\inserttitle\vskip0.5em\par\insertlecturenumbername~\insertlecturenumber}
+      {\usebeamerfont{part name}\inserttitle\vskip0.5em\par\insertlecturepartnumbername~\insertlecturenumber}
       \vskip1em\par
       \usebeamerfont{part title}\usebeamercolor[fg]{part name}\insertlecture\par
     \end{beamercolorbox}\vskip2em
@@ -58,7 +58,7 @@
 \defbeamertemplate*{part page}{fh-ooe}[1][]
 {
   \frametitle{\begin{center}\vskip-1.5em\insertpart\end{center}\vskip-2.5em}
-  \framesubtitle{\begin{center}\vskip-1em\ \insertpartframetitle\end{center}\vskip-2em}
+  \framesubtitle{\begin{center}\vskip-1em\ \insertlecture\end{center}\vskip-2em}
   \tableofcontents[%
     hideallsubsections, % causes all subsections to be hidden.
     firstsection=\value{fh-ooe@firstsectioninchapter}
@@ -113,7 +113,7 @@
 
 \AtBeginLecture{
   \ifbeamer@inlecture
-    \pdfbookmark[0]{\insertlecturenumbername\ \insertlecturenumber\ifx\insertlecturehead\@empty\else: \insertlecture\fi}{Inhalt-\beamer@currentlecturelabel}
+    \pdfbookmark[0]{\insertlecturepartnumbername\ \insertlecturenumber\ifx\insertlecturenumbername\@empty\else: \insertlecturenumbername\fi}{Inhalt-\beamer@currentlecturelabel}
   \fi
 %  \fhooe@maketitle
   \gdef\fhooe@maketitle{}

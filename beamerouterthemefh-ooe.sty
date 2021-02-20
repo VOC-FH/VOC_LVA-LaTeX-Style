@@ -21,7 +21,7 @@
   \leavevmode%
   \hbox{%
   \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{section in head/foot}%
-    \usebeamerfont{section in head/foot}\inserttitlehead{} | \insertlonglecturenumberhead: \insertlecturehead{} | \insertpart\hspace*{2ex}
+    \usebeamerfont{section in head/foot}\inserttitlehead{} | \insertlecturehead{} | \insertpart\hspace*{2ex}
   \end{beamercolorbox}%
   \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,left]{subsection in head/foot}%
     \usebeamerfont{subsection in head/foot}\hspace*{2ex}\insertsectionhead
@@ -51,7 +51,7 @@
   \leavevmode%
   \hbox{%
   \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{section in head/foot}%
-    \usebeamerfont{section in head/foot}\inserttitlehead{} | \insertlonglecturenumberhead \hspace*{2ex}
+    \usebeamerfont{section in head/foot}\inserttitlehead{} | \insertlecturehead \hspace*{2ex}
   \end{beamercolorbox}%
   \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,left]{subsection in head/foot}%
     \usebeamerfont{subsection in head/foot}\hspace*{2ex}\insertpart
@@ -81,7 +81,7 @@
   \leavevmode%
   \hbox{%
   \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{section in head/foot}%
-    \usebeamerfont{section in head/foot}\inserttitlehead{} | \insertlonglecturenumberhead: \insertlecturehead\hspace*{2ex}
+    \usebeamerfont{section in head/foot}\inserttitlehead{} | \insertlecturehead\hspace*{2ex}
   \end{beamercolorbox}%
   \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,left]{subsection in head/foot}%
     \usebeamerfont{subsection in head/foot}\hspace*{2ex}\insertpart%\beamer@partname%\insertlecturehead
@@ -114,7 +114,7 @@
     \usebeamerfont{section in head/foot}\inserttitlehead\hspace*{2ex}
   \end{beamercolorbox}%
   \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,left]{subsection in head/foot}%
-    \usebeamerfont{subsection in head/foot}\hspace*{2ex}\insertlonglecturenumberhead: \insertlecturehead
+    \usebeamerfont{subsection in head/foot}\hspace*{2ex}\insertlecturehead
   \end{beamercolorbox}}%
   \vskip0pt%
 }
@@ -144,7 +144,7 @@
     \usebeamerfont{section in head/foot}\inserttitlehead{}\hspace*{2ex}
   \end{beamercolorbox}%
   \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,left]{subsection in head/foot}%
-    \usebeamerfont{subsection in head/foot}\hspace*{2ex}\insertlonglecturenumberhead: \insertlecturehead
+    \usebeamerfont{subsection in head/foot}\hspace*{2ex}\insertlecturehead
   \end{beamercolorbox}}%
   \vskip0pt%
 }
@@ -199,7 +199,8 @@
 \def\inserttitlehead{\inserttitle}
 \def\insertdegreehead{\insertdegree}
 \def\insertshortdegreehead{\insertshortdegree}
-\def\insertlecturenumbername{Kapitel}
+\def\insertlecturepartnumbername{Teil}
+\def\insertlecturenumbername{}
 \def\insertlonglecturenumberhead{\insertlecturenumbername{} \insertlecturenumber}
 \def\insertlecturehead{\ifx\insertlecture\@empty\else\insertlecture\fi}
 \newcounter{framenumberinlecture}
