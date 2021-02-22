@@ -1,9 +1,11 @@
-\documentclass[utf8x]{fh-ooe}
-\usepackage[orientation=landscape,size=custom,width=17.06,height=9.6,scale=0.4,debug]{beamerposter}
+\documentclass[utf8x, 10pt]{fh-ooe}
+%\usepackage[orientation=landscape,size=custom,width=17.06,height=9.6,scale=0.4,debug]{beamerposter}
 
 \pgfdeclarelayer{background}
 \pgfdeclarelayer{foreground}
 \pgfsetlayers{background,main,foreground}
+
+\geometry{paperwidth=17.06cm, paperheight=9.6cm}
 
 \setbeamersize{
     text margin left=10mm,
@@ -47,8 +49,8 @@
   xtick align=center, 
   ytick align=center,
   tick label style={font=\scriptsize},
-  axis x line*=bottom,
-  axis y line*=left,  
+  axis x line*=center,
+  axis y line*=center,  
   x axis line style={-latex},
   y axis line style={-latex},
   ylabel style={font=\footnotesize},
@@ -67,6 +69,23 @@
 \def\beamer@subsection[#1]#2{}%
 \def\beamer@subsubsection[#1]#2{}%
 \makeatother
+
+\newlength{\xunit}
+\newlength{\yunit}
+\makeatletter
+\tikzset{get units/.code={\xunit=\pgf@xx%
+    \yunit=\pgf@yy}}
+\makeatother
+
+%\makeatletter
+%\newcommand\appendtographicspath[1]{%
+%  \g@addto@macro\Ginput@path{#1}%
+%}
+%\makeatother
+
+\graphicspath{{/home/voc/usr/Hagenberg/MTD/LaTeXSlides/DMT2/}}
+
+\long\def\comment#1{}
 
 \begin{document}[without titlepage]%
 %  \begin{frame}{Frame Title}%
