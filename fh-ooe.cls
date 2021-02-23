@@ -49,6 +49,9 @@
 \RequirePackage{svg}
 \RequirePackage[euler]{textgreek}
 
+\RequirePackage[siunitx]{circuitikz}
+\AtBeginDocument{\sisetup{math-rm=\mathrm, text-rm=\rmfamily}}
+
 \DeclareCaptionFont{cap-fh-ooe-red}{\color{fh-ooe-red}}
 \captionsetup{format=default,justification=centering,labelformat=simple,labelfont={scriptsize,cap-fh-ooe-red},textfont=scriptsize}
 
