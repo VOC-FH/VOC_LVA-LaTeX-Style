@@ -21,6 +21,10 @@
 \usepackage{varwidth}
 \usepackage[euler]{textgreek}
 
+\usepackage[utf8x]{inputenc}
+\usepackage{eurosym}
+\usepackage[ngerman]{babel}
+
 \pgfkeys{/pgf/number format/.cd,1000 sep={\,}}
 
 \usepgfplotslibrary{dateplot}
@@ -42,18 +46,19 @@
       (current axis.above origin)
     },
     anchor=south,
-    align=center,
-%    inner sep=0
+    align=center
   },
   xtick align=center, 
   ytick align=center,
-  tick label style={font=\scriptsize},
+  tick label style={font=\tiny},
   axis x line*=center,
   axis y line*=center,  
   x axis line style={-latex},
   y axis line style={-latex},
   ylabel style={font=\footnotesize},
-  xlabel style={font=\footnotesize}
+  xlabel style={font=\footnotesize},
+  compat=newest,
+  samples=250
 }
 
 \usefonttheme[onlymath]{serif}
@@ -85,6 +90,15 @@
 \graphicspath{{/home/voc/usr/Hagenberg/MTD/LaTeXSlides/DMT2/}}
 
 \long\def\comment#1{}
+
+\newcolumntype{C}[1]{>{\centering}m{#1}}
+
+\setjavasourcepath{/home/voc/usr/Hagenberg/MTD/LaTeXSlides/DMT2/java/src}
+
+\setcppsourcepath{/home/voc/usr/Hagenberg/MTD/LaTeXSlides/DMT2/cpp}
+
+
+\usetikzlibrary{calc,angles,quotes}
 
 \begin{document}[without titlepage]%
 %  \begin{frame}{Frame Title}%
