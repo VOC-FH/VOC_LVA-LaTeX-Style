@@ -20,7 +20,6 @@
 \usepackage{filecontents}
 \usepackage{varwidth}
 \usepackage[euler]{textgreek}
-
 \usepackage[utf8x]{inputenc}
 \usepackage{eurosym}
 \usepackage[ngerman]{babel}
@@ -99,6 +98,9 @@
 
 
 \usetikzlibrary{calc,angles,quotes}
+
+\setbasesoundpath{/home/voc/usr/Hagenberg/MTD/LaTeXSlides/DMT2}
+\setsoundpath{kapitel-2/audio}
 
 \begin{document}[without titlepage]%
 %  \begin{frame}{Frame Title}%

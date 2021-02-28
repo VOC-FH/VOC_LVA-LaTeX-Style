@@ -61,6 +61,23 @@
 \newcommand\TSI[1][]{\SI[mode=text, #1]}
 \newcommand\tsi[1][]{\si[mode=text, #1]}
 
+\RequirePackage{multimedia}
+
+\newcommand{\mysound}[3][]{%
+  \sound[#1]{#2}{\basesoundpath/\soundpath/#3}%
+}%
+
+\def\basesoundpath{}
+\def\setbasesoundpath#1{%
+  \def\basesoundpath{#1}%
+}%
+
+\def\soundpath{}
+\def\setsoundpath#1{%
+  \def\soundpath{#1}%
+}%
+
+
 \DeclareCaptionFont{cap-fh-ooe-red}{\color{fh-ooe-red}}
 \captionsetup{format=default,justification=centering,labelformat=simple,labelfont={scriptsize,cap-fh-ooe-red},textfont=scriptsize}
 
@@ -273,6 +290,7 @@
     \end{column}
   \end{columns}
 }
+
 
 % Temporary Fix
 \makeatletter
