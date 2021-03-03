@@ -23,6 +23,10 @@
 \usepackage[utf8x]{inputenc}
 \usepackage{eurosym}
 \usepackage[ngerman]{babel}
+\usepackage{braket}
+\usepackage{tkz-euclide}
+
+\usepackage{fourieranalyses}
 
 \pgfkeys{/pgf/number format/.cd,1000 sep={\,}}
 
@@ -31,34 +35,6 @@
 \usetikzlibrary{positioning,shapes.multipart,shadows,calc,arrows,fit,trees}
 \usetikzlibrary{arrows.meta, quotes}
 \usetikzlibrary{intersections, tikzmark}
-
-\pgfplotsset{
-  every axis x label/.style={
-    at={
-      (current axis.right of origin)
-    },
-    anchor=north,
-    align=center
-  },
-  every axis y label/.style={
-    at={
-      (current axis.above origin)
-    },
-    anchor=south,
-    align=center
-  },
-  xtick align=center, 
-  ytick align=center,
-  tick label style={font=\tiny},
-  axis x line*=center,
-  axis y line*=center,  
-  x axis line style={-latex},
-  y axis line style={-latex},
-  ylabel style={font=\footnotesize},
-  xlabel style={font=\footnotesize},
-  compat=newest,
-  samples=250
-}
 
 \usefonttheme[onlymath]{serif}
 
@@ -101,6 +77,68 @@
 
 \setbasesoundpath{/home/voc/usr/Hagenberg/MTD/LaTeXSlides/DMT2}
 \setsoundpath{kapitel-2/audio}
+
+
+\pgfplotsset{
+  every axis x label/.style={
+    at={
+      (current axis.right of origin)
+    },
+    anchor=north,
+    align=center
+  },
+  every axis y label/.style={
+    at={
+      (current axis.above origin)
+    },
+    anchor=south,
+    align=center
+  },
+  xtick align=center, 
+  ytick align=center,
+  tick label style={font=\tiny},
+  axis x line*=center,
+  axis y line*=center,  
+  x axis line style={-latex},
+  y axis line style={-latex},
+  ylabel style={font=\footnotesize},
+  xlabel style={font=\footnotesize},
+  compat=newest,
+  samples=250
+}
+
+\pgfplotsset{
+  every axis x label/.style={
+    at={
+      (current axis.right of origin)
+    },
+    anchor=west,
+    align=center
+  },
+  every axis y label/.style={
+    at={
+      (current axis.above origin)
+    },
+    anchor=south,
+    align=center
+  },
+  xtick align=center, 
+  ytick align=center,
+  ztick align=center,
+  tick label style={font=\tiny},
+  axis x line*=center,
+  axis y line*=center,  
+  axis z line*=center,
+  x axis line style={-latex},
+  y axis line style={-latex},
+  z axis line style={-latex},
+  ylabel style={font=\footnotesize},
+  xlabel style={font=\footnotesize},
+  zlabel style={font=\footnotesize},
+  samples=250
+}
+
+\pgfkeys{/pgf/number format/.cd,1000 sep={\,}}
 
 \begin{document}[without titlepage]%
 %  \begin{frame}{Frame Title}%

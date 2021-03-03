@@ -48,6 +48,7 @@
 \RequirePackage{xstring}
 \RequirePackage{svg}
 \RequirePackage[euler]{textgreek}
+\RequirePackage{relsize}
 
 \RequirePackage[siunitx]{circuitikz}
 \AtBeginDocument{\sisetup{math-rm=\mathrm}}

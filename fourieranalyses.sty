@@ -1,0 +1,80 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{fourieranalyses}[202/02/03 Plotting Fourier-Graphs using PGF and TikZ]
+
+\newcommand{\addplotfouriersinbase}[3][]{%
+  \def\fourierseries{0}%
+  \foreach \a/\color [count=\k from 0] in {#3}{%
+    \xdef\fourierseries{\fourierseries + \a * sin(\k*#2*x)}%
+    \edef\temp{\noexpand\addplot gnuplot [#1, \color] {(\a) * sin(\k*#2*x)};}%
+    \temp
+  }%
+  \let\fourierseries\undefined%
+  \let\temp\undefined%
+}%
+
+\newcommand{\addplotfouriersinpartialsums}[3][]{%
+  \def\fourierseries{0}%
+  \foreach \a/\color [count=\k from 0] in {#3}{%
+    \xdef\fourierseries{\fourierseries + {\a} * sin(\k*#2*x)}%
+    \edef\temp{\noexpand\addplot gnuplot [#1, \color] {\fourierseries};}%
+    \temp
+  }%
+  \let\fourierseries\undefined%
+  \let\temp\undefined%
+}%
+
+\newcommand{\addplotfouriersinpartialsum}[3][]{%
+  \def\fourierseries{0}%
+  \foreach \a/\color [count=\k from 0] in {#3}{%
+    \xdef\fourierseries{\fourierseries + \a * sin(\k*#2*x)}
+  }%
+  \addplot gnuplot [#1] {\fourierseries};%
+  \let\fourierseries\undefined%
+  \let\temp\undefined%
+}%
+
+\newcommand{\addplotfouriercosbase}[3][]{%
+  \def\fourierseries{0}%
+  \foreach \a/\color [count=\k from 0] in {#3}{%
+    \xdef\fourierseries{\fourierseries + \a * cos(\k*#2*x)}%
+    \edef\temp{\noexpand\addplot gnuplot [#1, \color] {(\a) * cos(\k*#2*x)};}%
+    \temp
+  }%
+  \let\fourierseries\undefined%
+  \let\temp\undefined%
+}%
+
+\newcommand{\addplotfouriercospartialsums}[3][]{%
+  \def\fourierseries{0}%
+  \foreach \a/\color [count=\k from 0] in {#3}{%
+    \xdef\fourierseries{\fourierseries + \a * cos(\k*#2*x)}%
+    \edef\temp{\noexpand\addplot gnuplot [#1, \color] {\fourierseries};}%
+    \temp
+  }%
+  \let\fourierseries\undefined%
+  \let\temp\undefined%
+}%
+
+\newcommand{\addplotfouriercospartialsum}[3][]{%
+  \def\fourierseries{0}%
+  \foreach \a/\color [count=\k from 0] in {#3}{%
+    \xdef\fourierseries{\fourierseries + \a * cos(\k*#2*x)}
+  }%
+  \addplot gnuplot [#1] {\fourierseries};%
+  \let\fourierseries\undefined%
+  \let\temp\undefined%
+}%
+
+\newcommand{\addplotfourier}[4][]{% #1=omega, #2=sincoefficients #3=coscoefficients
+  \def\fourierseries{0}%
+  \foreach \a [count=\k from 0] in {#3}{%
+    \xdef\fourierseries{\fourierseries + \a * sin(\k*#2*x)}%
+  }%
+  \foreach \a [count=\k from 0] in {#4}{%
+    \xdef\fourierseries{\fourierseries + \a * cos(\k*#2*x)}%
+  }%
+  \edef\temp{\noexpand\addplot gnuplot [#1] {\fourierseries};}%
+  \temp%
+  \let\fourierseries\undefined%
+  \let\temp\undefined%
+}%
