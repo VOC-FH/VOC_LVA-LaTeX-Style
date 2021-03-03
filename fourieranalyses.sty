@@ -80,3 +80,19 @@
   \let\fourierseries\undefined%
   \let\temp\undefined%
 }%
+
+\newcommand{\addplotfouriersinspectrum}[3][]{%
+  \foreach \a/\color [count=\k from 0] in {#3}{%
+    \pgfmathparse{\a}
+    \edef\temp{\noexpand\draw[\color, #1] (\k, 0) -- (\k, \pgfmathresult);}%
+    \temp
+    \edef\temp{\noexpand\draw[draw=none, fill=\color, \color, #1]
+      (\k, \pgfmathresult) circle[anchor=center, #1] {};}%
+    \temp
+  }%
+}%
+
+\let\addplotfouriercosspectrum\addplotfouriersinspectrum%
+
+\newcommand{\addplotfourierspectrum}[4][]{%
+}%
