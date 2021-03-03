@@ -15,7 +15,7 @@
 \newcommand{\addplotfouriersinpartialsums}[3][]{%
   \def\fourierseries{0}%
   \foreach \a/\color [count=\k from 0] in {#3}{%
-    \xdef\fourierseries{\fourierseries + {\a} * sin(\k*#2*x)}%
+    \xdef\fourierseries{\fourierseries + \a * sin(\k*#2*x)}%
     \edef\temp{\noexpand\addplot gnuplot [#1, \color] {\fourierseries};}%
     \temp
   }%
@@ -32,6 +32,8 @@
   \let\fourierseries\undefined%
   \let\temp\undefined%
 }%
+
+
 
 \newcommand{\addplotfouriercosbase}[3][]{%
   \def\fourierseries{0}%
