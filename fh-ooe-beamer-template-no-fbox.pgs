@@ -22,11 +22,18 @@
 \usepackage[euler]{textgreek}
 \usepackage[utf8x]{inputenc}
 \usepackage{eurosym}
-\usepackage[ngerman]{babel}
+%\usepackage[ngerman]{babel}
 \usepackage{braket}
 \usepackage{tkz-euclide}
+\usepackage{trfsigns}
 
 \usepackage{fourieranalyses}
+
+%\usepackage{fontenc}
+%\usepackage{mathtext}
+
+\usepackage[T2A, T1]{fontenc}
+%\usepackage[russian]{babel}
 
 \pgfkeys{/pgf/number format/.cd,1000 sep={\,}}
 

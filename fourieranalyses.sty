@@ -84,10 +84,10 @@
 \newcommand{\addplotfouriersinspectrum}[3][]{%
   \foreach \a/\color [count=\k from 0] in {#3}{%
     \pgfmathparse{\a}
-    \edef\temp{\noexpand\draw[\color, #1] (\k, 0) -- (\k, \pgfmathresult);}%
+    \edef\temp{\noexpand\draw[\color, #1] (\k+#2, 0) -- (\k+#2, \pgfmathresult);}%
     \temp
     \edef\temp{\noexpand\draw[draw=none, fill=\color, \color, #1]
-      (\k, \pgfmathresult) circle[anchor=center, #1] {};}%
+      (\k+#2, \pgfmathresult) circle[anchor=center, #1] {};}%
     \temp
   }%
 }%

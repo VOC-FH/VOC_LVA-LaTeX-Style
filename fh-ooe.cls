@@ -32,7 +32,7 @@
 
 \usetheme{FH-OOE}
 
-\RequirePackage[T1]{fontenc}
+\RequirePackage[T2A, T1]{fontenc}
 \RequirePackage{pgfplots}
 \RequirePackage{pgfplotstable}
 \RequirePackage{filecontents}
@@ -263,34 +263,34 @@
 }
 
 \newenvironment{boxblock}[1]{%
-  \begin{columns}
-    \begin{column}{#1}
-      \begin{block}
-      }{
-      \end{block}
-    \end{column}
-  \end{columns}
-}
+  \begin{columns}%
+    \begin{column}{#1}%
+      \begin{block}%
+      }{%
+      \end{block}%
+    \end{column}%
+  \end{columns}%
+}%
 
 \newenvironment{boxexampleblock}[1]{%
-  \begin{columns}
-    \begin{column}{#1}
-      \begin{exampleblock}
-      }{
-      \end{exampleblock}
-    \end{column}
-  \end{columns}
-}
+  \begin{columns}%
+    \begin{column}{#1}%
+      \begin{exampleblock}%
+      }{%
+      \end{exampleblock}%
+    \end{column}%
+  \end{columns}%
+}%
 
 \newenvironment{boxalertblock}[1]{%
-  \begin{columns}
-    \begin{column}{#1}
-      \begin{alertblock}
-      }{
-      \end{alertblock}
-    \end{column}
-  \end{columns}
-}
+  \begin{columns}%
+    \begin{column}{#1}%
+      \begin{alertblock}%
+      }{%
+      \end{alertblock}%
+    \end{column}%
+  \end{columns}%
+}%
 
 
 % Temporary Fix
