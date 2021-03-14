@@ -2,89 +2,90 @@
 \ProvidesClass{fourieranalyses}[202/02/03 Plotting Fourier-Graphs using PGF and TikZ]
 
 \newcommand{\addplotfouriersinbase}[3][]{%
-  \def\fourierseries{0}%
-  \foreach \a/\color [count=\k from 0] in {#3}{%
+  \xdef\fourierseries{0}%
+  \expandafter\def\expandafter\koefizienten\expandafter{#3}%
+  \foreach \a/\color [count=\k from 0] in \koefizienten {%
     \xdef\fourierseries{\fourierseries + \a * sin(\k*#2*x)}%
     \edef\temp{\noexpand\addplot gnuplot [#1, \color] {(\a) * sin(\k*#2*x)};}%
     \temp
   }%
-  \let\fourierseries\undefined%
-  \let\temp\undefined%
+  \global\let\fourierseries\undefined%
 }%
 
 \newcommand{\addplotfouriersinpartialsums}[3][]{%
-  \def\fourierseries{0}%
-  \foreach \a/\color [count=\k from 0] in {#3}{%
+  \xdef\fourierseries{0}%
+  \expandafter\def\expandafter\koefizienten\expandafter{#3}%
+  \foreach \a/\color [count=\k from 0] in \koefizienten {%
     \xdef\fourierseries{\fourierseries + \a * sin(\k*#2*x)}%
     \edef\temp{\noexpand\addplot gnuplot [#1, \color] {\fourierseries};}%
     \temp
   }%
-  \let\fourierseries\undefined%
-  \let\temp\undefined%
+  \global\let\fourierseries\undefined%
 }%
 
 \newcommand{\addplotfouriersinpartialsum}[3][]{%
-  \def\fourierseries{0}%
-  \foreach \a/\color [count=\k from 0] in {#3}{%
+  \xdef\fourierseries{0}%
+  \expandafter\def\expandafter\koefizienten\expandafter{#3}%
+  \foreach \a/\color [count=\k from 0] in \koefizienten {%
     \xdef\fourierseries{\fourierseries + \a * sin(\k*#2*x)}
   }%
   \addplot gnuplot [#1] {\fourierseries};%
-  \let\fourierseries\undefined%
-  \let\temp\undefined%
+  \global\let\fourierseries\undefined%
 }%
 
 
 
 \newcommand{\addplotfouriercosbase}[3][]{%
-  \def\fourierseries{0}%
-  \foreach \a/\color [count=\k from 0] in {#3}{%
+  \xdef\fourierseries{0}%
+  \expandafter\def\expandafter\koefizienten\expandafter{#3}%
+  \foreach \a/\color [count=\k from 0] in \koefizienten {%
     \xdef\fourierseries{\fourierseries + \a * cos(\k*#2*x)}%
     \edef\temp{\noexpand\addplot gnuplot [#1, \color] {(\a) * cos(\k*#2*x)};}%
     \temp
   }%
-  \let\fourierseries\undefined%
-  \let\temp\undefined%
+  \global\let\fourierseries\undefined%
 }%
 
 \newcommand{\addplotfouriercospartialsums}[3][]{%
-  \def\fourierseries{0}%
-  \foreach \a/\color [count=\k from 0] in {#3}{%
+  \xdef\fourierseries{0}%
+  \expandafter\def\expandafter\koefizienten\expandafter{#3}%
+  \foreach \a/\color [count=\k from 0] in \koefizienten {%
     \xdef\fourierseries{\fourierseries + \a * cos(\k*#2*x)}%
     \edef\temp{\noexpand\addplot gnuplot [#1, \color] {\fourierseries};}%
     \temp
   }%
-  \let\fourierseries\undefined%
-  \let\temp\undefined%
+  \global\let\fourierseries\undefined%
 }%
 
 \newcommand{\addplotfouriercospartialsum}[3][]{%
-  \def\fourierseries{0}%
-  \foreach \a/\color [count=\k from 0] in {#3}{%
+  \xdef\fourierseries{0}%
+  \expandafter\def\expandafter\koefizienten\expandafter{#3}%
+  \foreach \a/\color [count=\k from 0] in \koefizienten {%
     \xdef\fourierseries{\fourierseries + \a * cos(\k*#2*x)}
   }%
   \addplot gnuplot [#1] {\fourierseries};%
-  \let\fourierseries\undefined%
-  \let\temp\undefined%
+  \global\let\fourierseries\undefined%
 }%
 
-\newcommand{\addplotfourier}[4][]{% #1=omega, #2=sincoefficients #3=coscoefficients
-  \def\fourierseries{0}%
-  \foreach \a [count=\k from 0] in {#3}{%
+\newcommand{\addplotfourier}[4][]{% #1=options to plot, #2omega, #3=sincoefficients #4=coscoefficients
+  \xdef\fourierseries{0}%
+  \expandafter\def\expandafter\koefizienten\expandafter{#3}%
+  \foreach \a/\color [count=\k from 0] in \koefizienten {%
     \xdef\fourierseries{\fourierseries + \a * sin(\k*#2*x)}%
   }%
-  \foreach \a [count=\k from 0] in {#4}{%
-    \xdef\fourierseries{\fourierseries + \a * cos(\k*#2*x)}%
+  \expandafter\def\expandafter\koefizienten\expandafter{#4}%
+  \foreach \b/\color [count=\k from 0] in \koefizienten {%
+    \xdef\fourierseries{\fourierseries + \b * cos(\k*#2*x)}%
   }%
-  \edef\temp{\noexpand\addplot gnuplot [#1] {\fourierseries};}%
-  \temp%
-  \let\fourierseries\undefined%
-  \let\temp\undefined%
+  \addplot gnuplot [#1] {\fourierseries};%
+  \global\let\fourierseries=\undefined%
 }%
 
 \newcommand{\addplotfouriersinspectrum}[3][]{%
-  \foreach \a/\color [count=\k from 0] in {#3}{%
+  \expandafter\def\expandafter\koefizienten\expandafter{#3}%
+  \foreach \a/\color [count=\k from 0] in \koefizienten {%
     \pgfmathparse{\a}
-    \edef\temp{\noexpand\draw[\color, #1] (\k+#2, 0) -- (\k+#2, \pgfmathresult);}%
+    \edef\temp{\noexpand\addplot[\color, #1] coordinates {(\k+#2, 0) (\k+#2, \pgfmathresult)};}%
     \temp
     \edef\temp{\noexpand\draw[draw=none, fill=\color, \color, #1]
       (\k+#2, \pgfmathresult) circle[anchor=center, #1] {};}%
