@@ -193,76 +193,9 @@
     \app@exe{ls #1/*.tex | xargs cat >> #1/\jobname.tmp}%
 %    \app@exe{ls #1/*.tex | xargs -n1 /bin/bash -c 'echo "{" >> #1/\jobname.tmp ; cat "$@" >> #1/\jobname.tmp ; echo "}" >> #1/\jobname.tmp ;' ''}
     \InputIfFileExists{#1/\jobname.tmp}{}{}%
-%    \AtEndDocument{\app@exe{rm -f #1/\jobname.tmp}}%
+    \AtEndDocument{\app@exe{rm -f #1/\jobname.tmp}}%
   }
 \makeatother
-
-\definecolor{grassgreen}{HTML}{00A619}
-
-\newenvironment{signalplot}[1][] {%
-  \newcommand{\csignal}[1][]{\addplot+[mark=*, ycomb, semithick, black, mark options={black}, ##1, mark options={scale=0.7}]}%
-  \newcommand{\ccsignal}[2][]{\csignal[##2, mark options={##2}, ##1] plot coordinates}%
-  \newcommand{\crsignal}[1][]{\ccsignal[##1]{red}}%
-  \newcommand{\cbsignal}[1][]{\ccsignal[##1]{blue}}%
-  \newcommand{\cgsignal}[1][]{\ccsignal[##1]{grassgreen}}%
-  
-  \newcommand{\lsignal}[2][]{%
-    \xdef\coordinates{}%
-    \foreach[count=\x from -6] \y in {##2}{%
-      \xdef\coordinates{\coordinates (\x, \y)}%
-    }%
-    \csignal[##1] plot coordinates {\coordinates}%
-  }%
-  
-  \newcommand{\lcsignal}[2][]{\lsignal[##2, mark options={##2}, ##1]}%
-  \newcommand{\lrsignal}[1][]{\lcsignal[##1]{red}}%
-  \newcommand{\lbsignal}[1][]{\lcsignal[##1]{blue}}%
-  \newcommand{\lgsignal}[1][]{\lcsignal[##1]{grassgreen}}%
-  
-  \begin{axis}[
-    clip=false, 
-    height=2.6cm, width=6cm, 
-    xmin = -6.5, xmax = 6.9,
-    ymin = 0, ymax= 1, 
-    y axis line style={
-      draw=none
-    },
-    tick style={
-      draw=none
-    }, 
-    yticklabels={,,}, xticklabels={,,},
-    xlabel={$u$}, 
-    every axis x label/.style={
-      at={
-         (axis cs:6.9, 0)
-      },
-      anchor=west,
-      inner sep = 0.5ex,
-      align=center
-    },
-    every axis y label/.style={
-      at={
-        (axis cs:0, 1)
-      },
-      anchor=south,
-      align=center
-    },
-    tick label style={/pgf/number format/sci, font=\rmfamily\tiny},
-    xticklabel style = {yshift=+0.5ex},
-    #1
-  ]%
-  }{%
-  \end{axis}%
-}%
-
-\def\withxticks{extra x ticks={-3, -2, -1, 0, 1, 2, 3},
-  extra x tick labels={-3, -2, -1, 0, 1, 2, 3}}
-
-\newcommand{\cfbox}[2]{%
-  \colorlet{currentcolor}{.}%
-  {\color{#1}%
-    \fbox{\color{currentcolor}#2}}%
-}
 
 \newenvironment{boxblock}[1]{%
   \begin{columns}%

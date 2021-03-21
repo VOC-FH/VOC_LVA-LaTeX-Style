@@ -4,7 +4,7 @@
 \newcommand{\addplotfouriersinbase}[3][]{%
   \expandafter\def\expandafter\koefizienten\expandafter{#3}%
   \foreach \a/\color [count=\k from 0, count=\i from 1] in \koefizienten {%
-    \edef\temp{\noexpand\addplot gnuplot [#1, \color] {(\a) * sin(\k*#2*x)};}%
+    \edef\temp{\noexpand\addplot gnuplot [\color, #1] {(\a) * sin(\k*#2*x)};}%
     \temp
   }%
 }%
@@ -14,7 +14,7 @@
   \expandafter\def\expandafter\koefizienten\expandafter{#3}%
   \foreach \a/\color [count=\k from 0, count=\i from 1] in \koefizienten {%
     \xdef\fourierseries{\fourierseries + \a * sin(\k*#2*x)}%
-    \edef\temp{\noexpand\addplot gnuplot [#1, \color] {\fourierseries};}%
+    \edef\temp{\noexpand\addplot gnuplot [\color, #1] {\fourierseries};}%
     \temp
   }%
   \global\let\fourierseries\undefined%
@@ -33,7 +33,7 @@
 \newcommand{\addplotfouriercosbase}[3][]{%
   \expandafter\def\expandafter\koefizienten\expandafter{#3}%
   \foreach \a/\color [count=\k from 0, count=\i from 1] in \koefizienten {%
-    \edef\temp{\noexpand\addplot gnuplot [#1, \color] {(\a) * cos(\k*#2*x)};}%
+    \edef\temp{\noexpand\addplot gnuplot [\color, #1] {(\a) * cos(\k*#2*x)};}%
     \temp
   }%
 }%
@@ -43,7 +43,7 @@
   \expandafter\def\expandafter\koefizienten\expandafter{#3}%
   \foreach \a/\color [count=\k from 0, count=\i from 1] in \koefizienten {%
     \xdef\fourierseries{\fourierseries + \a * cos(\k*#2*x)}%
-    \edef\temp{\noexpand\addplot gnuplot [#1, \color] {\fourierseries};}%
+    \edef\temp{\noexpand\addplot gnuplot [\color, #1] {\fourierseries};}%
     \temp
   }%
   \global\let\fourierseries\undefined%
