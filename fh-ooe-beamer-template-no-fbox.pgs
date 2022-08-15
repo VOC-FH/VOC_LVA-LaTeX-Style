@@ -1,10 +1,6 @@
 \documentclass[utf8x, 10pt]{fh-ooe}
 %\usepackage[orientation=landscape,size=custom,width=17.06,height=9.6,scale=0.4,debug]{beamerposter}
 
-\pgfdeclarelayer{background}
-\pgfdeclarelayer{foreground}
-\pgfsetlayers{background,main,foreground}
-
 \geometry{paperwidth=17.06cm, paperheight=9.6cm}
 
 \setbeamersize{
