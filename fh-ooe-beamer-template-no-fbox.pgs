@@ -1,4 +1,4 @@
-\documentclass[utf8x, 10pt]{fh-ooe}
+\documentclass[utf8, 10pt]{fh-ooe}
 %\usepackage[orientation=landscape,size=custom,width=17.06,height=9.6,scale=0.4,debug]{beamerposter}
 
 \geometry{paperwidth=17.06cm, paperheight=9.6cm}
@@ -16,7 +16,7 @@
 \usepackage{filecontents}
 \usepackage{varwidth}
 \usepackage[euler]{textgreek}
-\usepackage[utf8x]{inputenc}
+\usepackage[utf8]{inputenc}
 \usepackage{eurosym}
 \usepackage[ngerman]{babel}
 \usepackage{braket}
@@ -127,6 +127,8 @@
 }
 
 \pgfkeys{/pgf/number format/.cd,1000 sep={\,}}
+
+\author[voc]{Volker Christian}
 
 \begin{document}[without titlepage]%
 %  \begin{frame}{Frame Title}%

@@ -1,9 +1,9 @@
 \ProvidesClass{fh-ooe}
-
+% 
 \RequirePackage{ifthen}
 \RequirePackage{kvoptions}
 \RequirePackage{etex}
-
+% 
 \SetupKeyvalOptions{
   family=fhooe,
   prefix=fhooe@
@@ -20,7 +20,7 @@
 \ProcessKeyvalOptions*
 
 \ifx\fhooe@article\@empty%
-  \LoadClassWithOptions{beamer}[2010/06/21]
+  \LoadClassWithOptions{beamer}
   \RequirePackage{fh-ooe.multiscreen}
 \else
   \LoadClassWithOptions{\fhooe@article}
@@ -31,8 +31,9 @@
 \hypersetup{bookmarksdepth=paragraph}
 
 \usetheme{FH-OOE}
-
+%
 \RequirePackage[T2A, T1]{fontenc}
+\RequirePackage{ucs}
 \RequirePackage{pgfplots}
 \RequirePackage{pgfplotstable}
 \RequirePackage{filecontents}
@@ -49,53 +50,53 @@
 \RequirePackage{svg}
 \RequirePackage[euler]{textgreek}
 \RequirePackage{relsize}
-
+% 
 \RequirePackage[siunitx]{circuitikz}
 \AtBeginDocument{\sisetup{math-rm=\mathrm}}
-
+% 
 \let\orig@num\num
 \renewcommand\num[1][]{\orig@num[group-minimum-digits = 4, group-separator = {\,}, output-decimal-marker = {,}, #1]}
 \newcommand\tnum[1][]{\num[mode=text, #1]}
-
+% 
 \let\orig@SI\SI
 \renewcommand\SI[1][]{\orig@SI[group-minimum-digits = 4, group-separator = {\,}, output-decimal-marker = {,}, #1]}
 \newcommand\TSI[1][]{\SI[mode=text, #1]}
 \newcommand\tsi[1][]{\si[mode=text, #1]}
-
+% 
 \RequirePackage{multimedia}
-
+% 
 \newcommand{\mysound}[3][]{%
   \sound[#1]{#2}{\basesoundpath/\soundpath/#3}%
 }%
-
+% 
 \def\basesoundpath{}
 \def\setbasesoundpath#1{%
   \def\basesoundpath{#1}%
 }%
-
+% 
 \def\soundpath{}
 \def\setsoundpath#1{%
   \def\soundpath{#1}%
 }%
-
-
+% 
+% 
 \DeclareCaptionFont{cap-fh-ooe-red}{\color{fh-ooe-red}}
 \captionsetup{format=default,justification=centering,labelformat=simple,labelfont={scriptsize,cap-fh-ooe-red},textfont=scriptsize}
-
+% 
 \newcommand{\degree}{\@dblarg\beamer@degree}
 \long\def\beamer@degree[#1]#2{%
   \def\insertdegree{#2}%
   \def\insertshortdegree{#1}%
 }
 \degree{}
-
+% 
 \newcommand{\semester}{\@dblarg\beamer@semester}
 \long\def\beamer@semester[#1]#2{%
   \def\insertsemester{#2}
   \def\insertshortsemester{#1}
 }
 \semester{}
-
+% 
 \let\orig@include\include
 \renewcommand{\include}[2][.]{
   \graphicspath{{#1/material/}{#1/images/}}
@@ -105,7 +106,7 @@
 %  \def\cppsourcepath{c++sources/#1}
   \orig@include{#1/#2}
 }
-
+% 
 \newcommand{\setpath}[1]{%
   \graphicspath{{#1/material/}}%
   \def\pgfpath{#1/material/pgf/}%
@@ -113,11 +114,11 @@
   \svgpath{{#1/images/}}
 %  \def\cppsourcepath{c++sources/#1}%
 }
-
+% 
 \def\includegraphicswrapper[{\includegraphics[}
-
+% 
 \def\pgfinput#1{\input{\pgfpath/#1.pgf}}
-
+% 
 \let\orig@lecture\lecture
 \newcounter{lastframeoflastlecture}
 \setcounter{lastframeoflastlecture}{0}
@@ -127,14 +128,14 @@
   \date{\insertshortlecture}
   \orig@lecture[#1]{#2}{#3}
 }
-
+% 
 \AtBeginDocument{%
   \fhooe@includeonlylecture%
 }%
-
+% 
 \let\orig@document\document%
 \let\orig@enddocument\enddocument%
-
+% 
 \renewenvironment{document}[1][]%
 {%
   \gdef\fhooe@ArgI{{#1}}%
@@ -176,16 +177,16 @@
   \orig@document%
   \fhooe@maketitle%
 }%
-
+% 
 \def\fhooepresentationoptions{\beamertemplatenavigationsymbolsempty}
-
+% 
 \mode<presentation>{\fhooepresentationoptions}
-
+% 
 % Read options from file
 \InputIfFileExists{fh-ooe.def.tex}{}{}
 \InputIfFileExists{experimental.def.tex}{}{}
 \InputIfFileExists{private.def.tex}{}{}
-
+% 
 \makeatletter
   \def\app@exe{\immediate\write18}
   \def\inputAllFiles#1{%
@@ -196,7 +197,7 @@
     \AtEndDocument{\app@exe{rm -f #1/\jobname.tmp}}%
   }
 \makeatother
-
+%
 \newenvironment{boxblock}[1]{%
   \begin{columns}%
     \begin{column}{#1}%
@@ -206,7 +207,7 @@
     \end{column}%
   \end{columns}%
 }%
-
+% 
 \newenvironment{boxexampleblock}[1]{%
   \begin{columns}%
     \begin{column}{#1}%
@@ -216,7 +217,7 @@
     \end{column}%
   \end{columns}%
 }%
-
+% 
 \newenvironment{boxalertblock}[1]{%
   \begin{columns}%
     \begin{column}{#1}%
@@ -226,8 +227,8 @@
     \end{column}%
   \end{columns}%
 }%
-
-
+% 
+% 
 % Temporary Fix
 \makeatletter
 \ifdefined\@@magyar@captionfix
@@ -235,4 +236,4 @@
 \let\@@magyar@captionfix\relax
 \fi
 \makeatother
-
+% 
