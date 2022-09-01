@@ -1,15 +1,6 @@
 \documentclass[utf8, 10pt]{fh-ooe}
 %\usepackage[orientation=landscape,size=custom,width=17.06,height=9.6,scale=0.4,debug]{beamerposter}
 
-\geometry{paperwidth=17.06cm, paperheight=9.6cm}
-
-\setbeamersize{
-    text margin left=10mm,
-    text margin right=10mm,
-    sidebar width left  = 0mm,
-    sidebar width right = 0mm
-}
-
 \usepackage{pgfkeys}
 \usepackage{pgfplots}
 \usepackage{pgfplotstable}
@@ -22,6 +13,11 @@
 \usepackage{braket}
 \usepackage{tkz-euclide}
 \usepackage{trfsigns}
+\RequirePackage{svg}
+\RequirePackage{includesvg}
+
+\usepackage{psfrag}
+
 
 \usepackage{fourieranalyses}
 
@@ -65,22 +61,25 @@
 %}
 %\makeatother
 
-\graphicspath{{/home/voc/usr/Hagenberg/MTD/LaTeXSlides/DMT2/}}
+\graphicspath{{/home/voc/usr/Hagenberg/MTD/LaTeXSlides/ADS/}}
 
 \long\def\comment#1{}
 
 \newcolumntype{C}[1]{>{\centering}m{#1}}
 
-\setjavasourcepath{/home/voc/usr/Hagenberg/MTD/LaTeXSlides/DMT2/java/src}
+\setjavasourcepath{/home/voc/usr/Hagenberg/MTD/LaTeXSlides/ADS/java/src}
 
-\setcppsourcepath{/home/voc/usr/Hagenberg/MTD/LaTeXSlides/DMT2/cpp}
+\setcppsourcepath{/home/voc/usr/Hagenberg/MTD/LaTeXSlides/ADS/cpp}
 
 
 \usetikzlibrary{calc,angles,quotes}
 
-\setbasesoundpath{/home/voc/usr/Hagenberg/MTD/LaTeXSlides/DMT2}
-\setsoundpath{kapitel-2/audio}
+\def\pgfpath{/home/voc/usr/Hagenberg/MTD/LaTeXSlides/ADS/kapitel-1/material/pgf/}
 
+\def\pgfinput#1{\input{\pgfpath/#1.pgf}}
+
+\svgsetup{inkscapepath=/home/voc/usr/Hagenberg/MTD/LaTeXSlides/ADS/kapitel-1/images/svg-inkscape}
+\svgpath{{/home/voc/usr/Hagenberg/MTD/LaTeXSlides/ADS/kapitel-1/material/}}
 
 \pgfplotsset{
   every axis x label/.style={

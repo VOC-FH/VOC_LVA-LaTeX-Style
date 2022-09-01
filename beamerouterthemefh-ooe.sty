@@ -9,8 +9,32 @@
 
 %\ProvidesPackageRCS $Header: beamerouterthemefh-ooe.sty,v 1.9 2007/01/28 20:48:30 tantau Exp $
 
-\ProvidesPackage{beamerouterthemefh-ooe}
+\author{}
 
+\ProvidesPackage{beamerouterthemefh-ooe}
+\newcommand{\degree}{\@dblarg\beamer@degree}
+\long\def\beamer@degree[#1]#2{%
+  \def\insertdegree{#2}%
+  \def\insertshortdegree{#1}%
+}
+\degree{}
+
+\newcommand{\semester}{\@dblarg\beamer@semester}
+\long\def\beamer@semester[#1]#2{%
+  \def\insertsemester{#2}
+  \def\insertshortsemester{#1}
+}
+\semester{}
+
+\let\orig@lecture\lecture
+\newcounter{lastframeoflastlecture}
+\setcounter{lastframeoflastlecture}{0}
+\renewcommand{\lecture}[3][]{
+  \def\insertlecturenumbername{#2}
+  \setcounter{lastframeoflastlecture}{\value{framenumber}}
+  \date{\insertshortlecture}
+  \orig@lecture[#1]{#2}{#3}
+}
 
 \mode<presentation>
 
