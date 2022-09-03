@@ -19,11 +19,13 @@
 
 \ProcessKeyvalOptions*
 
+\PassOptionsToPackage{unicode}{hyperref}
+
 \ifx\fhooe@article\@empty%
   \LoadClass{beamer}
   \RequirePackage{fh-ooe.multiscreen}
 \else
-  \LoadClassWithOptions{\fhooe@article}
+  \LoadClass{article}
   \RequirePackage{beamerarticle}
   \RequirePackage{hyperref}
 \fi
@@ -39,13 +41,12 @@
   sidebar width right = 0mm
 }
 %
+\RequirePackage[utf8]{inputenc}
 \RequirePackage[T2A, T1]{fontenc}
 \RequirePackage{ucs}
 \RequirePackage{pgfplots}
 \RequirePackage{pgfplotstable}
-\RequirePackage{filecontents}
 \RequirePackage{varwidth}
-\pgfplotsset{compat=1.13}
 \RequirePackage{tikz}
 \RequirePackage{tikz-uml}
 \RequirePackage{tikz-uml-extension}
@@ -58,8 +59,12 @@
 \RequirePackage[euler]{textgreek}
 \RequirePackage{relsize}
 \RequirePackage[siunitx]{circuitikz}
+\RequirePackage{multirow}
+\RequirePackage{fix-cm}
 % 
-\AtBeginDocument{\sisetup{math-rm=\mathrm}}
+\pgfplotsset{compat=1.13}
+% 
+% \AtBeginDocument{\sisetup{math-rm=\mathrm}} % https://tex.stackexchange.com/questions/403693/use-text-font-in-siunitx-instead-of-math-font
 % 
 \let\orig@num\num
 \renewcommand\num[1][]{\orig@num[group-minimum-digits = 4, group-separator = {\,}, output-decimal-marker = {,}, #1]}

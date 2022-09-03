@@ -74,12 +74,12 @@
 
 \usetikzlibrary{calc,angles,quotes}
 
-\def\pgfpath{/home/voc/usr/Hagenberg/MTD/LaTeXSlides/ADS/kapitel-1/material/pgf/}
+\def\pgfpath{/home/voc/usr/Hagenberg/MTD/LaTeXSlides/ADS/kapitel-2/material/pgf/}
 
 \def\pgfinput#1{\input{\pgfpath/#1.pgf}}
 
-\svgsetup{inkscapepath=/home/voc/usr/Hagenberg/MTD/LaTeXSlides/ADS/kapitel-1/images/svg-inkscape}
-\svgpath{{/home/voc/usr/Hagenberg/MTD/LaTeXSlides/ADS/kapitel-1/material/}}
+\svgsetup{inkscapepath=/home/voc/usr/Hagenberg/MTD/LaTeXSlides/ADS/kapitel-2/images/svg-inkscape}
+\svgpath{{/home/voc/usr/Hagenberg/MTD/LaTeXSlides/ADS/kapitel-2/material/}}
 
 \pgfplotsset{
   every axis x label/.style={
@@ -129,7 +129,10 @@
 
 \author[voc]{Volker Christian}
 
+\setpath{kapitel-2}
+
 \begin{document}[without titlepage]%
+\lecture[\today]{Elementare Datentypen als Datens\"atze}{kapitel-2}
 %  \begin{frame}{Frame Title}%
     <>
 %  \end{frame}%
