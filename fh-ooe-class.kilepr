@@ -10,7 +10,7 @@ kileversion=2.9.93
 masterDocument=
 name=FH-OOE-Class
 pkg_extIsRegExp=false
-pkg_extensions=.cls .sty .bbx .cbx .lbx
+pkg_extensions=.cls .sty .bbx .cbx .lbx .dbx
 src_extIsRegExp=false
 src_extensions=.tex .ltx .latex .dtx .ins
 

@@ -1,31 +1,97 @@
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T2A, T1]{fontenc}
+\RequirePackage{ucs}
+\RequirePackage{pgfplots}
+\RequirePackage{pgfplotstable}
+\RequirePackage{varwidth}
+\RequirePackage{tikz}
+\RequirePackage{tikz-uml}
+\RequirePackage{tikz-uml-extension}
+\RequirePackage[lighttt]{lmodern}
+\RequirePackage{listings-extension}
+\RequirePackage[scriptsize]{subfigure}
+\RequirePackage{caption}
+\RequirePackage{xstring}
+\RequirePackage{svg}
+\RequirePackage[euler]{textgreek}
+\RequirePackage{relsize}
+\RequirePackage[siunitx]{circuitikz}
+\RequirePackage{multirow}
+\RequirePackage{fix-cm}
+% 
+\pgfplotsset{compat=1.13}
+% 
+\setbeamertemplate{caption}[numbered]
+\DeclareCaptionFont{cap-fh-ooe-red}{\color{fh-ooe-red}}
+\captionsetup{format=default,justification=centering,labelformat=simple,labelfont={scriptsize,cap-fh-ooe-red},textfont=scriptsize}
+% 
+% \AtBeginDocument{\sisetup{math-rm=\mathrm}} % https://tex.stackexchange.com/questions/403693/use-text-font-in-siunitx-instead-of-math-font
+% 
+\let\orig@num\num
+\renewcommand\num[1][]{\orig@num[group-minimum-digits = 4, group-separator = {\,}, output-decimal-marker = {,}, #1]}
+\newcommand\tnum[1][]{\num[mode=text, #1]}
+% 
+\let\orig@SI\SI
+\renewcommand\SI[1][]{\orig@SI[group-minimum-digits = 4, group-separator = {\,}, output-decimal-marker = {,}, #1]}
+\newcommand\TSI[1][]{\SI[mode=text, #1]}
+\newcommand\tsi[1][]{\si[mode=text, #1]}
+% 
 \titlegraphic{\includegraphics[height=1.5cm]{Fhooe-logo}}
-
+% 
 %\def\insertlecturenumbername{Kapitel}
-
+% 
 \setbeamercovered{transparent}
 \setbeamercovered{highly dynamic}
 %\usefonttheme{structurebold}
-
+% 
 \definecolor{darkviolet}{rgb}{0.5,0,0.4}
 \definecolor{darkgreen}{rgb}{0,0.4,0.2}
 \definecolor{darkblue}{rgb}{0.1,0.1,0.9}
 \definecolor{darkgrey}{rgb}{0.5,0.5,0.5}
 \definecolor{lightblue}{rgb}{0.4,0.4,1}
-
+% 
 \newcommand{\fhooe@tiny}{\fontsize{7}{8}\selectfont}
 \newcommand{\fhooe@Tiny}{\fontsize{5}{5}\selectfont}
 \newcommand{\fhooe@HUGE}{\fontsize{100}{100}\selectfont}
-
+% 
 \def\codefontfamily{\ttfamily}
 \def\codefontsize{\fhooe@tiny}
 \def\numberfontsize{\fhooe@Tiny}
 \def\numberfontfamily{\normalfont}
-
+% 
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}} % linksbündig mit Breitenangabe
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}} % zentriert mit Breitenangabe
 \newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}} % rechtsbündig mit Breitenangabe
 \newcommand{\ltab}{\raggedright\arraybackslash} % Tabellenabschnitt linksbündig
 \newcommand{\ctab}{\centering\arraybackslash} % Tabellenabschnitt zentriert
 \newcommand{\rtab}{\raggedleft\arraybackslash} % Tabellenabschnitt rechtsbündig
-
-\setbeamertemplate{caption}[numbered]
+% 
+\newenvironment{boxblock}[1]{%
+  \begin{columns}%
+    \begin{column}{#1}%
+      \begin{block}%
+      }{%
+      \end{block}%
+    \end{column}%
+  \end{columns}%
+}%
+% 
+\newenvironment{boxexampleblock}[1]{%
+  \begin{columns}%
+    \begin{column}{#1}%
+      \begin{exampleblock}%
+      }{%
+      \end{exampleblock}%
+    \end{column}%
+  \end{columns}%
+}%
+% 
+\newenvironment{boxalertblock}[1]{%
+  \begin{columns}%
+    \begin{column}{#1}%
+      \begin{alertblock}%
+      }{%
+      \end{alertblock}%
+    \end{column}%
+  \end{columns}%
+}% 

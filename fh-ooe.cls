@@ -1,7 +1,6 @@
 \ProvidesClass{fh-ooe}
 % 
 \RequirePackage{kvoptions}
-\RequirePackage{etex}
 % 
 \SetupKeyvalOptions{
   family=fhooe,
@@ -29,11 +28,11 @@
   \RequirePackage{beamerarticle}
   \RequirePackage{hyperref}
 \fi
-
+% 
 \hypersetup{bookmarksdepth=paragraph}
-
+% 
 \usetheme{FH-OOE}
-%
+% 
 \setbeamersize{
   text margin left=10mm,
   text margin right=10mm,
@@ -41,42 +40,6 @@
   sidebar width right = 0mm
 }
 %
-\RequirePackage[utf8]{inputenc}
-\RequirePackage[T2A, T1]{fontenc}
-\RequirePackage{ucs}
-\RequirePackage{pgfplots}
-\RequirePackage{pgfplotstable}
-\RequirePackage{varwidth}
-\RequirePackage{tikz}
-\RequirePackage{tikz-uml}
-\RequirePackage{tikz-uml-extension}
-\RequirePackage[lighttt]{lmodern}
-\RequirePackage{listings-extension}
-\RequirePackage[scriptsize]{subfigure}
-\RequirePackage{caption}
-\RequirePackage{xstring}
-\RequirePackage{svg}
-\RequirePackage[euler]{textgreek}
-\RequirePackage{relsize}
-\RequirePackage[siunitx]{circuitikz}
-\RequirePackage{multirow}
-\RequirePackage{fix-cm}
-% 
-\pgfplotsset{compat=1.13}
-% 
-% \AtBeginDocument{\sisetup{math-rm=\mathrm}} % https://tex.stackexchange.com/questions/403693/use-text-font-in-siunitx-instead-of-math-font
-% 
-\let\orig@num\num
-\renewcommand\num[1][]{\orig@num[group-minimum-digits = 4, group-separator = {\,}, output-decimal-marker = {,}, #1]}
-\newcommand\tnum[1][]{\num[mode=text, #1]}
-% 
-\let\orig@SI\SI
-\renewcommand\SI[1][]{\orig@SI[group-minimum-digits = 4, group-separator = {\,}, output-decimal-marker = {,}, #1]}
-\newcommand\TSI[1][]{\SI[mode=text, #1]}
-\newcommand\tsi[1][]{\si[mode=text, #1]}
-%
-\DeclareCaptionFont{cap-fh-ooe-red}{\color{fh-ooe-red}}
-\captionsetup{format=default,justification=centering,labelformat=simple,labelfont={scriptsize,cap-fh-ooe-red},textfont=scriptsize}
 % 
 \let\orig@include\include
 \renewcommand{\include}[2][.]{
@@ -163,36 +126,6 @@
     \AtEndDocument{\app@exe{rm -f #1/\jobname.tmp}}%
   }
 \makeatother
-%
-\newenvironment{boxblock}[1]{%
-  \begin{columns}%
-    \begin{column}{#1}%
-      \begin{block}%
-      }{%
-      \end{block}%
-    \end{column}%
-  \end{columns}%
-}%
-% 
-\newenvironment{boxexampleblock}[1]{%
-  \begin{columns}%
-    \begin{column}{#1}%
-      \begin{exampleblock}%
-      }{%
-      \end{exampleblock}%
-    \end{column}%
-  \end{columns}%
-}%
-% 
-\newenvironment{boxalertblock}[1]{%
-  \begin{columns}%
-    \begin{column}{#1}%
-      \begin{alertblock}%
-      }{%
-      \end{alertblock}%
-    \end{column}%
-  \end{columns}%
-}%
 % 
 % 
 % Temporary Fix
