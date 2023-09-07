@@ -13,12 +13,77 @@
   \closeout\srcf%
 }%
 
+
+\colorlet{punct}{red!60!black}
+\definecolor{background}{HTML}{EEEEEE}
+\definecolor{delim}{RGB}{20,105,176}
+\definecolor{keyword}{HTML}{880389}
+\colorlet{numb}{magenta!60!black}
+
+\lstdefinelanguage{json}{
+%  string=[s]{"}{"},
+%  stringstyle=\color{blue},
+%  comment=[l]{:},
+%  commentstyle=\color{black},
+%  comment=[s]{:\ "}{"}
+  literate=
+  *{0}{{{\color{numb}0}}}{1}
+  {1}{{{\color{numb}1}}}{1}
+  {2}{{{\color{numb}2}}}{1}
+  {3}{{{\color{numb}3}}}{1}
+  {4}{{{\color{numb}4}}}{1}
+  {5}{{{\color{numb}5}}}{1}
+  {6}{{{\color{numb}6}}}{1}
+  {7}{{{\color{numb}7}}}{1}
+  {8}{{{\color{numb}8}}}{1}
+  {9}{{{\color{numb}9}}}{1}
+  {:}{{{\color{punct}{:}}}}{1}
+  {,}{{{\color{punct}{,}}}}{1}
+  {\{}{{{\color{delim}{\{}}}}{1}
+  {\}}{{{\color{delim}{\}}}}}{1}
+  {[}{{{\color{delim}{[}}}}{1}
+  {]}{{{\color{delim}{]}}}}{1}
+  {"name"}{{{\color{keyword}{"name"}}}}{6}
+  {"connection"}{{{\color{keyword}{"connection"}}}}{12}
+  {"keep_alive"}{{{\color{keyword}{"keep\_alive"}}}}{12}
+  {"client_id"}{{{\color{keyword}{"client\_id"}}}}{11}
+  {"clean_session"}{{{\color{keyword}{"clean\_session"}}}}{15}
+  {"will_topic"}{{{\color{keyword}{"will\_topic"}}}}{12}
+  {"will_message"}{{{\color{keyword}{"will\_message"}}}}{14}
+  {"will_qos"}{{{\color{keyword}{"will\_qos"}}}}{10}
+  {"will_topic"}{{{\color{keyword}{"will\_topic"}}}}{12}
+  {"will_retain"}{{{\color{keyword}{"will\_retain"}}}}{13}
+  {"username"}{{{\color{keyword}{"username"}}}}{10}
+  {"password"}{{{\color{keyword}{"password"}}}}{10}
+  {"will_retain"}{{{\color{keyword}{"will\_retain"}}}}{13}
+  {"mappings"}{{{\color{keyword}{"mappings"}}}}{10}
+  {"discover_prefix"}{{{\color{keyword}{"discover\_prefix"}}}}{17}
+  {"topic_level"}{{{\color{keyword}{"topic\_level"}}}}{13}
+  {"type"}{{{\color{keyword}{"type"}}}}{6}
+  {"subscription"}{{{\color{keyword}{"subscription"}}}}{14}
+  {"qos"}{{{\color{keyword}{"qos"}}}}{5}
+  {"mapping"}{{{\color{keyword}{"mapping"}}}}{9}
+  {"subscription"}{{{\color{keyword}{"subscription"}}}}{14}
+  {"qos"}{{{\color{keyword}{"qos"}}}}{5}
+  {"comment"}{{{\color{keyword}{"comment"}}}}{9}
+  {"value"}{{{\color{keyword}{"value"}}}}{7}
+  {"mapped_topic"}{{{\color{keyword}{"mapped\_topic"}}}}{14}
+  {"retain_message"}{{{\color{keyword}{"retain\_message"}}}}{16}
+  {"mapping_template"}{{{\color{keyword}{"mapping\_template"}}}}{18}
+  {"static"}{{{\color{keyword}{"static"}}}}{8}
+  {"message_mappings"}{{{\color{keyword}{"message\_mappings"}}}}{18}
+  {"message"}{{{\color{keyword}{"message"}}}}{9}
+  {"mapped_message"}{{{\color{keyword}{"mapped\_message"}}}}{16}
+  {"json"}{{{\color{keyword}{"json"}}}}{6}
+}
+
+
 \lstdefinestyle{eclipse-inline}{
   morecomment=[s][\color{lightblue}]{/**}{*/},
   escapeinside={/*@}{@*/},
   basicstyle=\codefontfamily,
   basewidth={0.5em,0.45em},
-  inputencoding=utf8x,
+  inputencoding=utf8,
   extendedchars=\true,
   commentstyle=\color{darkgreen},
   stringstyle=\color{darkblue},
@@ -46,7 +111,7 @@
   escapeinside={/*@}{@*/},
   basicstyle=\codefontsize\codefontfamily,
   basewidth={0.5em,0.45em},
-  inputencoding=utf8x,
+  inputencoding=utf8,
   extendedchars=\true,
   numbers=left,
   stepnumber=1,
@@ -267,6 +332,12 @@
   \lstset{xleftmargin=\lst@numbersep}%
 }{}
 
+\lstnewenvironment{jsoncode}[1][]{
+  \codefontsize%
+  \lstset{style=eclipse,language=json,#1}%
+  \lstset{xleftmargin=\lst@numbersep}%
+}{}
+
 \lstnewenvironment{cppapi}[1][]{
   \lstset{%
     style=eclipse,
@@ -278,6 +349,8 @@
     #1
   }%
 }{}
+
+
 
 \newcommand{\addcppfile}[2]{
   \addsourcefile{\@cppsourcepath/#1/#2}%

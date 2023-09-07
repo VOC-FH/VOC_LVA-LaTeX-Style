@@ -119,8 +119,12 @@
 \makeatletter
   \def\app@exe{\immediate\write18}
   \def\inputAllFiles#1{%
+    \setpath{#1}
     \app@exe{rm -f #1/\jobname.tmp}
-    \app@exe{ls #1/*.tex | xargs cat >> #1/\jobname.tmp}%
+    \app@exe{find #1 -type f -name '*.tex' -not -path '*/sav/*' | sort | xargs cat >> #1/\jobname.tmp}%
+%    \app@exe{ls #1/*.tex >> #1/out.tmp}%
+%    \app@exe{find #1 -type f \\( -name '*.tex' \\) | sort | xargs cat >> #1/\jobname.tmp}%
+%    \app@exe{ls #1/*.tex | xargs cat >> #1/\jobname.tmp}%
 %    \app@exe{ls #1/*.tex | xargs -n1 /bin/bash -c 'echo "{" >> #1/\jobname.tmp ; cat "$@" >> #1/\jobname.tmp ; echo "}" >> #1/\jobname.tmp ;' ''}
     \InputIfFileExists{#1/\jobname.tmp}{}{}%
     \AtEndDocument{\app@exe{rm -f #1/\jobname.tmp}}%

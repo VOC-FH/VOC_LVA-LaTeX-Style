@@ -100,7 +100,7 @@
 \def\makesectionframe{
   \setbeamertemplate{headline}[fh-ooe theme section page]
   \setbeamertemplate{footline}[fh-ooe theme section page]
-  \begin{frame}[t]{\insertsection}
+  \begin{frame}[t]{\insertpart}
     \tableofcontents[%
       currentsection, % causes all sections but the current to be shown in a semi-transparent way.
 %      hideallsubsections, % causes all subsections to be hidden.
@@ -112,21 +112,38 @@
   \setbeamertemplate{footline}[fh-ooe theme section slide page]
 }
 
+\newboolean{fh-ooe@withlecturepage}
+\def\nolecturepage{\def\lecturepagedefined{defined}\setboolean{fh-ooe@withlecturepage}{false}}
+\def\withlecturepage{\def\lecturepagedefined{defined}\setboolean{fh-ooe@withlecturepage}{true}}
+\setboolean{fh-ooe@withlecturepage}{true}
+\def\lecturepagedefined{undefined}
+
 \AtBeginLecture{
   \ifbeamer@inlecture
     \pdfbookmark[0]{\insertlecturepartnumbername\ \insertlecturenumber\ifx\insertlecturenumbername\@empty\else: \insertlecturenumbername\fi}{Inhalt-\beamer@currentlecturelabel}
   \fi
 %  \fhooe@maketitle
   \gdef\fhooe@maketitle{}
-  \makelectureframe
+  \ifthenelse{\boolean{fh-ooe@withlecturepage}} {
+    \makelectureframe
+  }
 }
 
 \newboolean{fh-ooe@withpartpage}
+\def\nopartpage{\def\partpagedefined{defined}\setboolean{fh-ooe@withpartpage}{false}}
+\def\withpartpage{\def\partpagedefined{defined}\setboolean{fh-ooe@withpartpage}{true}}
 \setboolean{fh-ooe@withpartpage}{true}
+\def\partpagedefined{undefined}
+
 \newboolean{fh-ooe@withsectionpage}
+\def\nosectionpage{\def\sectionpagedefined{defined}\setboolean{fh-ooe@withsectionpage}{false}}
+\def\withsectionpage{\def\sectionpagedefined{defined}\setboolean{fh-ooe@withsectionpage}{true}}
 \setboolean{fh-ooe@withsectionpage}{false}
+\def\sectionpagedefined{undefined}
+
 \newcounter{fh-ooe@firstsectioninchapter}
 \setcounter{fh-ooe@firstsectioninchapter}{1}
+
 \AtBeginPart{
   \setcounter{fh-ooe@firstsectioninchapter}{\value{section}}\addtocounter{fh-ooe@firstsectioninchapter}{1}
   \ifthenelse{\boolean{fh-ooe@withpartpage}} {
@@ -136,20 +153,21 @@
     \setbeamertemplate{footline}[fh-ooe theme part slide page]
   }
 }
-\AtBeginSection{
-  \ifthenelse{\boolean{fh-ooe@withsectionpage}} {
-    \makesectionframe
-  } {
-  }
-}
+\AtBeginSection{%
+  \ifthenelse{\boolean{fh-ooe@withsectionpage}} {%
+    \makesectionframe%
+  } {%
+  }%
+}%
 
 \let\orig@part=\part
 \renewcommand{\part}[1][]{%
   \ifthenelse{\equal{#1}{nopartpage}}{%
     \setboolean{fh-ooe@withpartpage}{false}%
-  }{%
+  }{}%
+  \ifthenelse{\equal{#1}{withpartpage}}{%
     \setboolean{fh-ooe@withpartpage}{true}%
-  }%
+  }{}%
   \orig@part%
 }
 
@@ -157,9 +175,10 @@
 \renewcommand{\section}[1][]{%
   \ifthenelse{\equal{#1}{nosectionpage}}{%
     \setboolean{fh-ooe@withsectionpage}{false}%
-  }{%
+  }{}%
+  \ifthenelse{\equal{#1}{withsectionpage}}{%
     \setboolean{fh-ooe@withsectionpage}{true}%
-  }%
+  }{}%
   \orig@section%
 }
 
