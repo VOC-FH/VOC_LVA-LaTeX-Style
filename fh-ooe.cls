@@ -50,7 +50,7 @@
 \newcommand{\setpath}[1]{%
   \graphicspath{{#1/material/}{#1/images/}}%
   \def\pgfpath{#1/material/pgf/}%
-  \svgsetup{inkscapepath=./#1/images/svg-inkscape}
+  \svgsetup{inkscapepath=#1/images/svg-inkscape}
   \svgpath{{#1/images/}}
 }
 % 
@@ -127,7 +127,7 @@
 %    \app@exe{ls #1/*.tex | xargs cat >> #1/\jobname.tmp}%
 %    \app@exe{ls #1/*.tex | xargs -n1 /bin/bash -c 'echo "{" >> #1/\jobname.tmp ; cat "$@" >> #1/\jobname.tmp ; echo "}" >> #1/\jobname.tmp ;' ''}
     \InputIfFileExists{#1/\jobname.tmp}{}{}%
-    \AtEndDocument{\app@exe{rm -f #1/\jobname.tmp}}%
+%    \AtEndDocument{\app@exe{rm -f #1/\jobname.tmp}}%
   }
 \makeatother
 % 
