@@ -32,7 +32,7 @@
 \renewcommand{\lecture}[3][]{
   \def\insertlecturenumbername{#2}
   \setcounter{lastframeoflastlecture}{\value{framenumber}}
-  \date{\insertshortlecture}
+%  \date{\insertshortlecture}
   \orig@lecture[#1]{#2}{#3}
 }
 
@@ -226,7 +226,7 @@
 \def\insertlecturepartnumbername{Teil}
 \def\insertlecturenumbername{}
 \def\insertlonglecturenumberhead{\insertlecturenumbername{} \insertlecturenumber}
-\def\insertlecturehead{\ifx\insertlecture\@empty\else\insertlecture\fi}
+\def\insertlecturehead{\ifx\insertshortlecture\@empty\else\insertshortlecture\fi}
 \newcounter{framenumberinlecture}
 \def\insertframenumberinlecture{%
   \setcounter{framenumberinlecture}{\value{framenumber}}%
