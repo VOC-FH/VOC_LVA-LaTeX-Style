@@ -48,10 +48,10 @@
 }
 % 
 \newcommand{\setpath}[1]{%
-  \graphicspath{{#1/material/}{#1/images/}}%
+  \graphicspath{{#1/}}%{#1/material/}{#1/images/}}%
   \def\pgfpath{#1/material/pgf/}%
   \svgsetup{inkscapepath=#1/images/svg-inkscape}
-  \svgpath{{#1/images/}}
+  \svgpath{{#1/}}%{#1/images/}}
 }
 % 
 \def\includegraphicswrapper[{\includegraphics[}
@@ -121,7 +121,7 @@
   \def\inputAllFiles#1{%
     \setpath{#1}
     \app@exe{rm -f #1/\jobname.tmp}
-    \app@exe{find #1 -type f -name '*.tex' -not -path '*/sav/*' | sort | xargs cat >> #1/\jobname.tmp}%
+    \app@exe{find #1 -maxdepth 1 -type f -name '*.tex' -not -path '*/sav/*' | sort | xargs cat >> #1/\jobname.tmp}%
 %    \app@exe{ls #1/*.tex >> #1/out.tmp}%
 %    \app@exe{find #1 -type f \\( -name '*.tex' \\) | sort | xargs cat >> #1/\jobname.tmp}%
 %    \app@exe{ls #1/*.tex | xargs cat >> #1/\jobname.tmp}%
