@@ -42,21 +42,28 @@
 %
 % 
 \let\orig@include\include
-\renewcommand{\include}[2][.]{
-  \setpath{#1}
-  \orig@include{#1/#2}
+\renewcommand{\include}[2][]{%
+  \setpath{#1}%
+  \orig@include{#1#2}%
 }
 % 
 \newcommand{\setpath}[1]{%
-  \graphicspath{{#1/}}%{#1/material/}{#1/images/}}%
+  \graphicspath{{#1/}{#1/material/}{#1/images/}}%
   \def\pgfpath{#1/material/pgf/}%
-  \svgsetup{inkscapepath=#1/images/svg-inkscape}
-  \svgpath{{#1/}}%{#1/images/}}
-}
+  \svgsetup{inkscapepath=#1/images/svg-inkscape}%
+  \svgpath{{#1/}{#1/images/}}%
+}%
 % 
 \def\includegraphicswrapper[{\includegraphics[}
-% 
-\def\pgfinput#1{\input{\pgfpath/#1.pgf}}
+%
+\def\pgfinput#1{%
+  \ifdefined\pgfpath%
+    \def\pgffile{\pgfpath#1.pgf}%
+  \else%
+    \def\pgffile{#1.pgf}%
+  \fi%
+  \input{\pgffile}%
+}%
 % 
 \AtBeginDocument{%
   \fhooe@includeonlylecture%
@@ -120,13 +127,13 @@
   \def\app@exe{\immediate\write18}
   \def\inputAllFiles#1{%
     \setpath{#1}
-    \app@exe{rm -f #1/\jobname.tmp}
+    \app@exe{rm -f #1\jobname.tmp}
     \app@exe{find #1 -maxdepth 1 -type f -name '*.tex' -not -path '*/sav/*' | sort | xargs cat >> #1/\jobname.tmp}%
 %    \app@exe{ls #1/*.tex >> #1/out.tmp}%
 %    \app@exe{find #1 -type f \\( -name '*.tex' \\) | sort | xargs cat >> #1/\jobname.tmp}%
 %    \app@exe{ls #1/*.tex | xargs cat >> #1/\jobname.tmp}%
 %    \app@exe{ls #1/*.tex | xargs -n1 /bin/bash -c 'echo "{" >> #1/\jobname.tmp ; cat "$@" >> #1/\jobname.tmp ; echo "}" >> #1/\jobname.tmp ;' ''}
-    \InputIfFileExists{#1/\jobname.tmp}{}{}%
+    \InputIfFileExists{#1\jobname.tmp}{}{}%
 %    \AtEndDocument{\app@exe{rm -f #1/\jobname.tmp}}%
   }
 \makeatother
