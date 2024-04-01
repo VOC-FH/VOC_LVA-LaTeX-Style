@@ -1,6 +1,8 @@
 \ProvidesPackage{listings-extension}
 \RequirePackage{listings}
 \RequirePackage{lstautogobble}
+\RequirePackage{xparse}
+\RequirePackage{expl3}
 
 \RequirePackage{etoolbox}
 \usepackage{MnSymbol}
@@ -130,8 +132,8 @@
   commentstyle=\color{darkgreen},
   stringstyle=\color{darkblue},
   keywordstyle=\color{darkviolet}\bfseries,
-  ndkeywordstyle=\color{yellow}\bfseries,
-  identifierstyle=,
+%  ndkeywordstyle=\color{yellow}\bfseries,
+  identifierstyle=\color{fh-ooe-red},
   emphstyle=\color{red}\bfseries,
   tabsize=4,
   rangeprefix=/*\{\ ,
@@ -326,12 +328,80 @@
   \def\@cppsourcepath{#1}%
 }
 
-\newcommand\inlinecppcode[1][]{\lstinline[style=eclipse-inline,language=c++,#1]}
+\newcommand\inlinecppcode[1][]{\lstinline[style=eclipse-inline,language=[11]C++,#1]}
+
+\ExplSyntaxOn
+
+% compile the expression
+\regex_new:N \l_pascal_camelcase_regex
+\regex_set:Nn \l_pascal_camelcase_regex { ^ [a-z]* [A-Z]+ [a-zA-Z]* $ }
+
+% a variant that expands the input fully
+\cs_generate_variant:Nn \regex_match:NnTF {No}
+
+\NewDocumentCommand \ifcamelcase { m m }
+{
+    % expand to actual underscore
+    \cs_set_eq:Nc \__pascal_camelcase_um { lst@um_ }
+    \tl_set:cn { lst@um_ } { _ }
+    % match the current token
+    \regex_match:NoTF \l_pascal_camelcase_regex {\the\use:c{lst@token}} {#1} {#2}
+    % reset
+    \cs_set_eq:cN { lst@um_ } \__pascal_camelcase_um
+}
+
+\ExplSyntaxOff
+
+
+\definecolor{CPPLight}  {HTML} {686868}
+\definecolor{CPPSteel}  {HTML} {888888}
+\definecolor{CPPDark}   {HTML} {262626}
+\definecolor{CPPBlue}   {HTML} {4172A3}
+\definecolor{CPPGreen}  {HTML} {487818}
+\definecolor{CPPBrown}  {HTML} {A07040}
+\definecolor{CPPRed}    {HTML} {AD4D3A}
+\definecolor{CPPViolet} {HTML} {7040A0}
+\definecolor{CPPGray}  {HTML} {B8B8B8}
 
 \lstnewenvironment{cppcode}[1][]{
   \codefontsize%
-  \lstset{style=eclipse,language=c++,#1}%
-  \lstset{xleftmargin=\lst@numbersep}%
+  \lstset{
+    style=eclipse,
+    language=[11]C++,
+    xleftmargin=\lst@numbersep,
+    alsoletter={?_},
+    columns=fixed,
+    identifierstyle=\ifcamelcase{\color{fh-ooe-red}\bfseries}{\relax},
+    showstringspaces=false,
+%
+    morekeywords={alignas,continue,friend,register,true,alignof,decltype,goto,
+      reinterpret_cast,try,asm,defult,if,return,typedef,auto,delete,inline,short,
+      typeid,bool,do,int,signed,typename,break,double,long,sizeof,union,case,
+      dynamic_cast,mutable,static,unsigned,catch,else,namespace,static_assert,using,
+      char,enum,new,static_cast,virtual,char16_t,char32_t,explict,noexcept,struct,
+      void,export,nullptr,switch,volatile,class,extern,operator,template,wchar_t,
+      const,false,private,this,while,constexpr,float,protected,thread_local,
+      const_cast,for,public,throw,std,override,final,using,
+      uint8_t,uint16_t,uint32_t,uint64_t,int8_t,int16_t,int32_t,int64_t
+    },
+%
+    emph={map,set,multimap,multiset,unordered_map,unordered_set,
+      unordered_multiset,unordered_multimap,vector,string,list,deque,
+      array,stack,forwared_list,iostream,memory,shared_ptr,unique_ptr,
+      random,bitset,ostream,istream,cout,cin,endl,move,default_random_engine,
+      uniform_int_distribution,iterator,algorithm,functional,bing,numeric,size_t,
+      ssize_t,LOG,VLOG,PLOG
+    },
+%
+    morekeywords={[3]{
+      junk,junkLen
+    }},
+%
+    keywordstyle={[3]\color{black}},
+    keywordstyle={[2]\color{fh-ooe-red}\bfseries},
+    emphstyle=\color{CPPViolet}\bfseries,
+  }
+  \lstset{#1}
 }{}
 
 \lstnewenvironment{jsoncode}[1][]{

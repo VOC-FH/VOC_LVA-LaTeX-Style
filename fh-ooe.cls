@@ -14,7 +14,7 @@
   \PassOptionsToClass{\CurrentOption}{beamer}%
 }
 
-\PassOptionsToClass{aspectratio=3218}{beamer}
+\PassOptionsToClass{usenames,dvipsnames,aspectratio=3218}{beamer}
 
 \ProcessKeyvalOptions*
 
