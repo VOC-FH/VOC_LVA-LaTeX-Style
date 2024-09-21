@@ -103,6 +103,10 @@
   \setbeamertemplate{headline}[fh-ooe theme section page]
   \setbeamertemplate{footline}[fh-ooe theme section page]
   \begin{frame}[t]{\insertpart}
+    \ifdefined\insertshortsection %
+      \framesubtitle{\insertshortsection}%
+      \undef\insertshortsection%
+    \fi
     \tableofcontents[%
       currentsection, % causes all sections but the current to be shown in a semi-transparent way.
 %      hideallsubsections, % causes all subsections to be hidden.
