@@ -29,12 +29,11 @@
 \let\orig@lecture\lecture
 \newcounter{lastframeoflastlecture}
 \setcounter{lastframeoflastlecture}{0}
-\renewcommand{\lecture}[3][]{
-  \def\insertlecturenumbername{#2}
-  \setcounter{lastframeoflastlecture}{\value{framenumber}}
-%  \date{\insertshortlecture}
-  \orig@lecture[#1]{#2}{#3}
-}
+\renewcommand{\lecture}[3][]{%
+  \def\insertlecturenumbername{#2}%
+  \setcounter{lastframeoflastlecture}{\value{framenumber}}%
+  \orig@lecture[#1]{#2}{#3}%
+}%
 
 \mode<presentation>
 
