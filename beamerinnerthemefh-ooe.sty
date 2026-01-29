@@ -102,20 +102,25 @@
 \def\makesectionframe{
   \setbeamertemplate{headline}[fh-ooe theme section page]
   \setbeamertemplate{footline}[fh-ooe theme section page]
+  \begingroup
+  \edef\TOCopts{%
+    currentsection,%
+    hideothersubsections,%
+    sections={\number\value{fh-ooe@firstsectioninchapter}-},%
+    sectionstyle=\sectionstyle%
+  }
+  \edef\DoTOC{\noexpand\tableofcontents[\TOCopts]}%
   \begin{frame}[t]{\insertpart}
     \ifdefined\insertshortsection %
       \framesubtitle{\insertshortsection}%
       \undef\insertshortsection%
     \fi
-    \tableofcontents[%
-      currentsection, % causes all sections but the current to be shown in a semi-transparent way.
-%      hideallsubsections, % causes all subsections to be hidden.
-      hideothersubsections,
-      firstsection=\value{fh-ooe@firstsectioninchapter}
-    ]
+    \DoTOC
   \end{frame}
+  \endgroup
   \setbeamertemplate{headline}[fh-ooe theme section slide page]
   \setbeamertemplate{footline}[fh-ooe theme section slide page]
+  \def\sectionstyle{show/shaded}
 }
 
 \newboolean{fh-ooe@withlecturepage}
@@ -178,6 +183,7 @@
 }
 
 \let\orig@section=\section
+\def\sectionstyle{show/shaded}%
 \renewcommand{\section}[1][]{%
   \ifthenelse{\equal{#1}{nosectionpage}}{%
     \setboolean{fh-ooe@withsectionpage}{false}%
